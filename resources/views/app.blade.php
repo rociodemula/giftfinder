@@ -19,7 +19,17 @@
 	<![endif]-->
 </head>
 <body>
-	<nav class="navbar navbar-default">
+<div class="container">
+	<div class="masthead">
+		<div class="jumbotron">
+			<h2>Anúnciate aquí</h2>
+			<p class="lead">Llega a tu público con un banner a tu medida <a class="btn btn-sm btn-success" role="button" href="http://demosdata.com/">Conócenos</a>
+			</p>
+		</div>
+	</div>
+</div>
+
+	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
@@ -28,21 +38,36 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="{{ url('/') }}">APP</a>
+				<a class="navbar-brand" href="{{ url('/') }}"><img src="01.png">
+					</a>
 			</div>
 
 			<div class="collapse navbar-collapse" id="navbar">
-				<ul class="nav navbar-nav">
+				<!--<ul class="nav navbar-nav">
 					<li><a href="{{ url('/home') }}">Home</a></li>
+				</ul>-->
+				<ul class="nav navbar-nav">
+					<li class="active">
+						<a href="/">Inicio</a>
+					</li>
+					<li>
+						<a href="/">Perfil</a>
+					</li>
+					<li>
+						<a href="/">Búsqueda</a>
+					</li>
+					<li>
+						<a href="/">Contacto</a>
+					</li>
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">
 					@if(auth()->guest())
 						@if(!Request::is('auth/login'))
-							<li><a href="{{ url('/auth/login') }}">Login</a></li>
+							<li><a href="{{ url('/auth/login') }}">Identifícate</a></li>
 						@endif
 						@if(!Request::is('auth/register'))
-							<li><a href="{{ url('/auth/register') }}">Register</a></li>
+							<li><a href="{{ url('/auth/register') }}">Regístrate</a></li>
 						@endif
 					@else
 						<li class="dropdown">
@@ -58,6 +83,24 @@
 	</nav>
 
 	@yield('content')
+<footer class="navbar navbar-default navbar-fixed-bottom">
+	<div class="container-fluid">
+			<div class="collapse navbar-collapse" id="footer">
+				<ul class="nav navbar-nav">
+					<li class="active">
+						<a href="condiciones">Condiciones de uso</a>
+					</li>
+					<li>
+						<a href="ayuda">Ayuda / Manuales</a>
+					</li>
+					<li>
+						<a href="derechos">Derechos de autor</a>
+					</li>
+				</ul>
+			</div>
+	</div>
+</footer>
+
 
 	<!-- Scripts -->
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>

@@ -13,10 +13,10 @@ namespace Giftfinder\Http\Controllers;
 class UsersController extends Controller
 {
     public function getIndex() {
-        $result = \DB::table('users')
-            ->select(['name', 'email'])
-            ->where('name','rociodemula')
-            ->orderBy('name','ASC')
+        $result = \DB::table('usuarios')
+            ->select(['nombre_usuario', 'email'])
+            ->where('nombre_usuario','rociodemula')
+            ->orderBy('nombre_usuario','ASC')
             ->get();
         dd($result);
         // return $result;

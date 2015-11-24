@@ -3,6 +3,8 @@
 namespace Giftfinder\Http\Controllers;
 
 
+use Giftfinder\Producto;
+
 class WelcomeController extends Controller
 {
     /*
@@ -26,7 +28,7 @@ class WelcomeController extends Controller
 
     public function index()
     {
-        return view('welcome');
+        return view('welcome', ['producto' => Producto::all()]);
     }
 
 }

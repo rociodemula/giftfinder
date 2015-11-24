@@ -10,7 +10,7 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
-class User extends Model implements AuthenticatableContract,
+class Usuario extends Model implements AuthenticatableContract,
                                     AuthorizableContract,
                                     CanResetPasswordContract
 {
@@ -21,25 +21,25 @@ class User extends Model implements AuthenticatableContract,
      *
      * @var string
      */
-    protected $table = 'users';
+    protected $table = 'usuarios';
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['name', 'first_name', 'last_name', 'email', 'password'];
+    protected $fillable = ['nombre_usuario', 'localizacion', 'latitud', 'longitud', 'email', 'clave', 'telefono', 'movil', 'whatsapp', 'geolicalizacion', 'acepto'];
 
     /**
      * The attributes excluded from the model's JSON form.
      *
      * @var array
      */
-    protected $hidden = ['password', 'remember_token'];
+    protected $hidden = ['clave', 'remember_token'];
 
     public function properties()
     {
-        $this->hasMany('Giftfinder\Property');
+        $this->hasMany('Giftfinder\Peticion');
     }
 
 }

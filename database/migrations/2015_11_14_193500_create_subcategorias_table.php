@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTransactionTypesTable extends Migration
+class CreateSubcategoriasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,13 +12,17 @@ class CreateTransactionTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('transaction_types', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('transaction_name');
-            $table->text('transaction_description');
-
+        Schema::create('subcategorias', function (Blueprint $table) {
+            $table->increments('cod_subcategoria');
+            $table->string('nombre_subcategoria',30);
+            $table->integer('categoria')->unsigned();
             $table->timestamps();
+            $table->foreign('categoria')
+                ->references('cod_categoria')
+                ->on('categorias')
+                ->onDelete('cascade');
         });
+
     }
 
     /**
@@ -29,7 +33,7 @@ class CreateTransactionTypesTable extends Migration
     public function down()
     {
         DB::statement('SET FOREIGN_KEY_CHECKS = 0');
-        Schema::dropIfExists('transaction_types');
+        Schema::dropIfExists('subcategorias');
         DB::statement('SET FOREIGN_KEY_CHECKS = 1');
         // Schema::drop('transaction_types');
     }

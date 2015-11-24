@@ -13,7 +13,7 @@ class AdminTableSeeder extends Seeder {
             'name' => 'rociodemula',
             'first_name' => 'Rocío',
             'last_name' => 'de Mula',
-            'email' => 'rociodemula@demosdata.com',
+            'email' => 'pruebas@example.com',
             'type' => 'admin',
             'password' => \Hash::make('secret'),
 

@@ -14,13 +14,12 @@ class DatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        $this->call(TransactionTypesSeeder::class);
-        $this->call(AdminTableSeeder::class);
-        // Inicia la carga de la clase UserTableSeeder que acabamos de crear
-        // con los datos de los usuarios
-        $this->call(UserTableSeeder::class);
-        $this->call(PropertiesTableSeeder::class);
-        $this->call(TransactionsSeeder::class);
+        //$this->call(CategoriaTableSeeder::class);
+        //$this->call(SubcategoriaTableSeeder::class);
+        $this->call(ProductoTableSeeder::class);
+        $this->call(UsuarioTableSeeder::class);
+        $this->call(UsuarioProductoTableSeeder::class);
+        $this->call(PeticionTableSeeder::class);
 
         Model::reguard();
     }

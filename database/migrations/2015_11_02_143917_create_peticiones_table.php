@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePropertiesTable extends Migration
+class CreatePeticionesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,17 +12,17 @@ class CreatePropertiesTable extends Migration
      */
     public function up()
     {
-        Schema::create('properties', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
-            $table->string('address');
-            $table->text('description');
+        Schema::create('peticiones', function (Blueprint $table) {
+            $table->increments('cod_peticion');
+            $table->string('email_respuesta', 80);
+            $table->string('asunto', 50)->nullable();
+            $table->string('mensaje');
             $table->timestamps();
             //
-            $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')
-                ->references('id')
-                ->on('users')
+            $table->integer('usuario')->unsigned();
+            $table->foreign('usuario')
+                ->references('cod_usuario')
+                ->on('usuarios')
                 ->onDelete('cascade');
         });
     }
@@ -35,7 +35,7 @@ class CreatePropertiesTable extends Migration
     public function down()
     {
         DB::statement('SET FOREIGN_KEY_CHECKS = 0');
-        Schema::dropIfExists('properties');
+        Schema::dropIfExists('peticiones');
         DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 }
