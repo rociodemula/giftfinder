@@ -6,15 +6,14 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'AdminTableSeeder' => $baseDir . '/database/seeds/AdminTableSeeder.php',
     'CategoriaTableSeeder' => $baseDir . '/database/seeds/CategoriaTableSeeder.php',
+    'CreateCategoriasTable' => $baseDir . '/database/migrations/2015_11_14_125829_create_categorias_table.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
-    'CreatePropertiesImagesTable' => $baseDir . '/database/migrations/2015_11_14_125829_create_categorias_table.php',
-    'CreatePropertiesTable' => $baseDir . '/database/migrations/2015_11_02_143917_create_peticiones_table.php',
-    'CreateTransactionTypesTable' => $baseDir . '/database/migrations/2015_11_14_193500_create_subcategorias_table.php',
-    'CreateTransactionsTable' => $baseDir . '/database/migrations/2015_11_14_193530_create_productos_table.php',
-    'CreateUsersTable' => $baseDir . '/database/migrations/2014_10_12_000000_create_usuarios_table.php',
+    'CreatePeticionesTable' => $baseDir . '/database/migrations/2015_11_02_143917_create_peticiones_table.php',
+    'CreateProductosTable' => $baseDir . '/database/migrations/2015_11_14_193530_create_productos_table.php',
+    'CreateSubcategoriasTable' => $baseDir . '/database/migrations/2015_11_14_193500_create_subcategorias_table.php',
     'CreateUsuariosProductosTable' => $baseDir . '/database/migrations/2015_11_24_135320_create_usuarios_productos_table.php',
+    'CreateUsuariosTable' => $baseDir . '/database/migrations/2014_10_12_000000_create_usuarios_table.php',
     'DatabaseSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
     'File_Iterator' => $vendorDir . '/phpunit/php-file-iterator/src/Iterator.php',
     'File_Iterator_Facade' => $vendorDir . '/phpunit/php-file-iterator/src/Facade.php',
@@ -485,7 +484,6 @@ return array(
     'PHP_Token_YIELD_FROM' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
     'PeticionTableSeeder' => $baseDir . '/database/seeds/PeticionTableSeeder.php',
     'ProductoTableSeeder' => $baseDir . '/database/seeds/ProductoTableSeeder.php',
-    'PropertiesTableSeeder' => $baseDir . '/database/seeds/PropertiesTableSeeder.php',
     'SebastianBergmann\\Comparator\\ArrayComparator' => $vendorDir . '/sebastian/comparator/src/ArrayComparator.php',
     'SebastianBergmann\\Comparator\\Comparator' => $vendorDir . '/sebastian/comparator/src/Comparator.php',
     'SebastianBergmann\\Comparator\\ComparisonFailure' => $vendorDir . '/sebastian/comparator/src/ComparisonFailure.php',
@@ -526,8 +524,6 @@ return array(
     'SubcategoriaTableSeeder' => $baseDir . '/database/seeds/SubcategoriaTableSeeder.php',
     'TestCase' => $baseDir . '/tests/TestCase.php',
     'Text_Template' => $vendorDir . '/phpunit/php-text-template/src/Template.php',
-    'TransactionTypesSeeder' => $baseDir . '/database/seeds/TransactionTypesSeeder.php',
-    'TransactionsSeeder' => $baseDir . '/database/seeds/TransactionsSeeder.php',
     'UsuarioProductoTableSeeder' => $baseDir . '/database/seeds/UsuarioProductoTableSeeder.php',
     'UsuarioTableSeeder' => $baseDir . '/database/seeds/UsuarioTableSeeder.php',
 );

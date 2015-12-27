@@ -28,7 +28,7 @@
                                 <li class="lead list-group-item">{{ $item->nombre_producto }}</li>
                                 <li class="list-group-item"><img src="{{ $item->foto_producto }}"></li>
                                 <li class="list-group-item">{{ $item->descripcion }}</li>
-                                <li class="list-group-item">{{ $item->link_articulo }}</li>
+                                <li class="list-group-item"><a href="{{ $item->link_articulo }}">Más información</a></li>
                             </ul>
                         </div>
                         @endforeach

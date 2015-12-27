@@ -23,6 +23,8 @@ class Usuario extends Model implements AuthenticatableContract,
      */
     protected $table = 'usuarios';
 
+    protected $primaryKey = 'cod_usuario';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -37,7 +39,7 @@ class Usuario extends Model implements AuthenticatableContract,
      */
     protected $hidden = ['clave', 'remember_token'];
 
-    public function properties()
+    public function peticiones()
     {
         $this->hasMany('Giftfinder\Peticion');
     }

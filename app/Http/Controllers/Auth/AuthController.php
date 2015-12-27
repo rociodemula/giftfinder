@@ -2,7 +2,7 @@
 
 namespace Giftfinder\Http\Controllers\Auth;
 
-use Giftfinder\User;
+use Giftfinder\Usuario;
 use Validator;
 use Giftfinder\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
@@ -51,11 +51,12 @@ class AuthController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'nombre_usuario' => 'required|max:255|unique:users',
+            'nombre_usuario' => 'required|max:255|unique:usuarios',
             'latitud' => 'required|max:255',
             'longitud' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
-            'clave' => 'required|confirmed|min:6',
+            'email' => 'required|email|max:255|unique:usuarios',
+            'clave' => 'required|min:6',
+            'password_confirmation' => 'required|same:clave'
         ]);
     }
 
@@ -67,12 +68,12 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        return Usuario::create([
             'nombre_usuario' => $data['nombre_usuario'],
             'latitud' => $data['latitud'],
             'longitud' => $data['longitud'],
             'email' => $data['email'],
-            'clave' => bcrypt($data['clave']),
+            'clave' => bcrypt($data['clave'])
         ]);
     }
 }

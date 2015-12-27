@@ -33,7 +33,7 @@ trait AuthenticatesUsers
     public function postLogin(Request $request)
     {
         $this->validate($request, [
-            $this->loginUsername() => 'required', 'password' => 'required',
+            $this->loginUsername() => 'required', 'clave' => 'required',
         ]);
 
         // If the class is using the ThrottlesLogins trait, we can automatically throttle
@@ -57,7 +57,6 @@ trait AuthenticatesUsers
         if ($throttles) {
             $this->incrementLoginAttempts($request);
         }
-
         return redirect($this->loginPath())
             ->withInput($request->only($this->loginUsername(), 'remember'))
             ->withErrors([
@@ -93,7 +92,7 @@ trait AuthenticatesUsers
      */
     protected function getCredentials(Request $request)
     {
-        return $request->only($this->loginUsername(), 'password');
+        return $request->only($this->loginUsername(), 'clave');
     }
 
     /**
@@ -137,7 +136,7 @@ trait AuthenticatesUsers
      */
     public function loginUsername()
     {
-        return property_exists($this, 'username') ? $this->username : 'email';
+        return property_exists($this, 'nombre_usuario') ? $this->username : 'email';
     }
 
     /**
