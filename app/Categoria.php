@@ -15,7 +15,7 @@ class Categoria extends Model
 {
     protected $table = 'categorias';
 
-    public function properties()
+    public function subcategorias()
 
     {
         $this->hasMany('Giftfinder\Subcategoria');

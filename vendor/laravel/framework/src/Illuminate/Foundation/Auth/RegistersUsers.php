@@ -27,6 +27,7 @@ trait RegistersUsers
      */
     public function postRegister(Request $request)
     {
+        //dd($request);
         $validator = $this->validator($request->all());
 
         if ($validator->fails()) {

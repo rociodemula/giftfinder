@@ -15,9 +15,18 @@
     return view('welcome');
 }); */
 
-Route::get('/', 'WelcomeController@index');
-Route::get('/welcome', 'WelcomeController@index');
-Route::get('/home', 'HomeController@index');
+Route::get('/', 'WelcomeController@index')->name('inicio');
+//Route::get('/welcome', 'WelcomeController@index');
+//Route::get('/home', 'HomeController@index');
+Route::get('/perfil', 'ProfileController@edit')->name('perfil');
+Route::post('/perfil', 'ProfileController@index');
+Route::get('/busqueda', 'SearchController@edit')->name('busqueda');
+Route::post('/busqueda', 'SearchController@show');
+Route::get('/contacto', 'SendController@edit')->name('contacto');
+Route::post('/contacto', 'SendController@store');
+Route::get('/condiciones', 'UseController@show');
+Route::get('/ayuda', 'HelpController@show');
+Route::get('/derechos', 'CopyrightController@show');
 
 // Authentication routes...
 /*
@@ -25,12 +34,12 @@ Route::get('/home', 'HomeController@index');
  *
 */
 // Authentication routes...
-Route::get('auth/login', 'Auth\AuthController@getLogin');
+Route::get('auth/login', 'Auth\AuthController@getLogin')->name('login');
 Route::post('auth/login', 'Auth\AuthController@postLogin');
 Route::get('auth/logout', 'Auth\AuthController@getLogout');
 
 // Registration routes...
-Route::get('auth/register', 'Auth\AuthController@getRegister');
+Route::get('auth/register', 'Auth\AuthController@getRegister')->name('registro');
 Route::post('auth/register', 'Auth\AuthController@postRegister');
 
 // Password reset link request routes...

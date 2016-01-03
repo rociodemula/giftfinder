@@ -10,10 +10,10 @@
                 <div class="panel-body">
                     <p class="text-justify">Somos una comunidad interesada en regalar a otros cosas útiles que ya no necesitamos.</p>
                     <p class="text-justify">Necesitas registrarte o identificarte en nuestra web para ofrecer o solicitar los productos disponibles.
-                        ¡Te costará solo un minuto! <a class="btn btn-xs btn-success" role="button" href="auth/perfil">Altas</a></p>
+                        ¡Te costará solo un minuto! <a class="btn btn-xs btn-success" role="button" href="{{ url('/auth/register') }}">Altas</a></p>
                     <p class="text-justify">Si quieres compartir algo que te sobre y no lo encuentras entre las categorías/productos disponibles,
                         solicita un alta de nuevo producto al administrador del sitio.
-                        <a class="btn btn-xs btn-success" role="button" href="auth/perfil">Contacto</a></p>
+                        <a class="btn btn-xs btn-success" role="button" href="{{ url('/contacto') }}">Contacto</a></p>
                 </div>
             </div>
             <div class="panel panel-default">
@@ -35,7 +35,7 @@
                         <div class="col-sm-3">
                             <ul class="list-group">
                                 <li class="lead list-group-item">¡Encuentra donantes!</li>
-                                <li class="list-group-item"><a class="btn btn-xs btn-success" role="button" href="auth/contacto">Contacto</a></p></li>
+                                <li class="list-group-item"><a class="btn btn-xs btn-success" role="button" href="{{ url('/busqueda') }}">Búsqueda</a></p></li>
                             </ul>
                         </div>
                     </div>
@@ -46,9 +46,9 @@
                     <h3 class="panel-title">Si necesitas ayuda...</h3>
                 </div>
                 <div class="panel-body">
-                    <p class="text-justify">Cualquier duda que tengas puedes transmitirla al admintirador en
-                        <a class="btn btn-xs btn-success" role="button" href="auth/contacto">Contacto</a> pero asegúrate
-                        de consultar antes la <a class="btn btn-xs btn-success" role="button" href="ayuda">Ayuda</a></p>
+                    <p class="text-justify">Cualquier duda que tengas puedes transmitirla al administrador en
+                        <a class="btn btn-xs btn-success" role="button" href="{{ url('/contacto') }}">Contacto</a> pero asegúrate
+                        de consultar antes la <a class="btn btn-xs btn-success" role="button" href="{{ url('/ayuda') }}">Ayuda</a></p>
                 </div>
             </div>
         </div><br/><br/>

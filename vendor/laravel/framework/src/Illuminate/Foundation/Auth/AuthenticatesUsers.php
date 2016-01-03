@@ -33,7 +33,7 @@ trait AuthenticatesUsers
     public function postLogin(Request $request)
     {
         $this->validate($request, [
-            $this->loginUsername() => 'required', 'clave' => 'required',
+        $this->loginUsername() => 'required', 'password' => 'required',
         ]);
 
         // If the class is using the ThrottlesLogins trait, we can automatically throttle
@@ -47,7 +47,7 @@ trait AuthenticatesUsers
 
         $credentials = $this->getCredentials($request);
 
-        if (Auth::attempt($credentials, $request->has('remember'))) {
+       if (Auth::attempt($credentials, $request->has('remember'))) {
             return $this->handleUserWasAuthenticated($request, $throttles);
         }
 

@@ -16,9 +16,9 @@ class Producto extends Model
 
     protected $table = 'productos';
 
-    public function properties()
+    public function usuarios()
 
     {
-        $this->hasMany('Giftfinder\Peticion');
+        $this->hasMany('Giftfinder\Usuario_producto');
     }
 }

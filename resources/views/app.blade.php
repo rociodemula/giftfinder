@@ -49,17 +49,19 @@
 				</ul>-->
 				<ul class="nav navbar-nav">
 					<li class="active">
-						<a href="/">Inicio</a>
+						<a href="{{ url('/') }}">Inicio</a>
 					</li>
-					<li>
-						<a href="/">Perfil</a>
-					</li>
-					<li>
-						<a href="/">Búsqueda</a>
-					</li>
-					<li>
-						<a href="/">Contacto</a>
-					</li>
+					@if(!auth()->guest())
+						<li>
+							<a href="{{ url('/perfil') }}">Perfil</a>
+						</li>
+						<li>
+							<a href="{{ url('/busqueda') }}">Búsqueda</a>
+						</li>
+						<li>
+							<a href="{{ url('/contacto') }}">Contacto</a>
+						</li>
+					@endif
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">
@@ -72,9 +74,9 @@
 						@endif
 					@else
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ auth()->user()->name }} <span class="caret"></span></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Bienvenido, {{ auth()->user()->nombre_usuario }} <span class="caret"></span></a>
 							<ul class="dropdown-menu" role="menu">
-								<li><a href="{{ url('/auth/logout') }}">Logout</a></li>
+								<li><a href="{{ url('/auth/logout') }}">Salir</a></li>
 							</ul>
 						</li>
 					@endif
@@ -89,13 +91,13 @@
 			<div class="collapse navbar-collapse" id="footer">
 				<ul class="nav navbar-nav">
 					<li class="active">
-						<a href="condiciones">Condiciones de uso</a>
+						<a href="{{ url('/condiciones') }}">Condiciones de uso</a>
 					</li>
 					<li>
-						<a href="ayuda">Ayuda / Manuales</a>
+						<a href="{{ url('/ayuda') }}">Ayuda / Manuales</a>
 					</li>
 					<li>
-						<a href="derechos">Derechos de autor</a>
+						<a href="{{ url('/derechos') }}">Derechos de autor</a>
 					</li>
 				</ul>
 			</div>
