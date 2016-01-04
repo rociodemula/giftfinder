@@ -10,7 +10,7 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Support\Facades\DB;
-use Validator;
+use Illuminate\Support\Facades\Validator;
 use Giftfinder\Usuario_producto;
 
 class Usuario extends Model implements AuthenticatableContract,
@@ -85,7 +85,7 @@ class Usuario extends Model implements AuthenticatableContract,
             'acepto' => $data['acepto']
         ]);
 
-        if ($data['producto'] != 'Selecciona'){
+        if ($data['producto'] != 'Producto'){
             Usuario_producto::alta($usuario->cod_usuario, $data['producto']);
         }
         return $usuario;
@@ -108,7 +108,7 @@ class Usuario extends Model implements AuthenticatableContract,
 
             $usuario->save();
 
-            if($request->producto != 'Selecciona'){
+            if($request->producto != 'Producto'){
                 Usuario_producto::alta($usuario->cod_usuario, $request->producto);
             }
             $ok = true;

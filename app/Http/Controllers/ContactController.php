@@ -2,15 +2,13 @@
 
 namespace Giftfinder\Http\Controllers;
 
+use Giftfinder\Peticion;
 use Illuminate\Http\Request;
-use Giftfinder\Categoria;
-use Giftfinder\Subcategoria;
-use Giftfinder\Producto;
-use Giftfinder\Usuario;
+
 use Giftfinder\Http\Requests;
 use Giftfinder\Http\Controllers\Controller;
 
-class ProfileController extends Controller
+class ContactController extends Controller
 {
     public function __construct()
     {
@@ -25,19 +23,12 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        if (\Input::has('eliminar')){
-            if ($this->destroy(auth()->user()->cod_usuario)){
-                //Para redirigir a inicio es necesario un return redirect():
-                return redirect('/');
-                //TODO mensaje de confirmación de borrado del perfil
-            }
-        }else{
-            if($this->update(\Request::instance(), auth()->user()->cod_usuario)){
-                return redirect('/perfil');
-                //TODO mensaje comunicando que el perfil ha sido actualizado
-                //TODO control de errores en el formulario y mensajes error
-            }
+
+        if ($this->store(\Request::instance(), auth()->user()->cod_usuario)){
+            return redirect('/contacto');
+            //TODO enviar mensaje de grabación correcta de petición
         }
+        //TODO gestión de errores y visualizacion
     }
 
     /**
@@ -50,15 +41,18 @@ class ProfileController extends Controller
         //
     }
 
+
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
+     * @param $id
      * @return \Illuminate\Http\Response
+     * @internal param array $data
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-        //
+        return Peticion::alta($request, $id);
     }
 
     /**
@@ -80,10 +74,7 @@ class ProfileController extends Controller
      */
     public function edit()
     {
-        return view('profile', [
-            'categoria' => Categoria::all(),
-            'subcategoria' => Subcategoria::all(),
-            'producto' => Producto::all() ]);
+        return view('contact');
     }
 
     /**
@@ -95,7 +86,7 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return Usuario::modificacion($request, $id);
+        //
     }
 
     /**
@@ -106,6 +97,6 @@ class ProfileController extends Controller
      */
     public function destroy($id)
     {
-        return Usuario::destroy($id);
+        //
     }
 }

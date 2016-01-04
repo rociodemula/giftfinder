@@ -3,21 +3,12 @@
 namespace Giftfinder\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Giftfinder\Categoria;
-use Giftfinder\Subcategoria;
-use Giftfinder\Producto;
-use Giftfinder\Usuario;
+
 use Giftfinder\Http\Requests;
 use Giftfinder\Http\Controllers\Controller;
 
-class ProfileController extends Controller
+class CopyController extends Controller
 {
-    public function __construct()
-    {
-        // Aplica un filtro a través de un middleware.
-        // No permite entrar en la página si no estamos logados.
-        $this->middleware('auth');
-    }
     /**
      * Display a listing of the resource.
      *
@@ -25,19 +16,7 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        if (\Input::has('eliminar')){
-            if ($this->destroy(auth()->user()->cod_usuario)){
-                //Para redirigir a inicio es necesario un return redirect():
-                return redirect('/');
-                //TODO mensaje de confirmación de borrado del perfil
-            }
-        }else{
-            if($this->update(\Request::instance(), auth()->user()->cod_usuario)){
-                return redirect('/perfil');
-                //TODO mensaje comunicando que el perfil ha sido actualizado
-                //TODO control de errores en el formulario y mensajes error
-            }
-        }
+        return view('copy');
     }
 
     /**
@@ -78,12 +57,9 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    public function edit($id)
     {
-        return view('profile', [
-            'categoria' => Categoria::all(),
-            'subcategoria' => Subcategoria::all(),
-            'producto' => Producto::all() ]);
+        //
     }
 
     /**
@@ -95,7 +71,7 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return Usuario::modificacion($request, $id);
+        //
     }
 
     /**
@@ -106,6 +82,6 @@ class ProfileController extends Controller
      */
     public function destroy($id)
     {
-        return Usuario::destroy($id);
+        //
     }
 }

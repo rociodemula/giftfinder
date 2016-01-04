@@ -18,15 +18,15 @@
 Route::get('/', 'WelcomeController@index')->name('inicio');
 //Route::get('/welcome', 'WelcomeController@index');
 //Route::get('/home', 'HomeController@index');
-Route::get('/perfil', 'ProfileController@edit')->name('perfil');
-Route::post('/perfil', 'ProfileController@index');
-Route::get('/busqueda', 'SearchController@edit')->name('busqueda');
-Route::post('/busqueda', 'SearchController@show');
-Route::get('/contacto', 'SendController@edit')->name('contacto');
-Route::post('/contacto', 'SendController@store');
-Route::get('/condiciones', 'UseController@show');
-Route::get('/ayuda', 'HelpController@show');
-Route::get('/derechos', 'CopyrightController@show');
+Route::get('/perfil', 'ProfileController@edit')->name('perfil')->middleware('auth');
+Route::post('/perfil', 'ProfileController@index')->middleware('auth');
+Route::get('/busqueda', 'SearchController@edit')->name('busqueda')->middleware('auth');
+Route::post('/busqueda', 'SearchController@show')->middleware('auth');
+Route::get('/contacto', 'ContactController@edit')->name('contacto')->middleware('auth');
+Route::post('/contacto', 'ContactController@index')->middleware('auth');
+Route::get('/condiciones', 'RulesController@index');
+Route::get('/ayuda', 'HelpController@index');
+Route::get('/derechos', 'CopyController@index');
 
 // Authentication routes...
 /*

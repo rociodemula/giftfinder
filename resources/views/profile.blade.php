@@ -52,6 +52,7 @@
                                     </div>
 
                                     <div class="row">
+                                        <!--TODO tanto latitud como longitud son obligatorios. Se pueden generar con gmaps a partir de la localización-->
                                         <div class="col-md-7">
                                             <div class="form-group">
                                                 <label class="col-md-offset-4 col-md-3 control-label">Latitud</label>
@@ -110,11 +111,13 @@
                                                 <div class="col-md-2">
                                                     <div class="form-group">
                                                         <div class="col-md-6">
+                                                            <!--TODO este campo solo se podra marcar si se ha rellenado el campo móvil con un tlf movil-->
                                                             <input type="checkbox" class="form-control" name="whatsapp" @if(auth()->user()->whatsapp == 1)checked @endif>
                                                         </div>
                                                         <label class="col-md-4"><img src="/img/whatsapp.png"></label>
                                                     </div>
                                                 </div>
+                                                <!--TODO incluir en formulario que haya que especificar al menos un modo de contacto-->
                                             </div>
                                         </div>
                                     </div>
@@ -128,7 +131,7 @@
                                     </div>
                                     <div class="col-md-3">
                                         <select class="form-control" name="categoria">
-                                            <option>Selecciona</option>
+                                            <option>Categoría</option>
                                             @foreach ($categoria as $item)
                                                 <option @if($item->nombre_categoria == old('categoria'))selected @endif>{{ $item->nombre_categoria }}</option>
                                             @endforeach
@@ -136,7 +139,7 @@
                                     </div>
                                     <div class="col-md-3">
                                         <select class="form-control" name="subcategoria">
-                                            <option>Selecciona</option>
+                                            <option>Subcategoría</option>
                                             @foreach ($subcategoria as $item)
                                                 <option @if($item->nombre_subcategoria == old('subcategoria'))selected @endif>{{ $item->nombre_subcategoria }}</option>
                                             @endforeach
@@ -144,12 +147,13 @@
                                     </div>
                                     <div class="col-md-3">
                                         <select class="form-control" name="producto">
-                                            <option>Selecciona</option>
+                                            <option>Producto</option>
                                             @foreach ($producto as $item)
                                                 <option @if($item->nombre_producto == old('producto'))selected @endif>{{ $item->nombre_producto }}</option>
                                             @endforeach
                                         </select>
                                     </div>
+                                    <!--TODO incluir botón + que añada más artículos para compartir-->
                                 </div>
                             </div>
                             <div class="row">

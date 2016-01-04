@@ -3,14 +3,15 @@
 namespace Giftfinder\Http\Controllers;
 
 use Illuminate\Http\Request;
+
+use Giftfinder\Http\Requests;
+use Giftfinder\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 use Giftfinder\Categoria;
 use Giftfinder\Subcategoria;
 use Giftfinder\Producto;
-use Giftfinder\Usuario;
-use Giftfinder\Http\Requests;
-use Giftfinder\Http\Controllers\Controller;
 
-class ProfileController extends Controller
+class SearchController extends Controller
 {
     public function __construct()
     {
@@ -25,19 +26,7 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        if (\Input::has('eliminar')){
-            if ($this->destroy(auth()->user()->cod_usuario)){
-                //Para redirigir a inicio es necesario un return redirect():
-                return redirect('/');
-                //TODO mensaje de confirmación de borrado del perfil
-            }
-        }else{
-            if($this->update(\Request::instance(), auth()->user()->cod_usuario)){
-                return redirect('/perfil');
-                //TODO mensaje comunicando que el perfil ha sido actualizado
-                //TODO control de errores en el formulario y mensajes error
-            }
-        }
+
     }
 
     /**
@@ -67,9 +56,31 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        $nombre_producto = \Request::get('producto');
+
+        if ($nombre_producto != 'Producto'){
+            $cod_producto = DB::table('productos')
+                ->where('nombre_producto', '=', $nombre_producto )
+                ->value('cod_producto');
+
+            $resultados = DB::table('usuarios_productos')
+                ->join('usuarios', 'usuarios.cod_usuario', '=', 'usuarios_productos.usuario')
+                ->select('usuarios.nombre_usuario', 'usuarios.email', 'usuarios.telefono', 'usuarios.movil', 'usuarios.whatsapp', 'usuarios.localizacion')
+                ->where('usuarios_productos.producto', '=', $cod_producto)
+                ->get();
+            //TODO ordenar por ubicación según posición del usuario logado
+        }
+        else{
+            $resultados = [];
+        }
+        //TODO la vista search no visualiza correctamente el Producto seleccionado
+        return view('search', [
+            'resultado' => $resultados,
+            'categoria' => Categoria::all(),
+            'subcategoria' => Subcategoria::all(),
+            'producto' => Producto::all() ]);
     }
 
     /**
@@ -80,10 +91,12 @@ class ProfileController extends Controller
      */
     public function edit()
     {
-        return view('profile', [
+        //TODO relacionar lso combos de Categoria-Subcat-Producto para que sean selectivos
+        return view('search', [
+            'resultado' => [],
             'categoria' => Categoria::all(),
             'subcategoria' => Subcategoria::all(),
-            'producto' => Producto::all() ]);
+            'producto' => Producto::all() ] );
     }
 
     /**
@@ -95,7 +108,7 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return Usuario::modificacion($request, $id);
+        //
     }
 
     /**
@@ -106,6 +119,6 @@ class ProfileController extends Controller
      */
     public function destroy($id)
     {
-        return Usuario::destroy($id);
+        //
     }
 }
