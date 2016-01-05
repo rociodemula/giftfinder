@@ -8,7 +8,7 @@
 	<link rel="shortcut icon" href="/img/logo.jpg">
 
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
-
+	<link href="/css/app.css" rel="stylesheet">
 	<!-- Fonts -->
 	<link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
 
@@ -20,18 +20,11 @@
 	<![endif]-->
 </head>
 <body>
-<div class="container">
-	<div class="masthead">
-		<div class="jumbotron">
-			<h2>Anúnciate aquí</h2>
-			<p class="lead">Llega a tu público con un banner a tu medida <a class="btn btn-sm btn-success" role="button" href="http://demosdata.com/">Conócenos</a>
-			</p>
-		</div>
-	</div>
-</div>
+
 
 	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container-fluid">
+			<a href="http://demosdata.com/"><img class="banner img-responsive center-block" height="70" src="/img/banner.jpg" height="35" width="1000"></img></a>
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
 					<span class="sr-only">Toggle Navigation</span>
@@ -39,7 +32,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="{{ url('/') }}"><img src="/img/logo.jpg" height="35" width="35">
+				<a class="navbar-brand" href="{{ url('/') }}"><img src="/img/logo.jpg" height="35" width="35""></img>
 					</a>
 			</div>
 

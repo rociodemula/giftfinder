@@ -18,7 +18,7 @@ class ProductoTableSeeder extends Seeder
         $subcategoria = \DB::table('subcategorias')->insertGetId(array(
         'nombre_subcategoria'   =>  'Kéfir',
         'categoria'             =>  $categoria,
-    ));
+        ));
 
         \DB::table('productos')->insert(array(
             'nombre_producto'  =>  'Kéfir de Agua',

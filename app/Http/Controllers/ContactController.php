@@ -28,6 +28,7 @@ class ContactController extends Controller
             return redirect('/contacto');
             //TODO enviar mensaje de grabación correcta de petición
         }
+        //TODO enviar mensaje automáticamente a email de administradores del sitio
         //TODO gestión de errores y visualizacion
     }
 
