@@ -11,7 +11,7 @@ class Usuario_producto extends Model
 
     protected $fillable = ['usuario', 'producto'];
 
-    public static function alta($cod_usuario, $nombre_producto){
+    public static function crear($cod_usuario, $nombre_producto){
         $codProducto = DB::table('productos')
             ->where('nombre_producto', '=', $nombre_producto )
             ->value('cod_producto');

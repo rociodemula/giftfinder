@@ -95,7 +95,7 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return Usuario::modificacion($request, $id);
+        return Usuario::modificar($request, $id);
     }
 
     /**

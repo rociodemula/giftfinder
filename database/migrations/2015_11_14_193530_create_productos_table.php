@@ -17,7 +17,7 @@ class CreateProductosTable extends Migration
             $table->integer('subcategoria')->unsigned();
             $table->string('nombre_producto', 30);
             $table->string('descripcion')->nullable();
-            $table->binary('foto_producto')->nullable();
+            $table->string('foto_producto')->nullable();
             $table->string('link_articulo')->nullable();
             $table->timestamps();
             $table->foreign('subcategoria')

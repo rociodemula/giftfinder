@@ -65,7 +65,7 @@ class Usuario extends Model implements AuthenticatableContract,
      * @param $data
      * @return static
      */
-    public static function alta($data){
+    public static function crear($data){
 
         $data['acepto'] = (isset($data['acepto']) && $data['acepto'] == 'on') ? 1 : 0;
         $data['whatsapp'] = (isset($data['whatsapp']) && $data['whatsapp'] == 'on') ? 1 : 0;
@@ -86,12 +86,12 @@ class Usuario extends Model implements AuthenticatableContract,
         ]);
 
         if ($data['producto'] != 'Producto'){
-            Usuario_producto::alta($usuario->cod_usuario, $data['producto']);
+            Usuario_producto::crear($usuario->cod_usuario, $data['producto']);
         }
         return $usuario;
     }
 
-    public static function modificacion($request, $id){
+    public static function modificar($request, $id){
         $ok = false;
         $usuario = Usuario::find($id);
         if (Usuario::validarModificacion($request)){
@@ -108,8 +108,8 @@ class Usuario extends Model implements AuthenticatableContract,
 
             $usuario->save();
 
-            if($request->producto != 'Producto'){
-                Usuario_producto::alta($usuario->cod_usuario, $request->producto);
+            if($request->has('producto')  && ($request->producto != 'Producto')){
+                Usuario_producto::crear($usuario->cod_usuario, $request->producto);
             }
             $ok = true;
         }

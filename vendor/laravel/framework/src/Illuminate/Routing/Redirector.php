@@ -40,7 +40,8 @@ class Redirector
      */
     public function home($status = 302)
     {
-        return $this->to($this->generator->route('home'), $status);
+        //TODO se ha sobreescrito la ruta de home a inicio para hacer una prueba con el error NotFoundHttpException
+        return $this->to($this->generator->route('inicio'), $status);
     }
 
     /**

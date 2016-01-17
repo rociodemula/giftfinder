@@ -73,7 +73,7 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
-        return Usuario::alta($data);
+        return Usuario::crear($data);
     }
 
     public function postLogin(Request $request)

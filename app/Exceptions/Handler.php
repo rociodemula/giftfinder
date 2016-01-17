@@ -46,6 +46,12 @@ class Handler extends ExceptionHandler
             $e = new NotFoundHttpException($e->getMessage(), $e);
         }
 
+        //TODO revisar si esta solución funciona. Procede de http://stackoverflow.com/questions/31449434/handling-expired-token-in-laravel
+        //Es posible que haya que cambiar a un return redirect()->guest('auth/login') o incluso a un simple redirect('/') si no queremos renovar el token
+        if ($e instanceof \Illuminate\Session\TokenMismatchException) {
+            return redirect('auth/login');
+        }
+
         return parent::render($request, $e);
     }
 }

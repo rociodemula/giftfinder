@@ -29,5 +29,7 @@ class Kernel extends HttpKernel
         'auth' => \Giftfinder\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'guest' => \Giftfinder\Http\Middleware\RedirectIfAuthenticated::class,
+        'admin' => \Giftfinder\Http\Middleware\AdminControl::class,
     ];
+
 }

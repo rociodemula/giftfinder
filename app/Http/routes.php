@@ -15,15 +15,21 @@
     return view('welcome');
 }); */
 
+//TODO los name no funcionan, para redirect(inicio), p.e. da error:
+//LogicException in RouteCompiler.php line 102: Route pattern "/dummy/{n}/{{n}}" cannot reference variable name "n" more than once.
 Route::get('/', 'WelcomeController@index')->name('inicio');
-//Route::get('/welcome', 'WelcomeController@index');
-//Route::get('/home', 'HomeController@index');
 Route::get('/perfil', 'ProfileController@edit')->name('perfil')->middleware('auth');
 Route::post('/perfil', 'ProfileController@index')->middleware('auth');
 Route::get('/busqueda', 'SearchController@edit')->name('busqueda')->middleware('auth');
 Route::post('/busqueda', 'SearchController@show')->middleware('auth');
 Route::get('/contacto', 'ContactController@edit')->name('contacto')->middleware('auth');
 Route::post('/contacto', 'ContactController@index')->middleware('auth');
+Route::get('/cpanel',  'CPanelController@show')->name('cpanel')->middleware(['auth', 'admin']);
+Route::post('/cpanel', 'CPanelController@index')->middleware(['auth', 'admin']);
+Route::get('/cpanel/editar/{tabla}/{id}', 'CPanelController@edit')->middleware(['auth', 'admin']);
+Route::get('/cpanel/borrar/{tabla}/{id}', 'CPanelController@destroy')->middleware(['auth', 'admin']);
+Route::post('/cpanel/grabar', 'CPanelController@update')->middleware(['auth', 'admin']);
+
 Route::get('/condiciones', 'RulesController@index');
 Route::get('/ayuda', 'HelpController@index');
 Route::get('/derechos', 'CopyController@index');
@@ -59,10 +65,14 @@ Route::controllers([
     'password' => 'Auth\PasswordController',
 ]);
 
-
-Route::group(['prefix' => 'dummy', 'namespace' => 'Dummy'], function() {
+//TODO si no se comenta este código, el redirect(name) da el error
+//LogicException in RouteCompiler.php line 102: Route pattern "/dummy/{n}/{{n}}" cannot reference variable name "n" more than once.
+//Si se comenta, da el error:
+//NotFoundHttpException in RouteCollection.php line 161:
+/*Route::group(['prefix' => 'dummy', 'namespace' => 'Dummy'], function() {
     // Los controladores de tipo "resource" siguen la interfaz REST
     Route::resource('/{n?}', 'DummyController@index',['n']);
 
-});
+});*/
+
 

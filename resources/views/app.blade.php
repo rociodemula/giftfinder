@@ -24,7 +24,7 @@
 
 	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container-fluid">
-			<a href="http://demosdata.com/"><img class="banner img-responsive center-block" height="70" src="/img/banner.jpg" height="35" width="1000"></img></a>
+			<a href="http://demosdata.com/"><img class="banner img-responsive center-block" height="70" src="/img/banner.jpg" height="35"></img></a>
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
 					<span class="sr-only">Toggle Navigation</span>
@@ -53,6 +53,11 @@
 						</li>
 						<li>
 							<a href="{{ url('/contacto') }}">Contacto</a>
+						</li>
+					@endif
+					@if(!auth()->guest() && (auth()->user()->tipo == 'admin'))
+						<li>
+							<a href="{{ url('/cpanel') }}">Panel de control</a>
 						</li>
 					@endif
 				</ul>

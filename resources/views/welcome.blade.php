@@ -8,7 +8,7 @@
                     <h3 class="panel-title">¿Quiénes somos?</h3>
                 </div>
                 <div class="panel-body">
-                    <p class="text-justify">Somos una comunidad interesada en regalar a otros cosas útiles que ya no necesitamos.</p>
+                    <p class="text-justify">Somos una comunidad interesada en regalar a otros esas cosas útiles que ya no necesitamos.</p>
                     <p class="text-justify">Necesitas registrarte o identificarte en nuestra web para ofrecer o solicitar los productos disponibles.
                         ¡Te costará solo un minuto! <a class="btn btn-xs btn-success" role="button" href="{{ url('/auth/register') }}">Altas</a></p>
                     <p class="text-justify">Si quieres compartir algo que te sobre y no lo encuentras entre las categorías/productos disponibles,
@@ -26,7 +26,7 @@
                         <div class="col-sm-3">
                             <ul class="list-group">
                                 <li class="lead list-group-item">{{ $item->nombre_producto }}</li>
-                                <li class="list-group-item"><img src="{{ $item->foto_producto }}"></li>
+                                <li class="list-group-item"><img src="{{ $item->foto_producto }}" height="50" width="50"></li>
                                 <li class="list-group-item">{{ $item->descripcion }}</li>
                                 <li class="list-group-item"><a href="{{ $item->link_articulo }}">Más información</a></li>
                             </ul>
@@ -35,6 +35,7 @@
                         <div class="col-sm-3">
                             <ul class="list-group">
                                 <li class="lead list-group-item">¡Encuentra donantes!</li>
+                                <li class="list-group-item">Descubre personas dispuestas a regalar excedentes del producto de tu interés.</li>
                                 <li class="list-group-item"><a class="btn btn-xs btn-success" role="button" href="{{ url('/busqueda') }}">Búsqueda</a></p></li>
                             </ul>
                         </div>
