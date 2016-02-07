@@ -41,22 +41,22 @@
 					<li><a href="{{ url('/home') }}">Home</a></li>
 				</ul>-->
 				<ul class="nav navbar-nav">
-					<li class="active">
+					<li @if (Request::is('/')) class="active" @endif>
 						<a href="{{ url('/') }}">Inicio</a>
 					</li>
 					@if(!auth()->guest())
-						<li>
+						<li @if (Request::is('perfil*')) class="active" @endif>
 							<a href="{{ url('/perfil') }}">Perfil</a>
 						</li>
-						<li>
+						<li @if (Request::is('busqueda*')) class="active" @endif>
 							<a href="{{ url('/busqueda') }}">Búsqueda</a>
 						</li>
-						<li>
+						<li @if (Request::is('contacto*')) class="active" @endif>
 							<a href="{{ url('/contacto') }}">Contacto</a>
 						</li>
 					@endif
 					@if(!auth()->guest() && (auth()->user()->tipo == 'admin'))
-						<li>
+						<li @if (Request::is('cpanel*')) class="active" @endif>
 							<a href="{{ url('/cpanel') }}">Panel de control</a>
 						</li>
 					@endif
@@ -88,13 +88,13 @@
 	<div class="container-fluid">
 			<div class="collapse navbar-collapse" id="footer">
 				<ul class="nav navbar-nav">
-					<li class="active">
+					<li  @if (Request::is('condiciones*')) class="active" @endif>
 						<a href="{{ url('/condiciones') }}">Condiciones de uso</a>
 					</li>
-					<li>
+					<li @if (Request::is('ayuda*')) class="active" @endif>
 						<a href="{{ url('/ayuda') }}">Ayuda / Manuales</a>
 					</li>
-					<li>
+					<li @if (Request::is('derechos*')) class="active" @endif>
 						<a href="{{ url('/derechos') }}">Derechos de autor</a>
 					</li>
 				</ul>

@@ -18,6 +18,14 @@
                                     @endforeach
                                 </ul>
                             </div>
+                        @elseif(isset($exito) && $exito)
+                            <div class="alert alert-success">
+                                <strong>¡Hecho!</strong> La operación se ha realizado con éxito.<br>
+                            </div>
+                        @elseif(isset($exito) && !$exito))
+                        <div class="alert alert-danger">
+                            <strong>¡Atención!</strong> La operación no se ha podido completar.<br><br>
+                        </div>
                         @endif
                         <form class="form-horizontal" role="form" method="POST" action="/cpanel">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -61,20 +69,21 @@
                                     </thead>
                                     @foreach($resultados as $registro)
                                         <tr @if ($editar && ($registro->$campos[0] == $id)) class="hidden" @endif>
-                                            <td><a href="{{URL::to('/cpanel/editar/'.$tabla.'/'.$registro->$campos[0])}}" class="btn btn-success btn-xs">Editar</a>
-                                            <a href="{{URL::to('/cpanel/borrar/'.$tabla.'/'.$registro->$campos[0])}}" class="btn btn-warning btn-xs">Borrar</a></td>
+                                            <td><a href="{{URL::to('/cpanel/editar/'.$tabla.'/'.$registro->$campos[0])}}" class="btn btn-success btn-xs" @if ($tabla == 'migrations' || $tabla == 'password_resets') disabled @endif>Editar</a>
+                                            <a href="{{URL::to('/cpanel/borrar/'.$tabla.'/'.$registro->$campos[0])}}" class="btn btn-warning btn-xs" @if ($tabla == 'migrations' || $tabla == 'password_resets') disabled @endif>Borrar</a></td>
                                             @foreach($campos as $campo)
                                                     <td>{{ $registro->$campo }}</td>
                                             @endforeach
                                         </tr>
+
                                         <tr @if (!$editar || ($registro->$campos[0] != $id)) class="hidden" @endif>
                                             <form method="POST" action="/cpanel/grabar">
                                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                 <input type="hidden" name="tabla" value="{{$tabla}}"/>
                                                 <input type="hidden" name="id" value="{{$registro->$campos[0]}}"/>
-                                                <td><button type="submit" class="btn btn-success btn-xs">Grabar</button></td>
-                                                @foreach($campos as $campo)
-                                                    <td><input name="{{$campo}}" value="{{ $registro->$campo }}"/></td>
+                                                <td><button type="submit" class="btn btn-success btn-xs" @if ($tabla == 'migrations' || $tabla == 'password_resets') disabled @endif>Grabar</button></td>
+                                                @foreach($campos as $index => $campo)
+                                                    <td><input name="{{$campo}}" value="{{ $registro->$campo }}" @if ($index == 0) readonly @endif/>@if ($campo == 'nombre_usuario' || $campo == 'clave')<input name="{{$campo}}_old" value="{{ $registro->$campo }}" type="hidden"/>@endif</td>
                                                 @endforeach
                                             </form>
                                         </tr>

@@ -109,13 +109,38 @@ class Usuario extends Model implements AuthenticatableContract,
             $usuario->save();
 
             if($request->has('producto')  && ($request->producto != 'Producto')){
-                Usuario_producto::crear($usuario->cod_usuario, $request->producto);
+                if(!Usuario_producto::buscar($request->nombre_usuario, $request->producto)){
+                    Usuario_producto::crear($usuario->cod_usuario, $request->producto);
+                }
             }
             $ok = true;
         }
+        //TODO resolver tema de rollback en caso de que no se pueda crear el producto.
         return $ok;
     }
 
+    public static function modificarAdmin($request, $id){
+        $update = array();
+        if($request->clave != $request->clave_old){
+            //Si la clave ha cambiado, la volvemos a encriptar antes de grabarla
+            $update = ['clave' => bcrypt($request->clave)];
+        }
+        //Si la clave no se ha alterado, no la actualizamos, así preservamos la clave encriptada original del usuario
+        $update = array_merge($update, [
+            'nombre_usuario' => $request->nombre_usuario,
+            'localizacion' => $request->localizacion,
+            'latitud' => $request->latitud,
+            'longitud' => $request->longitud,
+            'email' => $request->email,
+            'telefono' => $request->telefono,
+            'movil' => $request->movil,
+            'whatsapp' => ($request->whatsapp) ? 1 : 0,
+            'geolocalizacion' => ($request->geolocalizacion) ? 1 : 0,
+        ]);
+        return DB::table('usuarios')
+            ->where('cod_usuario', '=', $id)
+            ->update($update);
+    }
 
 
     public static function validarAlta($data){
@@ -139,8 +164,13 @@ class Usuario extends Model implements AuthenticatableContract,
      */
     public static function validarModificacion($request) {
 
-        $data = array(
-            'nombre_usuario' => $request->nombre_usuario,
+        $data = array();
+        $rules = array();
+        if(auth()->user()->nombre_usuario != $request->nombre_usuario){
+            $data = ['nombre_usuario' => $request->nombre_usuario];
+            $rules = ['nombre_usuario' => 'required|max:30|unique:usuarios'];
+        }
+        $rest = array(
             'clave' => $request->clave,
             'password_confirmation' => $request->password_confirmation,
             'localizacion' => $request->localizacion,
@@ -152,9 +182,7 @@ class Usuario extends Model implements AuthenticatableContract,
             'whatsapp' => $request->whatsapp,
             'geolocalizacion' => $request->geolocalizacion
         );
-
-        return Validator::make($data, [
-            'nombre_usuario' => 'required|max:30|unique:usuarios',
+        $restRules = array(
             'clave' => 'required|min:6',
             'password_confirmation' => 'required|same:clave',
             'localizacion' => 'max:60',
@@ -163,7 +191,45 @@ class Usuario extends Model implements AuthenticatableContract,
             'email' => 'email|max:80',
             'telefono' => 'numeric|digits:9',
             'movil' => 'numeric|digits:9'
-        ]);
+        );
+        $data = array_merge($data, $rest);
+        $rules = array_merge($rules, $restRules);
+
+        return \Validator::make($data, $rules);
+    }
+
+    public static function validarAdmin($request){
+
+        $data = array();
+        $rules = array();
+        if($request->nombre_usuario != $request->nombre_usuario_old){
+            $data = ['nombre_usuario' => $request->nombre_usuario];
+            $rules = ['nombre_usuario' => 'required|max:30|unique:usuarios'];
+        }
+        $rest = array(
+            'clave' => $request->clave,
+            'localizacion' => $request->localizacion,
+            'latitud' => $request->latitud,
+            'longitud' => $request->longitud,
+            'email' => $request->email,
+            'telefono' => $request->telefono,
+            'movil' => $request->movil,
+            'whatsapp' => $request->whatsapp,
+            'geolocalizacion' => $request->geolocalizacion
+        );
+        $restRules = array(
+            'clave' => 'required|min:6',
+            'localizacion' => 'max:60',
+            'latitud' => 'required|numeric',
+            'longitud' => 'required|numeric',
+            'email' => 'email|max:80',
+            'telefono' => 'numeric|digits:9',
+            'movil' => 'numeric|digits:9'
+        );
+        $data = array_merge($data, $rest);
+        $rules = array_merge($rules, $restRules);
+
+        return \Validator::make($data, $rules);
     }
 
 }

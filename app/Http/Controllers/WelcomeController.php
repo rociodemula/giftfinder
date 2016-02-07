@@ -31,4 +31,11 @@ class WelcomeController extends Controller
         return view('welcome', ['producto' => Producto::all()]);
     }
 
+    public function destroy($baja){
+        return view('welcome', [
+            'baja' => $baja,
+            'producto' => Producto::all()
+        ]);
+    }
+
 }

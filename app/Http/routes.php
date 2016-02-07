@@ -18,6 +18,7 @@
 //TODO los name no funcionan, para redirect(inicio), p.e. da error:
 //LogicException in RouteCompiler.php line 102: Route pattern "/dummy/{n}/{{n}}" cannot reference variable name "n" more than once.
 Route::get('/', 'WelcomeController@index')->name('inicio');
+Route::get('/baja/{baja}', 'WelcomeController@destroy');
 Route::get('/perfil', 'ProfileController@edit')->name('perfil')->middleware('auth');
 Route::post('/perfil', 'ProfileController@index')->middleware('auth');
 Route::get('/busqueda', 'SearchController@edit')->name('busqueda')->middleware('auth');

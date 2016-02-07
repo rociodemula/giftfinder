@@ -3,6 +3,15 @@
 @section('content')
     <div class="container">
         <div class="content">
+            @if (isset($baja) && $baja)
+                <div class="alert alert-info">
+                    <strong>¡Tu perfil ha sido borrado!</strong> Puedes volver a registrarte cuando quieras.<br>
+                </div>
+            @elseif(isset($baja) && !$baja)
+                <div class="alert alert-info">
+                    <strong>¡Tu perfil no se ha podido borrar!</strong> La operación no ha podido completarse.<br>
+                </div>
+            @endif
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">¿Quiénes somos?</h3>

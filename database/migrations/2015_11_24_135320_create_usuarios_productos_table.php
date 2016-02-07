@@ -13,6 +13,7 @@ class CreateUsuariosProductosTable extends Migration
     public function up()
     {
         Schema::create('usuarios_productos', function (Blueprint $table) {
+            $table->increments('codigo');
             $table->integer('usuario')->unsigned();
             $table->integer('producto')->unsigned();
             $table->timestamps();

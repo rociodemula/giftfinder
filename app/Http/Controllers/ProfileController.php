@@ -26,17 +26,39 @@ class ProfileController extends Controller
     public function index()
     {
         if (\Input::has('eliminar')){
-            if ($this->destroy(auth()->user()->cod_usuario)){
-                //Para redirigir a inicio es necesario un return redirect():
-                return redirect('/');
-                //TODO mensaje de confirmación de borrado del perfil
-            }
+            $baja = $this->destroy(auth()->user()->cod_usuario);
+            return redirect('/baja/' . $baja);
         }else{
+
+            $exito = false;
+            $request = \Request::instance();
+            $validacion = Usuario::validarModificacion($request);
+            if($validacion->fails()){
+                //Comunicación de errores en caso de que no esté correcto el formulario
+                return redirect()->back()->withInput()->withErrors($validacion->errors());
+            }
+            if($this->update($request, auth()->user()->cod_usuario)){
+                $exito = true;
+            }
+
+            return view('profile', [
+                'exito' => $exito,
+                'categoria' => Categoria::all(),
+                'subcategoria' => Subcategoria::all(),
+                'producto' => Producto::all() ]);
+
+            /*
             if($this->update(\Request::instance(), auth()->user()->cod_usuario)){
                 return redirect('/perfil');
-                //TODO mensaje comunicando que el perfil ha sido actualizado
-                //TODO control de errores en el formulario y mensajes error
             }
+            return view('profile', [
+                $this->update(\Request::instance(), auth()->user()->cod_usuario),
+
+                    'categoria' => Categoria::all(),
+                    'subcategoria' => Subcategoria::all(),
+                    'producto' => Producto::all()
+
+            ]);*/
         }
     }
 

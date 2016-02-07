@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 
 use Giftfinder\Http\Requests;
 use Giftfinder\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 use DB;
 
 class CPanelController extends Controller
@@ -59,7 +60,7 @@ class CPanelController extends Controller
      */
     public function create()
     {
-        //
+        //TODO falta implementar altas en panel de administración
     }
 
     /**
@@ -124,25 +125,45 @@ class CPanelController extends Controller
         $id = $request->get('id');
         $tabla = $request->get('tabla');
         $grabado = null;
+        $validacion = null;
         $editar = true;
+        $exito = false;
         switch($tabla){
             case 'categorias':
-                $grabado = Categoria::modificar($request, $id);
+                $validacion = Categoria::validar($request);
+                if(!$validacion-> fails()){
+                    $grabado = Categoria::modificar($request, $id);
+                }
                 break;
             case 'peticiones':
-                $grabado = Peticion::modificar($request, $id);
+                $validacion = Peticion::validar($request);
+                if(!$validacion->fails()) {
+                    $grabado = Peticion::modificar($request, $id);
+                }
                 break;
             case 'productos':
-                $grabado = Producto::modificar($request, $id);
+                $validacion = Producto::validar($request);
+                if(!$validacion->fails()) {
+                    $grabado = Producto::modificar($request, $id);
+                }
                 break;
             case 'subcategorias':
-                $grabado = Subcategoria::modificar($request, $id);
+                $validacion = Subcategoria::validar($request);
+                if(!$validacion->fails()) {
+                    $grabado = Subcategoria::modificar($request, $id);
+                }
                 break;
             case 'usuarios':
-                $grabado = Usuario::modificar($request, $id);
+                $validacion = Usuario::validarAdmin($request);
+                if(!$validacion->fails()) {
+                    $grabado = Usuario::modificarAdmin($request, $id);
+                }
                 break;
             case 'usuarios_productos':
-                $grabado = Usuario_producto::modificar($request, $id);
+                $validacion = Usuario_producto::validar($request);
+                if(!$validacion->fails()) {
+                    $grabado = Usuario_producto::modificar($request, $id);
+                }
         }
 
         $resultados =  DB::table($tabla)->get();
@@ -151,9 +172,13 @@ class CPanelController extends Controller
         if ($grabado){
             $id = '';
             $editar = false;
+            $exito= true;
+        }else if($validacion->fails()){
+            return redirect()->back()->withInput()->withErrors($validacion->errors());
         }
 
         return view('cpanel', [
+            'exito' => $exito,
             'editar' => $editar,
             'tabla' => $tabla,
             'id' => $id,

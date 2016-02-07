@@ -11,6 +11,7 @@ namespace Giftfinder;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 class Peticion extends Model
 {
@@ -28,14 +29,25 @@ class Peticion extends Model
             ]);
         }
     }
+    public static function modificar($request, $id){
+        return DB::table('peticiones')
+            ->where('cod_peticion', '=', $id)
+            ->update([
+                'email_respuesta' => $request->email_respuesta,
+                'asunto' => $request->asunto,
+                'mensaje' => $request->mensaje,
+                'usuario' => $request->usuario,
+            ]);
+    }
+
     public static function validar($request){
         $data = array(
             'email_respuesta' => $request->email_respuesta,
             'asunto' => $request->asunto,
             'mensaje' => $request->mensaje
         );
-        return Validator::make($data, [
-            'email_respuesta' => 'email|max:80',
+        return \Validator::make($data, [
+            'email_respuesta' => 'required|email|max:80',
             'asunto'=> 'max:50',
             'mensaje' => 'required|max:255'
         ]);
