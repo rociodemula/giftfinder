@@ -2,6 +2,7 @@
 
 namespace Giftfinder\Http\Controllers;
 
+use Giftfinder\Usuario_producto;
 use Illuminate\Http\Request;
 use Giftfinder\Categoria;
 use Giftfinder\Subcategoria;
@@ -45,7 +46,8 @@ class ProfileController extends Controller
                 'exito' => $exito,
                 'categoria' => Categoria::all(),
                 'subcategoria' => Subcategoria::all(),
-                'producto' => Producto::all() ]);
+                'producto' => Producto::all(),
+                'compartido' => Usuario_producto::where('usuario', auth()->user()->cod_usuario)->get() ]);
 
             /*
             if($this->update(\Request::instance(), auth()->user()->cod_usuario)){
@@ -105,7 +107,9 @@ class ProfileController extends Controller
         return view('profile', [
             'categoria' => Categoria::all(),
             'subcategoria' => Subcategoria::all(),
-            'producto' => Producto::all() ]);
+            'producto' => Producto::all(),
+            'compartido' => Usuario_producto::where('usuario', auth()->user()->cod_usuario)->get()
+        ]);
     }
 
     /**

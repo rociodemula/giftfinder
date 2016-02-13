@@ -61,6 +61,7 @@
 
                                     <div class="row">
                                         <!--TODO tanto latitud como longitud son obligatorios. Se pueden generar con gmaps a partir de la localización-->
+                                        <!--TODO generar latitud y longitud a partir de localización con gmaps https://developers.google.com/maps/documentation/javascript/geocoding?hl=es-->
                                         <div class="col-md-7">
                                             <div class="form-group">
                                                 <label class="col-md-offset-4 col-md-3 control-label">Latitud</label>
@@ -137,6 +138,41 @@
                                     <div class="col-md-offset-1 col-md-1">
                                         <label class="control-label">Ofrezco</label>
                                     </div>
+                                    @foreach ($compartido as $itemCompartido)
+                                        <div class="col-md-3">
+                                            <select class="form-control" name="categoria">
+                                                <option>Categoría</option>
+                                                @foreach ($categoria as $item)
+                                                    <option @if($item->nombre_categoria == old('categoria'))selected @endif>{{ $item->nombre_categoria }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <select class="form-control" name="subcategoria">
+                                                <option>Subcategoría</option>
+                                                @foreach ($subcategoria as $item)
+                                                    <option @if($item->nombre_subcategoria == old('subcategoria'))selected @endif>{{ $item->nombre_subcategoria }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3">
+
+                                            <select class="form-control" name="productoCompartido[{{$itemCompartido->codigo}}]">
+                                                <option>Producto</option>
+                                                @foreach ($producto as $item)
+                                                    <option @if($item->cod_producto == $itemCompartido->producto) selected @endif>{{ $item->nombre_producto }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <a class="btn btn-danger btn-sm" title="Dejar de compartir este producto">
+                                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                            </a>
+                                        </div>
+                                        <div class="col-md-offset-1 col-md-1">
+                                            <label class="control-label">y...</label>
+                                        </div>
+                                    @endforeach
                                     <div class="col-md-3">
                                         <select class="form-control" name="categoria">
                                             <option>Categoría</option>
@@ -161,7 +197,13 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                    <!--TODO incluir botón + que añada más artículos para compartir-->
+                                    <div class="col-md-1">
+                                        <a class="btn btn-success btn-sm" title="Compartir más productos">
+                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                        </a>
+                                    </div>
+                                    <!--TODO accionar botón + para que añada otra linea con jQuery-->
+                                    <!--TODO relacionar combos con jQuery para seleccionar categorías, subcategorias y productos enlazados-->
                                 </div>
                             </div>
                             <div class="row">

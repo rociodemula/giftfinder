@@ -109,10 +109,21 @@ class Usuario extends Model implements AuthenticatableContract,
             $usuario->save();
 
             if($request->has('producto')  && ($request->producto != 'Producto')){
-                if(!Usuario_producto::buscar($request->nombre_usuario, $request->producto)){
+                if(!Usuario_producto::buscar($usuario->cod_usuario, $request->producto)){
                     Usuario_producto::crear($usuario->cod_usuario, $request->producto);
                 }
             }
+            if(isset($request->productoCompartido)){
+                foreach ($request->productoCompartido as $clave => $producto){
+                    if ($producto != 'Producto'){
+                        Usuario_producto::modificar($usuario->cod_usuario, Usuario_producto::getCodProducto($producto), $clave);
+                    }else{
+                        Usuario_producto::borrarPorId($clave);
+                    }
+                }
+            }
+
+
             $ok = true;
         }
         //TODO resolver tema de rollback en caso de que no se pueda crear el producto.

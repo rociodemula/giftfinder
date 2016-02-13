@@ -162,7 +162,7 @@ class CPanelController extends Controller
             case 'usuarios_productos':
                 $validacion = Usuario_producto::validar($request);
                 if(!$validacion->fails()) {
-                    $grabado = Usuario_producto::modificar($request, $id);
+                    $grabado = Usuario_producto::modificarAdmin($request, $id);
                 }
         }
 

@@ -66,6 +66,7 @@
                                 </div>
                                 <div class="col-md-2">
                                     <div class="form-group">
+                                        <!--TODO opción para ver localización en el mapa, ver https://styde.net/integrar-google-maps-en-laravel-5-con-phpgmaps/-->
                                         <button type="button" id="mapa" class="btn btn-success">
                                             Ver resultados en mapa
                                         </button>

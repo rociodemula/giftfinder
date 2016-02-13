@@ -28,7 +28,15 @@ class Usuario_producto extends Model
             ->get();
     }
 
-    public static function modificar($request, $id){
+    public static function modificar($usuario, $producto, $id){
+        return DB::table('usuarios_productos')
+            ->where('codigo', '=', $id)
+            ->update([
+                'usuario' => $usuario,
+                'producto' => $producto,
+            ]);
+    }
+    public static function modificarAdmin($request, $id){
         return DB::table('usuarios_productos')
             ->where('codigo', '=', $id)
             ->update([
@@ -44,6 +52,11 @@ class Usuario_producto extends Model
             ->delete();;
     }
 
+    public static function borrarPorId($id){
+        return DB::table('usuarios_productos')
+            ->where('codigo', '=', $id)
+            ->delete();;
+    }
     public static function getCodProducto($nombre_producto){
         return DB::table('productos')
             ->where('nombre_producto', '=', $nombre_producto )
