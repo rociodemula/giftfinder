@@ -139,66 +139,94 @@
                                         <label class="control-label">Ofrezco</label>
                                     </div>
                                     @foreach ($compartido as $itemCompartido)
-                                        <div class="col-md-3">
+                                        <div class="col-md-3 {{$itemCompartido->codigo}}">
                                             <select class="form-control" name="categoria">
-                                                <option>Categoría</option>
                                                 @foreach ($categoria as $item)
                                                     <option @if($item->nombre_categoria == old('categoria'))selected @endif>{{ $item->nombre_categoria }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <div class="col-md-3">
+                                        <div class="col-md-3 {{$itemCompartido->codigo}}">
                                             <select class="form-control" name="subcategoria">
-                                                <option>Subcategoría</option>
                                                 @foreach ($subcategoria as $item)
                                                     <option @if($item->nombre_subcategoria == old('subcategoria'))selected @endif>{{ $item->nombre_subcategoria }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <div class="col-md-3">
+                                        <div class="col-md-3 {{$itemCompartido->codigo}}">
 
-                                            <select class="form-control" name="productoCompartido[{{$itemCompartido->codigo}}]">
-                                                <option>Producto</option>
+                                            <select class="form-control" name="productoCompartido[{{$itemCompartido->codigo}}]" id="productoCompartido{{$itemCompartido->codigo}}">
+                                                <option value="Producto">Producto</option>
                                                 @foreach ($producto as $item)
                                                     <option @if($item->cod_producto == $itemCompartido->producto) selected @endif>{{ $item->nombre_producto }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <div class="col-md-1">
-                                            <a class="btn btn-danger btn-sm" title="Dejar de compartir este producto">
+                                        <div class="col-md-1 {{$itemCompartido->codigo}}">
+                                            <a class="btn btn-danger btn-sm borrarProducto" title="Dejar de compartir este producto" id="{{$itemCompartido->codigo}}">
                                                 <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                                             </a>
                                         </div>
-                                        <div class="col-md-offset-1 col-md-1">
+                                        <div class="col-md-offset-1 col-md-1 {{$itemCompartido->codigo}}">
                                             <label class="control-label">y...</label>
                                         </div>
                                     @endforeach
-                                    <div class="col-md-3">
+                                    <div class="col-md-3 penultima">
                                         <select class="form-control" name="categoria">
-                                            <option>Categoría</option>
                                             @foreach ($categoria as $item)
                                                 <option @if($item->nombre_categoria == old('categoria'))selected @endif>{{ $item->nombre_categoria }}</option>
                                             @endforeach
                                         </select>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-3 penultima">
                                         <select class="form-control" name="subcategoria">
-                                            <option>Subcategoría</option>
                                             @foreach ($subcategoria as $item)
                                                 <option @if($item->nombre_subcategoria == old('subcategoria'))selected @endif>{{ $item->nombre_subcategoria }}</option>
                                             @endforeach
                                         </select>
                                     </div>
-                                    <div class="col-md-3">
-                                        <select class="form-control" name="producto">
-                                            <option>Producto</option>
+                                    <div class="col-md-3 penultima">
+                                        <select id="productoNuevo" class="form-control productoNuevo" name="producto[0]">
+                                            <option value="Producto">Producto</option>
                                             @foreach ($producto as $item)
                                                 <option @if($item->nombre_producto == old('producto'))selected @endif>{{ $item->nombre_producto }}</option>
                                             @endforeach
                                         </select>
                                     </div>
-                                    <div class="col-md-1">
-                                        <a class="btn btn-success btn-sm" title="Compartir más productos">
+                                    <div id="nuevaLinea" class="hidden">
+                                        <div class="col-md-1 penultima">
+                                            <a class="btn btn-danger btn-sm borrarProducto" title="Dejar de compartir este producto" id="">
+                                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                            </a>
+                                        </div>
+                                        <div class="col-md-offset-1 col-md-1 penultima">
+                                            <label class="control-label">y...</label>
+                                        </div>
+                                        <div class="col-md-3 ultima">
+                                            <select class="form-control" name="categoria">
+                                                @foreach ($categoria as $item)
+                                                    <option @if($item->nombre_categoria == old('categoria'))selected @endif>{{ $item->nombre_categoria }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3 ultima">
+                                            <select class="form-control" name="subcategoria">
+                                                @foreach ($subcategoria as $item)
+                                                    <option @if($item->nombre_subcategoria == old('subcategoria'))selected @endif>{{ $item->nombre_subcategoria }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3 ultima">
+                                            <select id="productoNuevo" class="form-control productoNuevo" name="producto[0]">
+                                                <option value="Producto">Producto</option>
+                                                @foreach ($producto as $item)
+                                                    <option @if($item->nombre_producto == old('producto'))selected @endif>{{ $item->nombre_producto }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div id="fin" class="col-md-1">
+                                        <a id="mas" class="btn btn-success btn-sm hidden" title="Compartir más productos">
                                             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                                         </a>
                                     </div>

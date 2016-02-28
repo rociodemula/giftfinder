@@ -108,11 +108,6 @@ class Usuario extends Model implements AuthenticatableContract,
 
             $usuario->save();
 
-            if($request->has('producto')  && ($request->producto != 'Producto')){
-                if(!Usuario_producto::buscar($usuario->cod_usuario, $request->producto)){
-                    Usuario_producto::crear($usuario->cod_usuario, $request->producto);
-                }
-            }
             if(isset($request->productoCompartido)){
                 foreach ($request->productoCompartido as $clave => $producto){
                     if ($producto != 'Producto'){
@@ -121,6 +116,15 @@ class Usuario extends Model implements AuthenticatableContract,
                         Usuario_producto::borrarPorId($clave);
                     }
                 }
+            }
+
+            if(isset($request->producto)){
+                foreach($request->producto as $producto){
+                    if(($producto != 'Producto') && !Usuario_producto::buscar($usuario->cod_usuario, $producto)){
+                        Usuario_producto::crear($usuario->cod_usuario, $producto);
+                    }
+                }
+
             }
 
 
@@ -194,8 +198,8 @@ class Usuario extends Model implements AuthenticatableContract,
             'geolocalizacion' => $request->geolocalizacion
         );
         $restRules = array(
-            'clave' => 'required|min:6',
-            'password_confirmation' => 'required|same:clave',
+            'clave' => 'min:6',
+            'password_confirmation' => 'same:clave',
             'localizacion' => 'max:60',
             'latitud' => 'required|numeric',
             'longitud' => 'required|numeric',
