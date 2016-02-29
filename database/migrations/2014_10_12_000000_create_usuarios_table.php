@@ -20,7 +20,7 @@ class CreateUsuariosTable extends Migration
             $table->string('localizacion', 60)->nullable();
             $table->decimal('latitud', 9, 6);
             $table->decimal('longitud', 9, 6);
-            $table->string('email', 80)->unique()->nullable();
+            $table->string('email', 80)->unique();
             $table->string('telefono', 12)->nullable();
             $table->string('movil', 12)->nullable();
             $table->boolean('whatsapp')->default(false);

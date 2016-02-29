@@ -171,7 +171,7 @@ class Usuario extends Model implements AuthenticatableContract,
             'localizacion' => 'max:60',
             'latitud' => 'required|numeric',
             'longitud' => 'required|numeric',
-            'email' => 'email|max:80',
+            'email' => 'required|email|max:80',
             'telefono' => 'numeric|digits:9',
             'movil' => 'numeric|digits:9',
             'acepto' => 'required'
@@ -209,7 +209,7 @@ class Usuario extends Model implements AuthenticatableContract,
             'localizacion' => 'max:60',
             'latitud' => 'required|numeric',
             'longitud' => 'required|numeric',
-            'email' => 'email|max:80',
+            'email' => 'required|email|max:80',
             'telefono' => 'numeric|digits:9',
             'movil' => 'numeric|digits:9'
         );
@@ -243,7 +243,7 @@ class Usuario extends Model implements AuthenticatableContract,
             'localizacion' => 'max:60',
             'latitud' => 'required|numeric',
             'longitud' => 'required|numeric',
-            'email' => 'email|max:80',
+            'email' => 'required|email|max:80',
             'telefono' => 'numeric|digits:9',
             'movil' => 'numeric|digits:9'
         );
