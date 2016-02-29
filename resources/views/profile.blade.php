@@ -8,7 +8,6 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Perfil de Usuario</div>
                     <div class="panel-body">
-
                         @if (count($errors) > 0)
                             <div class="alert alert-danger">
                                 <strong>¡Atención!</strong> Hay algún problema con tu entrada.<br><br>
@@ -34,7 +33,7 @@
                                     <div class="form-group">
                                         <label class="col-md-4 control-label pull-left">Usuario</label>
                                         <div class="col-md-8">
-                                            <input type="text" class="form-control" name="nombre_usuario" value="@if(count($errors) > 0){{old('nombre_usuario')}}@else{{auth()->user()->nombre_usuario}}@endif">
+                                            <input type="text" class="form-control" name="nombre_usuario" value="@if(count($errors) > 0){{old('nombre_usuario')}}@else{{$usuario->nombre_usuario}}@endif">
                                         </div>
                                     </div>
 
@@ -55,7 +54,7 @@
                                     <div class="form-group">
                                         <label class="col-md-4 control-label pull-left">Localización </label>
                                         <div class="col-md-8">
-                                            <input type="text" class="form-control" name="localizacion" value="@if(count($errors) > 0){{old('localizacion')}}@else{{auth()->user()->localizacion}}@endif">
+                                            <input type="text" class="form-control" name="localizacion" value="@if(count($errors) > 0){{old('localizacion')}}@else{{$usuario->localizacion}}@endif">
                                         </div>
                                     </div>
 
@@ -66,7 +65,7 @@
                                             <div class="form-group">
                                                 <label class="col-md-offset-4 col-md-3 control-label">Latitud</label>
                                                 <div class="col-md-5">
-                                                    <input type="text" class="form-control" name="latitud" value="@if(count($errors) > 0){{old('latitud')}}@else{{auth()->user()->latitud}}@endif">
+                                                    <input type="text" class="form-control" name="latitud" value="@if(count($errors) > 0){{old('latitud')}}@else{{$usuario->latitud}}@endif">
                                                 </div>
                                             </div>
 
@@ -75,7 +74,7 @@
                                             <div class="form-group">
                                                 <label class="col-md-5 control-label">Longitud</label>
                                                 <div class="col-md-7">
-                                                    <input type="text" class="form-control" name="longitud" value="@if(count($errors) > 0){{old('longitud')}}@else{{auth()->user()->longitud}}@endif">
+                                                    <input type="text" class="form-control" name="longitud" value="@if(count($errors) > 0){{old('longitud')}}@else{{$usuario->longitud}}@endif">
                                                 </div>
                                             </div>
                                         </div>
@@ -92,7 +91,7 @@
                                                     <div class="form-group">
                                                         <label class="col-md-3 control-label">E-Mail</label>
                                                         <div class="col-md-9">
-                                                            <input type="email" class="form-control" name="email" value="@if(count($errors) > 0){{old('email')}}@else{{auth()->user()->email}}@endif">
+                                                            <input type="email" class="form-control" name="email" value="@if(count($errors) > 0){{old('email')}}@else{{$usuario->email}}@endif">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -103,7 +102,7 @@
                                                     <div class="form-group">
                                                         <label class="col-md-3 control-label">Teléfono</label>
                                                         <div class="col-md-9">
-                                                            <input type="number" class="form-control" name="telefono" value="@if(count($errors) > 0){{old('telefono')}}@else{{auth()->user()->telefono}}@endif">
+                                                            <input type="number" class="form-control" name="telefono" value="@if(count($errors) > 0){{old('telefono')}}@else{{$usuario->telefono}}@endif">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -113,7 +112,7 @@
                                                     <div class="form-group">
                                                         <label class="col-md-3 control-label">Móvil</label>
                                                         <div class="col-md-9">
-                                                            <input type="number" class="form-control" name="movil" value="@if(count($errors) > 0){{old('movil')}}@else{{auth()->user()->movil}}@endif">
+                                                            <input type="number" class="form-control" name="movil" value="@if(count($errors) > 0){{old('movil')}}@else{{$usuario->movil}}@endif">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -121,7 +120,7 @@
                                                     <div class="form-group">
                                                         <div class="col-md-6">
                                                             <!--TODO este campo solo se podra marcar si se ha rellenado el campo móvil con un tlf movil-->
-                                                            <input type="checkbox" class="form-control" name="whatsapp" @if(auth()->user()->whatsapp == 1)checked @endif>
+                                                            <input type="checkbox" class="form-control" name="whatsapp" @if($usuario->whatsapp == 1)checked @endif>
                                                         </div>
                                                         <label class="col-md-4"><img src="/img/whatsapp.png"></label>
                                                     </div>
@@ -238,7 +237,7 @@
                                 <div class="col-md-5">
                                     <div class="form-group">
                                         <div class="col-md-2">
-                                            <input type="checkbox" class="form-control" name="geolocalizacion" @if(auth()->user()->geolocalizacion == 1)checked @endif>
+                                            <input type="checkbox" class="form-control" name="geolocalizacion" @if($usuario->geolocalizacion == 1)checked @endif>
                                         </div>
                                         <label class="col-md-10">Activar geolocalización</label>
                                     </div>

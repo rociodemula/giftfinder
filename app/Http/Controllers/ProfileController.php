@@ -42,11 +42,17 @@ class ProfileController extends Controller
                 $exito = true;
             }
 
+            //Se añade el registro de la tabla usuarios, para poder refrescarlo de forma correcta en la vista. Si no lo
+            //hacemos así, los campos del perfil de usuarios, no se actualizan en la sesión tras el update en todos los casos, solo
+            //si no modificamos los productos ofrecidos. Este bug se ha resuelto completamente con esta técnica, ya que no
+            // se recupera ningún dato del usuario de sesión, salvo el código, el esto procede de la base de datos recién
+            //actualizada.
             return view('profile', [
                 'exito' => $exito,
                 'categoria' => Categoria::all(),
                 'subcategoria' => Subcategoria::all(),
                 'producto' => Producto::all(),
+                'usuario' => Usuario::where('cod_usuario', auth()->user()->cod_usuario)->first(),
                 'compartido' => Usuario_producto::where('usuario', auth()->user()->cod_usuario)->get() ]);
 
             /*
@@ -108,6 +114,7 @@ class ProfileController extends Controller
             'categoria' => Categoria::all(),
             'subcategoria' => Subcategoria::all(),
             'producto' => Producto::all(),
+            'usuario' => Usuario::where('cod_usuario', auth()->user()->cod_usuario)->first(),
             'compartido' => Usuario_producto::where('usuario', auth()->user()->cod_usuario)->get()
         ]);
     }

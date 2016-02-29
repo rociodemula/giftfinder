@@ -96,7 +96,12 @@ class Usuario extends Model implements AuthenticatableContract,
         $usuario = Usuario::find($id);
         if (Usuario::validarModificacion($request)){
             $usuario->nombre_usuario = $request->nombre_usuario;
-            $usuario->clave = bcrypt($request->clave);
+            //Necesario para que no grabe el campo clave en caso de estar vacío.
+            //Para las modificaciones no se ve oportuno ponerlo obligatorio, así que, en caso de
+            //que el usuario no teclee nada, no se actualiza este campo en el save.
+            if (isset($request->clave) && $request->clave != ''){
+                $usuario->clave = bcrypt($request->clave);
+            }
             $usuario->localizacion = $request->localizacion;
             $usuario->latitud = $request->latitud;
             $usuario->longitud = $request->longitud;
@@ -197,6 +202,7 @@ class Usuario extends Model implements AuthenticatableContract,
             'whatsapp' => $request->whatsapp,
             'geolocalizacion' => $request->geolocalizacion
         );
+        //Para las modificaciones no ponemos obligatoria la password, y si no se modifica, se dejará la existente.
         $restRules = array(
             'clave' => 'min:6',
             'password_confirmation' => 'same:clave',
