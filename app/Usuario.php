@@ -84,9 +84,14 @@ class Usuario extends Model implements AuthenticatableContract,
             'geolocalizacion' => $data['geolocalizacion'],
             'acepto' => $data['acepto']
         ]);
+        var_dump($data['producto']);
+        if(isset($data['producto'])){
+            foreach($data['producto'] as $producto){
+                if(($producto != 'Producto') && !Usuario_producto::buscar($usuario->cod_usuario, $producto)){
+                    Usuario_producto::crear($usuario->cod_usuario, $producto);
+                }
+            }
 
-        if ($data['producto'] != 'Producto'){
-            Usuario_producto::crear($usuario->cod_usuario, $data['producto']);
         }
         return $usuario;
     }

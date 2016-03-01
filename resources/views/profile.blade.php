@@ -125,7 +125,6 @@
                                                         <label class="col-md-4"><img src="/img/whatsapp.png"></label>
                                                     </div>
                                                 </div>
-                                                <!--TODO incluir en formulario que haya que especificar al menos un modo de contacto-->
                                             </div>
                                         </div>
                                     </div>

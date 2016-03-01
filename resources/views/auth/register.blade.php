@@ -8,7 +8,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Alta de Usuario</div>
                     <div class="panel-body">
-
+                    <!-- Bloque de volcado de errores-->
                         @if (count($errors) > 0)
                             <div class="alert alert-danger">
                                 <strong>¡Atención!</strong> Hay algún problema con tu entrada.<br><br>
@@ -127,29 +127,64 @@
                                     <div class="col-md-offset-1 col-md-1">
                                         <label class="control-label">Ofrezco</label>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-3 penultima">
                                         <select class="form-control" name="categoria">
-                                            <option>Selecciona</option>
                                             @foreach ($categoria as $item)
                                                 <option @if($item->nombre_categoria == old('categoria'))selected @endif>{{ $item->nombre_categoria }}</option>
                                             @endforeach
                                         </select>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-3 penultima">
                                         <select class="form-control" name="subcategoria">
-                                            <option>Selecciona</option>
                                             @foreach ($subcategoria as $item)
                                                 <option @if($item->nombre_subcategoria == old('subcategoria'))selected @endif>{{ $item->nombre_subcategoria }}</option>
                                             @endforeach
                                         </select>
                                     </div>
-                                    <div class="col-md-3">
-                                        <select class="form-control" name="producto">
-                                            <option>Selecciona</option>
+                                    <div class="col-md-3 penultima">
+                                        <select id="productoNuevo" class="form-control productoNuevo" name="producto[0]">
+                                            <option value="Producto">Producto</option>
                                             @foreach ($producto as $item)
                                                 <option @if($item->nombre_producto == old('producto'))selected @endif>{{ $item->nombre_producto }}</option>
                                             @endforeach
                                         </select>
+                                    </div>
+                                    <div id="nuevaLinea" class="hidden">
+                                        <div class="col-md-1 penultima">
+                                            <a class="btn btn-danger btn-sm borrarProducto" title="Dejar de compartir este producto" id="">
+                                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                            </a>
+                                        </div>
+                                        <div class="col-md-offset-1 col-md-1 penultima">
+                                            <label class="control-label">y...</label>
+                                        </div>
+                                        <div class="col-md-3 ultima">
+                                            <select class="form-control" name="categoria">
+                                                @foreach ($categoria as $item)
+                                                    <option @if($item->nombre_categoria == old('categoria'))selected @endif>{{ $item->nombre_categoria }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3 ultima">
+                                            <select class="form-control" name="subcategoria">
+                                                @foreach ($subcategoria as $item)
+                                                    <option @if($item->nombre_subcategoria == old('subcategoria'))selected @endif>{{ $item->nombre_subcategoria }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3 ultima">
+                                            <select id="productoNuevo" class="form-control productoNuevo" name="producto[0]">
+                                                <option value="Producto">Producto</option>
+                                                @foreach ($producto as $item)
+                                                    <option @if($item->nombre_producto == old('producto'))selected @endif>{{ $item->nombre_producto }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div id="fin" class="col-md-1">
+                                        <a id="mas" class="btn btn-success btn-sm hidden" title="Compartir más productos">
+                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -179,8 +214,6 @@
 
                                 </div>
                             </div>
-
-
                         </form>
                     </div>
                 </div>
