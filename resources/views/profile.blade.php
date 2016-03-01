@@ -26,7 +26,7 @@
                                 <strong>¡Atención!</strong> La operación no se ha podido completar.<br><br>
                             </div>
                         @endif
-                        <form class="form-horizontal" role="form" method="POST" action="/perfil">
+                        <form id="perfil" class="form-horizontal" role="form" method="POST" action="/perfil">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <div class="row">
                                 <div class="col-md-5">
@@ -242,7 +242,7 @@
                                 <div class="col-md-5">
                                     <div class="form-group">
                                         <div class="col-md-2">
-                                            <input type="checkbox" class="form-control" name="eliminar" data-toogle="tooltip" rel="txtTooltip" data-placement="right" title="Pulsa esta opción si quieres borrar tu perfil de Giftfinder">
+                                            <input id="eliminar" type="checkbox" class="form-control" name="eliminar" data-toogle="tooltip" rel="txtTooltip" data-placement="right" title="Pulsa esta opción si quieres borrar tu perfil de Giftfinder">
                                         </div>
                                         <label class="col-md-10">Eliminar mi perfil de usuario del sistema</label>
                                         <!--TODO incluir panel model para confirmar borrado de perfil-->
@@ -250,16 +250,31 @@
                                 </div>
                                 <div class="col-md-2">
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-success" data-toogle="tooltip" rel="txtTooltip" data-placement="right" title="Pulsa para enviar la petición de cambio de perfil">
+                                        <button id="enviar" type="submit" class="btn btn-success" data-toogle="tooltip" rel="txtTooltip" data-placement="right" title="Pulsa para enviar la petición de cambio de perfil">
                                             Enviar
                                         </button>
                                     </div>
 
                                 </div>
                             </div>
-
-
                         </form>
+                        <div id="confirmacion" class="modal fade" tabindex="-1" role="dialog">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Volver"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title">¡Atención!</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Estás a punto de eliminar tu perfil del sitio. Perderás todo tu historial y productos compartidos y no tendrás acceso a la plataforma para seguir realizando búsquedas de artículos.</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Volver</button>
+                                        <button id="borrar" type="button" class="btn btn-danger">Eliminar mi perfil de Giftfinder</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><
                     </div>
                 </div>
             </div>

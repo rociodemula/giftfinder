@@ -71,7 +71,20 @@ $(function(){
     });
 
     /*
-    Inizializando las tooltips de bootstrap para indicaciones sobre algunos campos del formulario.
+    Gestión de evento clieck para visualización de caja modal para confirmación de borrado de perfil en el sitio
+     */
+    $('#enviar').on('click', function(e){
+        if($('#eliminar').prop('checked')){
+            e.preventDefault();
+            $('#confirmacion').modal({ backdrop: 'static', keyboard: false })
+                .one('click', '#borrar', function() {
+                    $('#perfil').trigger('submit');
+                });
+        }
+    });
+
+    /*
+    Inicializando las tooltips de bootstrap para indicaciones sobre algunos campos del formulario.
      */
     $('input[rel="txtTooltip"]').tooltip();
     $('select[rel="txtTooltip"]').tooltip();
