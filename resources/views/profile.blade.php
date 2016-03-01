@@ -162,7 +162,7 @@
                                         </div>
                                         <div class="col-md-1 {{$itemCompartido->codigo}}">
                                             <a class="btn btn-danger btn-sm borrarProducto" id="{{$itemCompartido->codigo}}" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Pulsa aquí para dejar de compartir este producto">
-                                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                                             </a>
                                         </div>
                                         <div class="col-md-offset-1 col-md-1 {{$itemCompartido->codigo}}">
@@ -194,7 +194,7 @@
                                     <div id="nuevaLinea" class="hidden">
                                         <div class="col-md-1 penultima">
                                             <a class="btn btn-danger btn-sm borrarProducto" id="" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Pulsa aquí para dejar de compartir este producto">
-                                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                                             </a>
                                         </div>
                                         <div class="col-md-offset-1 col-md-1 penultima">
@@ -245,7 +245,6 @@
                                             <input id="eliminar" type="checkbox" class="form-control" name="eliminar" data-toogle="tooltip" rel="txtTooltip" data-placement="right" title="Pulsa esta opción si quieres borrar tu perfil de Giftfinder">
                                         </div>
                                         <label class="col-md-10">Eliminar mi perfil de usuario del sistema</label>
-                                        <!--TODO incluir panel model para confirmar borrado de perfil-->
                                     </div>
                                 </div>
                                 <div class="col-md-2">
