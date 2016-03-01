@@ -69,4 +69,12 @@ $(function(){
         $('.ultima').addClass('penultima').removeClass('ultima');
         $('#mas').addClass('hidden'); //Hay que ocultar el boton mas, mientras que no se cambie el valor de 'Producto'
     });
+
+    /*
+    Inizializando las tooltips de bootstrap para indicaciones sobre algunos campos del formulario.
+     */
+    $('input[rel="txtTooltip"]').tooltip();
+    $('select[rel="txtTooltip"]').tooltip();
+    $('a[rel="txtTooltip"]').tooltip();
+    $('button[rel="txtTooltip"]').tooltip();
 });

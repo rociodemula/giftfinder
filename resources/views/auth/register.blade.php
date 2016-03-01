@@ -27,28 +27,28 @@
                                     <div class="form-group">
                                         <label class="col-md-4 control-label pull-left">Usuario</label>
                                         <div class="col-md-8">
-                                            <input type="text" class="form-control" name="nombre_usuario" value="{{ old('nombre_usuario') }}">
+                                            <input type="text" class="form-control" name="nombre_usuario" value="{{ old('nombre_usuario') }}" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Este será tu usuario de acceso a la plataforma">
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                         <label class="col-md-4 control-label pull-left">Contraseña</label>
                                         <div class="col-md-8">
-                                            <input type="password" class="form-control" name="clave">
+                                            <input type="password" class="form-control" name="clave" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Debe tener mínimo 6 caracteres">
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                         <label class="col-md-4 control-label pull-left">Verificación </label>
                                         <div class="col-md-8">
-                                            <input type="password" class="form-control" name="password_confirmation">
+                                            <input type="password" class="form-control" name="password_confirmation" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Vuelve a teclear la contraseña">
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                         <label class="col-md-4 control-label pull-left">Localización </label>
                                         <div class="col-md-8">
-                                            <input type="text" class="form-control" name="localizacion" value="{{ old('localizacion') }}">
+                                            <input type="text" class="form-control" name="localizacion" value="{{ old('localizacion') }}" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Sitio que prefieres para las entregas/recogidas">
                                         </div>
                                     </div>
 
@@ -83,7 +83,7 @@
                                                     <div class="form-group">
                                                         <label class="col-md-3 control-label">E-Mail</label>
                                                         <div class="col-md-9">
-                                                            <input type="email" class="form-control" name="email" value="{{ old('email') }}">
+                                                            <input type="email" class="form-control" name="email" value="{{ old('email') }}" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Tu email es necesario para registrarte, así podrás recuperar tu contraseña si la olvidas">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -94,7 +94,7 @@
                                                     <div class="form-group">
                                                         <label class="col-md-3 control-label">Teléfono</label>
                                                         <div class="col-md-9">
-                                                            <input type="number" class="form-control" name="telefono" value="{{ old('telefono') }}">
+                                                            <input type="number" class="form-control" name="telefono" value="{{ old('telefono') }}" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Puedes compartir tu teléfono si quieres">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -104,14 +104,14 @@
                                                     <div class="form-group">
                                                         <label class="col-md-3 control-label">Móvil</label>
                                                         <div class="col-md-9">
-                                                            <input type="number" class="form-control" name="movil" value="{{ old('movil') }}">
+                                                            <input type="number" class="form-control" name="movil" value="{{ old('movil') }}" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Puedes compartir tu móvil si quieres">
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-2">
                                                     <div class="form-group">
                                                         <div class="col-md-6">
-                                                            <input type="checkbox" class="form-control" name="whatsapp">
+                                                            <input type="checkbox" class="form-control" name="whatsapp" data-toogle="tooltip" rel="txtTooltip" data-placement="right" title="Si quieres que te contacten por whatsapp marca esta opción">
                                                         </div>
                                                         <label class="col-md-4"><img src="/img/whatsapp.png"></label>
                                                     </div>
@@ -142,7 +142,7 @@
                                         </select>
                                     </div>
                                     <div class="col-md-3 penultima">
-                                        <select id="productoNuevo" class="form-control productoNuevo" name="producto[0]">
+                                        <select id="productoNuevo" class="form-control productoNuevo" name="producto[0]" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Si ofreces algún producto, seleccionalo aquí">
                                             <option value="Producto">Producto</option>
                                             @foreach ($producto as $item)
                                                 <option @if($item->nombre_producto == old('producto'))selected @endif>{{ $item->nombre_producto }}</option>
@@ -151,7 +151,7 @@
                                     </div>
                                     <div id="nuevaLinea" class="hidden">
                                         <div class="col-md-1 penultima">
-                                            <a class="btn btn-danger btn-sm borrarProducto" title="Dejar de compartir este producto" id="">
+                                            <a class="btn btn-danger btn-sm borrarProducto" id="" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Pulsa aquí para dejar de compartir este producto">
                                                 <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                                             </a>
                                         </div>
@@ -173,7 +173,7 @@
                                             </select>
                                         </div>
                                         <div class="col-md-3 ultima">
-                                            <select id="productoNuevo" class="form-control productoNuevo" name="producto[0]">
+                                            <select id="productoNuevo" class="form-control productoNuevo" name="producto[0]" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Si ofreces algún producto, seleccionalo aquí">
                                                 <option value="Producto">Producto</option>
                                                 @foreach ($producto as $item)
                                                     <option @if($item->nombre_producto == old('producto'))selected @endif>{{ $item->nombre_producto }}</option>
@@ -182,7 +182,7 @@
                                         </div>
                                     </div>
                                     <div id="fin" class="col-md-1">
-                                        <a id="mas" class="btn btn-success btn-sm hidden" title="Compartir más productos">
+                                        <a id="mas" class="btn btn-success btn-sm hidden" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Pulsa aquí para compartir otro producto">
                                             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                                         </a>
                                     </div>
@@ -192,7 +192,7 @@
                                 <div class="col-md-5">
                                     <div class="form-group">
                                         <div class="col-md-2">
-                                            <input type="checkbox" class="form-control" name="geolocalizacion" >
+                                            <input type="checkbox" class="form-control" name="geolocalizacion" data-toogle="tooltip" rel="txtTooltip" data-placement="right" title="Si quieres activar la geolocalización de tu dispositivo, marca esta opción">
                                         </div>
                                         <label class="col-md-10">Activar geolocalización</label>
                                     </div>
@@ -200,14 +200,14 @@
                                 <div class="col-md-5">
                                     <div class="form-group">
                                         <div class="col-md-2">
-                                            <input type="checkbox" class="form-control" name="acepto">
+                                            <input type="checkbox" class="form-control" name="acepto" data-toogle="tooltip" rel="txtTooltip" data-placement="right" title="Es necesario aceptar las condiciones del sitio para continuar">
                                         </div>
                                         <label class="col-md-10">He leído y acepto las condiciones de uso</label>
                                     </div>
                                 </div>
                                 <div class="col-md-2">
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-success">
+                                        <button type="submit" class="btn btn-success" data-toogle="tooltip" rel="txtTooltip" data-placement="right" title="Pulsa aquí para grabar tu perfil en Giftfinder">
                                             Enviar
                                         </button>
                                     </div>
