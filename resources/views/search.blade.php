@@ -29,7 +29,6 @@
                                     </div>
                                     <div class="col-md-3">
                                         <select class="form-control" name="categoria">
-                                            <option>Categoría</option>
                                             @foreach ($categoria as $item)
                                                 <option @if($item->nombre_categoria == old('categoria'))selected @endif>{{ $item->nombre_categoria }}</option>
                                             @endforeach
@@ -37,14 +36,13 @@
                                     </div>
                                     <div class="col-md-3">
                                         <select class="form-control" name="subcategoria">
-                                            <option>Subcategoría</option>
                                             @foreach ($subcategoria as $item)
                                                 <option @if($item->nombre_subcategoria == old('subcategoria'))selected @endif>{{ $item->nombre_subcategoria }}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                     <div class="col-md-3">
-                                        <select class="form-control" name="producto">
+                                        <select class="form-control" name="producto" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Elige el producto que deseas buscar">
                                             <option>Producto</option>
                                             @foreach ($producto as $item)
                                                 <option @if($item->nombre_producto == old('producto'))selected @endif>{{ $item->nombre_producto }}</option>
@@ -53,7 +51,7 @@
                                     </div>
                                     <div class="col-md-1">
                                         <div class="form-group">
-                                            <button type="submit" class="btn btn-success">
+                                            <button type="submit" class="btn btn-success" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Pulsa aquí para ver el resultado de tu búsqueda">
                                                 Ver
                                             </button>
                                         </div>
@@ -89,7 +87,7 @@
                                         <td>{{ $item->email }}</td>
                                         <td>{{ $item->telefono }} </td>
                                         <td>{{ $item->movil }}</td>
-                                        <td>{{ $item->whatsapp }}</td>
+                                        <td>@if( $item->whatsapp ) Sí @else No @endif</td>
                                         <td>{{ $item->localizacion}}</td>
                                     </tr>
                                 @endforeach

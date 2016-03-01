@@ -77,4 +77,5 @@ $(function(){
     $('select[rel="txtTooltip"]').tooltip();
     $('a[rel="txtTooltip"]').tooltip();
     $('button[rel="txtTooltip"]').tooltip();
+    $('textarea[rel="txtTooltip"]').tooltip();
 });
