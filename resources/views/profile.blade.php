@@ -33,28 +33,28 @@
                                     <div class="form-group">
                                         <label class="col-md-4 control-label pull-left">Usuario</label>
                                         <div class="col-md-8">
-                                            <input type="text" class="form-control" name="nombre_usuario" value="@if(count($errors) > 0){{old('nombre_usuario')}}@else{{$usuario->nombre_usuario}}@endif" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Puedes cambiar el nombre de usuario con el que accedes al sitio">
+                                            <input type="text" class="form-control" name="nombre_usuario" maxlength="30" required value="@if(count($errors) > 0){{old('nombre_usuario')}}@else{{$usuario->nombre_usuario}}@endif" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Puedes cambiar el nombre de usuario con el que accedes al sitio">
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                         <label class="col-md-4 control-label pull-left">Contraseña</label>
                                         <div class="col-md-8">
-                                            <input type="password" class="form-control" name="clave" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Si quieres cambiar tu contraseña, recuerda que debe tener mínimo 6 caracteres">
+                                            <input type="password" class="form-control" name="clave" pattern=".{6,}" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Si quieres cambiar tu contraseña, recuerda que debe tener mínimo 6 caracteres">
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                         <label class="col-md-4 control-label pull-left">Verificación </label>
                                         <div class="col-md-8">
-                                            <input type="password" class="form-control" name="password_confirmation" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Vuelve a teclear la contraseña">
+                                            <input type="password" class="form-control" name="password_confirmation" pattern=".{6,}" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Vuelve a teclear la contraseña">
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                         <label class="col-md-4 control-label pull-left">Localización </label>
                                         <div class="col-md-8">
-                                            <input type="text" class="form-control" name="localizacion" value="@if(count($errors) > 0){{old('localizacion')}}@else{{$usuario->localizacion}}@endif" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Recuerda que esta localización es el sitio donde prefieres hacer las entregas/recogidas">
+                                            <input type="text" class="form-control" name="localizacion" maxlength="60" value="@if(count($errors) > 0){{old('localizacion')}}@else{{$usuario->localizacion}}@endif" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Recuerda que esta localización es el sitio donde prefieres hacer las entregas/recogidas">
                                         </div>
                                     </div>
 
@@ -65,7 +65,7 @@
                                             <div class="form-group">
                                                 <label class="col-md-offset-4 col-md-3 control-label">Latitud</label>
                                                 <div class="col-md-5">
-                                                    <input type="text" class="form-control" name="latitud" value="@if(count($errors) > 0){{old('latitud')}}@else{{$usuario->latitud}}@endif">
+                                                    <input type="text" class="form-control" name="latitud" required value="@if(count($errors) > 0){{old('latitud')}}@else{{$usuario->latitud}}@endif">
                                                 </div>
                                             </div>
 
@@ -74,7 +74,7 @@
                                             <div class="form-group">
                                                 <label class="col-md-5 control-label">Longitud</label>
                                                 <div class="col-md-7">
-                                                    <input type="text" class="form-control" name="longitud" value="@if(count($errors) > 0){{old('longitud')}}@else{{$usuario->longitud}}@endif">
+                                                    <input type="text" class="form-control" name="longitud" required value="@if(count($errors) > 0){{old('longitud')}}@else{{$usuario->longitud}}@endif">
                                                 </div>
                                             </div>
                                         </div>
@@ -91,7 +91,7 @@
                                                     <div class="form-group">
                                                         <label class="col-md-3 control-label">E-Mail</label>
                                                         <div class="col-md-9">
-                                                            <input type="email" class="form-control" name="email" value="@if(count($errors) > 0){{old('email')}}@else{{$usuario->email}}@endif" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Puedes cambiar tu email cuando quieras, pero necesitamos alguno para que puedas recuperar tu contraseña si la olvidas">
+                                                            <input type="email" class="form-control" name="email" maxlength="80" required value="@if(count($errors) > 0){{old('email')}}@else{{$usuario->email}}@endif" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Puedes cambiar tu email cuando quieras, pero necesitamos alguno para que puedas recuperar tu contraseña si la olvidas">
                                                         </div>
                                                     </div>
                                                 </div>

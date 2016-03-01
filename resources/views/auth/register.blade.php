@@ -27,28 +27,28 @@
                                     <div class="form-group">
                                         <label class="col-md-4 control-label pull-left">Usuario</label>
                                         <div class="col-md-8">
-                                            <input type="text" class="form-control" name="nombre_usuario" value="{{ old('nombre_usuario') }}" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Este será tu usuario de acceso a la plataforma">
+                                            <input type="text" class="form-control" name="nombre_usuario" maxlength="30" required value="{{ old('nombre_usuario') }}" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Este será tu usuario de acceso a la plataforma">
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                         <label class="col-md-4 control-label pull-left">Contraseña</label>
                                         <div class="col-md-8">
-                                            <input type="password" class="form-control" name="clave" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Debe tener mínimo 6 caracteres">
+                                            <input type="password" class="form-control" name="clave" pattern=".{6,}" required data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Debe tener mínimo 6 caracteres">
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                         <label class="col-md-4 control-label pull-left">Verificación </label>
                                         <div class="col-md-8">
-                                            <input type="password" class="form-control" name="password_confirmation" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Vuelve a teclear la contraseña">
+                                            <input type="password" class="form-control" name="password_confirmation" pattern=".{6,}" required data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Vuelve a teclear la contraseña">
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                         <label class="col-md-4 control-label pull-left">Localización </label>
                                         <div class="col-md-8">
-                                            <input type="text" class="form-control" name="localizacion" value="{{ old('localizacion') }}" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Sitio que prefieres para las entregas/recogidas">
+                                            <input type="text" class="form-control" name="localizacion" maxlength="60" value="{{ old('localizacion') }}" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Sitio que prefieres para las entregas/recogidas">
                                         </div>
                                     </div>
 
@@ -57,7 +57,7 @@
                                             <div class="form-group">
                                                 <label class="col-md-offset-4 col-md-3 control-label">Latitud</label>
                                                 <div class="col-md-5">
-                                                    <input type="text" class="form-control" name="latitud" value="{{ old('latitud') }}">
+                                                    <input type="text" class="form-control" name="latitud" required value="{{ old('latitud') }}">
                                                 </div>
                                             </div>
 
@@ -66,7 +66,7 @@
                                             <div class="form-group">
                                                 <label class="col-md-5 control-label">Longitud</label>
                                                 <div class="col-md-7">
-                                                    <input type="text" class="form-control" name="longitud" value="{{ old('longitud') }}">
+                                                    <input type="text" class="form-control" name="longitud" required value="{{ old('longitud') }}">
                                                 </div>
                                             </div>
                                         </div>
@@ -83,7 +83,7 @@
                                                     <div class="form-group">
                                                         <label class="col-md-3 control-label">E-Mail</label>
                                                         <div class="col-md-9">
-                                                            <input type="email" class="form-control" name="email" value="{{ old('email') }}" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Tu email es necesario para registrarte, así podrás recuperar tu contraseña si la olvidas">
+                                                            <input type="email" class="form-control" name="email" maxlength="80" required value="{{ old('email') }}" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Tu email es necesario para registrarte, así podrás recuperar tu contraseña si la olvidas">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -200,7 +200,7 @@
                                 <div class="col-md-5">
                                     <div class="form-group">
                                         <div class="col-md-2">
-                                            <input type="checkbox" class="form-control" name="acepto" data-toogle="tooltip" rel="txtTooltip" data-placement="right" title="Es necesario aceptar las condiciones del sitio para continuar">
+                                            <input type="checkbox" class="form-control" name="acepto" required data-toogle="tooltip" rel="txtTooltip" data-placement="right" title="Es necesario aceptar las condiciones del sitio para continuar">
                                         </div>
                                         <label class="col-md-10">He leído y acepto las condiciones de uso</label>
                                     </div>
