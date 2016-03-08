@@ -69,8 +69,12 @@
                                     </thead>
                                     @foreach($resultados as $registro)
                                         <tr @if ($editar && ($registro->$campos[0] == $id)) class="hidden" @endif>
-                                            <td><a href="{{URL::to('/cpanel/editar/'.$tabla.'/'.$registro->$campos[0])}}" class="btn btn-success btn-xs" @if ($tabla == 'migrations' || $tabla == 'password_resets') disabled @endif data-toogle="tooltip" rel="txtTooltip" data-placement="right" title="Editar"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
-                                            <a href="{{URL::to('/cpanel/borrar/'.$tabla.'/'.$registro->$campos[0])}}" class="btn btn-danger btn-xs" @if ($tabla == 'migrations' || $tabla == 'password_resets') disabled @endif data-toogle="tooltip" rel="txtTooltip" data-placement="right" title="Borrar"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td>
+                                            <td>
+                                                @if ($tabla != 'migrations' && $tabla != 'password_resets')
+                                                    <a href="{{URL::to('/cpanel/editar/'.$tabla.'/'.$registro->$campos[0])}}" class="btn btn-success btn-xs" data-toogle="tooltip" rel="txtTooltip" data-placement="right" title="Editar"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
+                                                    <a href="{{URL::to('/cpanel/borrar/'.$tabla.'/'.$registro->$campos[0])}}" class="btn btn-danger btn-xs" data-toogle="tooltip" rel="txtTooltip" data-placement="right" title="Borrar"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+                                                @endif
+                                            </td>
                                             @foreach($campos as $campo)
                                                     <td>{{ $registro->$campo }}</td>
                                             @endforeach
@@ -81,7 +85,11 @@
                                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                 <input type="hidden" name="tabla" value="{{$tabla}}"/>
                                                 <input type="hidden" name="id" value="{{$registro->$campos[0]}}"/>
-                                                <td><button type="submit" class="btn btn-warning btn-xs" @if ($tabla == 'migrations' || $tabla == 'password_resets') disabled @endif  data-toogle="tooltip" rel="txtTooltip" data-placement="right" title="Grabar"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button></td>
+                                                <td>
+                                                    @if ($tabla != 'migrations' && $tabla != 'password_resets')
+                                                        <button type="submit" class="btn btn-warning btn-xs" data-toogle="tooltip" rel="txtTooltip" data-placement="right" title="Grabar"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button>
+                                                    @endif
+                                                </td>
                                                 @foreach($campos as $index => $campo)
                                                     <td><input name="{{$campo}}" value="{{ $registro->$campo }}" @if ($index == 0) readonly @endif/>@if ($campo == 'nombre_usuario' || $campo == 'clave')<input name="{{$campo}}_old" value="{{ $registro->$campo }}" type="hidden"/>@endif</td>
                                                 @endforeach
