@@ -91,7 +91,7 @@
                                                     @endif
                                                 </td>
                                                 @foreach($campos as $index => $campo)
-                                                    <td><input name="{{$campo}}" value="{{ $registro->$campo }}" @if ($index == 0) readonly @endif/>@if ($campo == 'nombre_usuario' || $campo == 'clave')<input name="{{$campo}}_old" value="{{ $registro->$campo }}" type="hidden"/>@endif</td>
+                                                    <td><input name="{{$campo}}" value="{{ $registro->$campo }}" @if ($index == 0) readonly @endif/>@if ($campo == 'nombre_usuario' || $campo == 'password')<input name="{{$campo}}_old" value="{{ $registro->$campo }}" type="hidden"/>@endif</td>
                                                 @endforeach
                                             </form>
                                         </tr>

@@ -34,7 +34,7 @@
                                     <div class="form-group">
                                         <label class="col-md-4 control-label pull-left">Contraseña</label>
                                         <div class="col-md-8">
-                                            <input type="password" class="form-control" name="clave" pattern=".{6,}" required data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Debe tener mínimo 6 caracteres">
+                                            <input type="password" class="form-control" name="password" pattern=".{6,}" required data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Debe tener mínimo 6 caracteres">
                                         </div>
                                     </div>
 

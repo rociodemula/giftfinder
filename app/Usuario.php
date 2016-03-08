@@ -35,21 +35,21 @@ class Usuario extends Model implements AuthenticatableContract,
      * @return mixed
      */
     public function getAuthPassword() {
-        return $this->clave;
+        return $this->password;
     }
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['nombre_usuario', 'localizacion', 'latitud', 'longitud', 'email', 'clave', 'telefono', 'movil', 'whatsapp', 'geolocalizacion', 'acepto'];
+    protected $fillable = ['nombre_usuario', 'localizacion', 'latitud', 'longitud', 'email', 'password', 'telefono', 'movil', 'whatsapp', 'geolocalizacion', 'acepto'];
 
     /**
      * The attributes excluded from the model's JSON form.
      *
      * @var array
      */
-    protected $hidden = ['clave', 'remember_token'];
+    protected $hidden = ['password', 'remember_token'];
 
     public function peticiones()
     {
@@ -73,7 +73,7 @@ class Usuario extends Model implements AuthenticatableContract,
 
         $usuario = Usuario::create([
             'nombre_usuario' => $data['nombre_usuario'],
-            'clave' => bcrypt($data['clave']),
+            'password' => bcrypt($data['password']),
             'localizacion' => $data['localizacion'],
             'latitud' => $data['latitud'],
             'longitud' => $data['longitud'],
@@ -104,8 +104,8 @@ class Usuario extends Model implements AuthenticatableContract,
             //Necesario para que no grabe el campo clave en caso de estar vacío.
             //Para las modificaciones no se ve oportuno ponerlo obligatorio, así que, en caso de
             //que el usuario no teclee nada, no se actualiza este campo en el save.
-            if (isset($request->clave) && $request->clave != ''){
-                $usuario->clave = bcrypt($request->clave);
+            if (isset($request->password) && $request->password != ''){
+                $usuario->password = bcrypt($request->password);
             }
             $usuario->localizacion = $request->localizacion;
             $usuario->latitud = $request->latitud;
@@ -146,9 +146,9 @@ class Usuario extends Model implements AuthenticatableContract,
 
     public static function modificarAdmin($request, $id){
         $update = array();
-        if($request->clave != $request->clave_old){
+        if($request->password != $request->password_old){
             //Si la clave ha cambiado, la volvemos a encriptar antes de grabarla
-            $update = ['clave' => bcrypt($request->clave)];
+            $update = ['password' => bcrypt($request->password)];
         }
         //Si la clave no se ha alterado, no la actualizamos, así preservamos la clave encriptada original del usuario
         $update = array_merge($update, [
@@ -171,8 +171,8 @@ class Usuario extends Model implements AuthenticatableContract,
     public static function validarAlta($data){
         return Validator::make($data, [
             'nombre_usuario' => 'required|max:30|unique:usuarios',
-            'clave' => 'required|min:6',
-            'password_confirmation' => 'required|same:clave',
+            'password' => 'required|min:6',
+            'password_confirmation' => 'required|same:password',
             'localizacion' => 'max:60',
             'latitud' => 'required|numeric',
             'longitud' => 'required|numeric',
@@ -196,7 +196,7 @@ class Usuario extends Model implements AuthenticatableContract,
             $rules = ['nombre_usuario' => 'required|max:30|unique:usuarios'];
         }
         $rest = array(
-            'clave' => $request->clave,
+            'password' => $request->password,
             'password_confirmation' => $request->password_confirmation,
             'localizacion' => $request->localizacion,
             'latitud' => $request->latitud,
@@ -209,8 +209,8 @@ class Usuario extends Model implements AuthenticatableContract,
         );
         //Para las modificaciones no ponemos obligatoria la password, y si no se modifica, se dejará la existente.
         $restRules = array(
-            'clave' => 'min:6',
-            'password_confirmation' => 'same:clave',
+            'password' => 'min:6',
+            'password_confirmation' => 'same:password',
             'localizacion' => 'max:60',
             'latitud' => 'required|numeric',
             'longitud' => 'required|numeric',
@@ -233,7 +233,7 @@ class Usuario extends Model implements AuthenticatableContract,
             $rules = ['nombre_usuario' => 'required|max:30|unique:usuarios'];
         }
         $rest = array(
-            'clave' => $request->clave,
+            'password' => $request->password,
             'localizacion' => $request->localizacion,
             'latitud' => $request->latitud,
             'longitud' => $request->longitud,
@@ -244,7 +244,7 @@ class Usuario extends Model implements AuthenticatableContract,
             'geolocalizacion' => $request->geolocalizacion
         );
         $restRules = array(
-            'clave' => 'required|min:6',
+            'password' => 'required|min:6',
             'localizacion' => 'max:60',
             'latitud' => 'required|numeric',
             'longitud' => 'required|numeric',

@@ -15,7 +15,7 @@ class UsuarioTableSeeder extends Seeder {
 
         \DB::table('usuarios')->insert(array(
             'nombre_usuario' => 'adminproy',
-            'clave' => \Hash::make('secure'),
+            'password' => \Hash::make('secure'),
             'latitud' => 57.4879289,
             'longitud' => -4.1406816,
             'email' => 'pruebas@example.com',
@@ -24,7 +24,7 @@ class UsuarioTableSeeder extends Seeder {
 
         \DB::table('usuarios')->insert(array(
             'nombre_usuario' => 'tutorproy',
-            'clave' => \Hash::make('secure'),
+            'password' => \Hash::make('secure'),
             'latitud' => 57.4879289,
             'longitud' => -4.1406816,
             'email' => 'pruebas1@example.com',
@@ -33,7 +33,7 @@ class UsuarioTableSeeder extends Seeder {
         for ($i = 0; $i < 10; $i++) {
             \DB::table('usuarios')->insert(array(
                 'nombre_usuario' => $faker->unique()->word,
-                'clave' => \Hash::make('123456'),
+                'password' => \Hash::make('123456'),
                 'latitud' => $faker->latitude,
                 'longitud' => $faker->longitude,
                 'email' => $faker->unique()->email,

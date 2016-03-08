@@ -86,7 +86,7 @@ class AuthController extends Controller
         //http://stackoverflow.com/questions/28584531/laravel-5-modify-existing-auth-module-email-to-username
 
         $this->validate($request, [
-            'nombre_usuario' => 'required', 'clave' => 'required',
+            'nombre_usuario' => 'required', 'password' => 'required',
         ]);
 
         // If the class is using the ThrottlesLogins trait, we can automatically throttle
@@ -103,7 +103,7 @@ class AuthController extends Controller
         //se sustituye por consejo en:
         //http://stackoverflow.com/questions/28584531/laravel-5-modify-existing-auth-module-email-to-username
 
-        $credentials = $request->only('nombre_usuario', 'clave');
+        $credentials = $request->only('nombre_usuario', 'password');
 
         //Para solucionar las limitaciones de Laravel para cambiar el nombre del campo password, y
         //poder acceder a nuestro campo clave en la base de datos, no hay más remedio que renombrar
@@ -111,7 +111,7 @@ class AuthController extends Controller
         //de clave 'clave' en lugar de 'password', que es lo que espera el sistema
         //Se siguen los consejos del siguiente enlace
         // http://stackoverflow.com/questions/26073309/how-to-change-custom-password-field-name-for-laravel-4-and-laravel-5-user-auth
-        $my_credentials = ['nombre_usuario' => $credentials['nombre_usuario'], 'password' => $credentials['clave']];
+        $my_credentials = ['nombre_usuario' => $credentials['nombre_usuario'], 'password' => $credentials['password']];
         if (Auth::attempt($my_credentials, $request->has('remember'))) {
             return $this->handleUserWasAuthenticated($request, $throttles);
         }
