@@ -30,6 +30,8 @@ Route::post('/cpanel', 'CPanelController@index')->middleware(['auth', 'admin']);
 Route::get('/cpanel/editar/{tabla}/{id}', 'CPanelController@edit')->middleware(['auth', 'admin']);
 Route::get('/cpanel/borrar/{tabla}/{id}', 'CPanelController@destroy')->middleware(['auth', 'admin']);
 Route::post('/cpanel/grabar', 'CPanelController@update')->middleware(['auth', 'admin']);
+Route::get('/cpanel/nuevo/{tabla}', 'CPanelController@create')->middleware(['auth', 'admin']);
+Route::post('/cpanel/alta/{tabla}', 'CPanelController@store')->middleware(['auth', 'admin']);
 
 Route::get('/condiciones', 'RulesController@index');
 Route::get('/ayuda', 'HelpController@index');

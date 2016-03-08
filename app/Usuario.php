@@ -161,6 +161,7 @@ class Usuario extends Model implements AuthenticatableContract,
             'movil' => $request->movil,
             'whatsapp' => ($request->whatsapp) ? 1 : 0,
             'geolocalizacion' => ($request->geolocalizacion) ? 1 : 0,
+            'acepto' => 1,
         ]);
         return DB::table('usuarios')
             ->where('cod_usuario', '=', $id)
@@ -178,8 +179,7 @@ class Usuario extends Model implements AuthenticatableContract,
             'longitud' => 'required|numeric',
             'email' => 'required|email|max:80',
             'telefono' => 'numeric|digits:9',
-            'movil' => 'numeric|digits:9',
-            'acepto' => 'required'
+            'movil' => 'numeric|digits:9'
         ]);
     }
 
@@ -241,7 +241,8 @@ class Usuario extends Model implements AuthenticatableContract,
             'telefono' => $request->telefono,
             'movil' => $request->movil,
             'whatsapp' => $request->whatsapp,
-            'geolocalizacion' => $request->geolocalizacion
+            'geolocalizacion' => $request->geolocalizacion,
+            'acepto' => $request->acepto
         );
         $restRules = array(
             'password' => 'required|min:6',
@@ -250,7 +251,10 @@ class Usuario extends Model implements AuthenticatableContract,
             'longitud' => 'required|numeric',
             'email' => 'required|email|max:80',
             'telefono' => 'numeric|digits:9',
-            'movil' => 'numeric|digits:9'
+            'movil' => 'numeric|digits:9',
+            'acepto' => 'required|boolean:true',
+            'whatsapp' => 'boolean',
+            'geolocalizacion' => 'boolean'
         );
         $data = array_merge($data, $rest);
         $rules = array_merge($rules, $restRules);

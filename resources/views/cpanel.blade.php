@@ -22,9 +22,9 @@
                             <div class="alert alert-success">
                                 <strong>¡Hecho!</strong> La operación se ha realizado con éxito.<br>
                             </div>
-                        @elseif(isset($exito) && !$exito))
+                        @elseif(isset($exito) && !$exito)
                         <div class="alert alert-danger">
-                            <strong>¡Atención!</strong> La operación no se ha podido completar.<br><br>
+                            <strong>¡Atención!</strong> No se ha realizado ningún cambio.<br><br>
                         </div>
                         @endif
                         <form class="form-horizontal" role="form" method="POST" action="/cpanel">
@@ -56,47 +56,61 @@
                             </form>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <h4>Contenido de la tabla: {{ $tabla }}</h4>
+                                    <h4>Contenido de la tabla: {{ $tabla }} @if ($tabla != '' && $tabla != 'migrations' && $tabla != 'password_resets') <a href="{{URL::to('/cpanel/nuevo/'.$tabla)}}" class="btn btn-success btn-xs" data-toogle="tooltip" rel="txtTooltip" data-placement="right" title="Añadir registro"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>@endif</h4>
                                 </div>
                             </div>
                             <table class="table table-responsive table-striped">
-                                @if ($resultados != null)
                                     <thead>
                                     <td>Acciones</td>
+                                    @if ($resultados != null)
                                         @foreach($campos as $campo)
                                             <td>{{ $campo }}</td>
                                         @endforeach
+                                    @endif
                                     </thead>
-                                    @foreach($resultados as $registro)
-                                        <tr @if ($editar && ($registro->$campos[0] == $id)) class="hidden" @endif>
-                                            <td>
-                                                @if ($tabla != 'migrations' && $tabla != 'password_resets')
-                                                    <a href="{{URL::to('/cpanel/editar/'.$tabla.'/'.$registro->$campos[0])}}" class="btn btn-success btn-xs" data-toogle="tooltip" rel="txtTooltip" data-placement="right" title="Editar"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
-                                                    <a href="{{URL::to('/cpanel/borrar/'.$tabla.'/'.$registro->$campos[0])}}" class="btn btn-danger btn-xs" data-toogle="tooltip" rel="txtTooltip" data-placement="right" title="Borrar"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
-                                                @endif
-                                            </td>
-                                            @foreach($campos as $campo)
-                                                    <td>{{ $registro->$campo }}</td>
-                                            @endforeach
-                                        </tr>
-
-                                        <tr @if (!$editar || ($registro->$campos[0] != $id)) class="hidden" @endif>
-                                            <form method="POST" action="/cpanel/grabar">
+                                    @if ($resultados != null)
+                                        <tr @if (!$nuevo ) class="hidden" @endif>
+                                            <form method="POST" action="{{'/cpanel/alta/'.$tabla}}">
                                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                 <input type="hidden" name="tabla" value="{{$tabla}}"/>
-                                                <input type="hidden" name="id" value="{{$registro->$campos[0]}}"/>
                                                 <td>
-                                                    @if ($tabla != 'migrations' && $tabla != 'password_resets')
-                                                        <button type="submit" class="btn btn-warning btn-xs" data-toogle="tooltip" rel="txtTooltip" data-placement="right" title="Grabar"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button>
-                                                    @endif
+                                                    <button type="submit" class="btn btn-warning btn-xs" data-toogle="tooltip" rel="txtTooltip" data-placement="right" title="Grabar"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button>
                                                 </td>
                                                 @foreach($campos as $index => $campo)
-                                                    <td><input name="{{$campo}}" value="{{ $registro->$campo }}" @if ($index == 0) readonly @endif/>@if ($campo == 'nombre_usuario' || $campo == 'password')<input name="{{$campo}}_old" value="{{ $registro->$campo }}" type="hidden"/>@endif</td>
+                                                    <td><input name="{{$campo}}" value="{{ old($campo) }}"@if ($index == 0) readonly @endif/></td>
                                                 @endforeach
                                             </form>
                                         </tr>
-                                    @endforeach
-                                @endif
+                                        @foreach($resultados as $registro)
+                                            <tr @if ($editar && ($registro->$campos[0] == $id)) class="hidden" @endif>
+                                                <td>
+                                                    @if ($tabla != 'migrations' && $tabla != 'password_resets')
+                                                        <a href="{{URL::to('/cpanel/editar/'.$tabla.'/'.$registro->$campos[0])}}" class="btn btn-success btn-xs" data-toogle="tooltip" rel="txtTooltip" data-placement="right" title="Editar"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
+                                                        <a href="{{URL::to('/cpanel/borrar/'.$tabla.'/'.$registro->$campos[0])}}" class="btn btn-danger btn-xs" data-toogle="tooltip" rel="txtTooltip" data-placement="right" title="Borrar"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+                                                    @endif
+                                                </td>
+                                                @foreach($campos as $campo)
+                                                        <td>{{ $registro->$campo }}</td>
+                                                @endforeach
+                                            </tr>
+
+                                            <tr @if (!$editar || ($registro->$campos[0] != $id)) class="hidden" @endif>
+                                                <form method="POST" action="/cpanel/grabar">
+                                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                    <input type="hidden" name="tabla" value="{{$tabla}}"/>
+                                                    <input type="hidden" name="id" value="{{$registro->$campos[0]}}"/>
+                                                    <td>
+                                                        @if ($tabla != 'migrations' && $tabla != 'password_resets')
+                                                            <button type="submit" class="btn btn-warning btn-xs" data-toogle="tooltip" rel="txtTooltip" data-placement="right" title="Grabar"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button>
+                                                        @endif
+                                                    </td>
+                                                    @foreach($campos as $index => $campo)
+                                                        <td><input name="{{$campo}}" value="{{ $registro->$campo }}" @if ($index == 0) readonly @endif/>@if ($campo == 'nombre_usuario' || $campo == 'password')<input name="{{$campo}}_old" value="{{ $registro->$campo }}" type="hidden"/>@endif</td>
+                                                    @endforeach
+                                                </form>
+                                            </tr>
+                                        @endforeach
+                                    @endif
                             </table>
 
                     </div>
