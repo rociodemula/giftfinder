@@ -29,60 +29,58 @@
                         <form id="perfil" class="form-horizontal" role="form" method="POST" action="/perfil">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <div class="row">
-                                <div class="col-md-5">
+                                <div class="col-md-7">
                                     <div class="form-group">
-                                        <label class="col-md-4 control-label pull-left">Usuario</label>
-                                        <div class="col-md-8">
+                                        <label class="col-md-3 control-label pull-left">Usuario</label>
+                                        <div class="col-md-9">
                                             <input type="text" class="form-control" name="nombre_usuario" maxlength="30" required value="@if(count($errors) > 0){{old('nombre_usuario')}}@else{{$usuario->nombre_usuario}}@endif" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Puedes cambiar el nombre de usuario con el que accedes al sitio">
                                         </div>
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="col-md-4 control-label pull-left">Contraseña</label>
-                                        <div class="col-md-8">
+                                        <label class="col-md-3 control-label pull-left">Contraseña</label>
+                                        <div class="col-md-9">
                                             <input type="password" class="form-control" name="password" pattern=".{6,}" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Si quieres cambiar tu contraseña, recuerda que debe tener mínimo 6 caracteres">
                                         </div>
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="col-md-4 control-label pull-left">Verificación </label>
-                                        <div class="col-md-8">
+                                        <label class="col-md-3 control-label pull-left">Verificación </label>
+                                        <div class="col-md-9">
                                             <input type="password" class="form-control" name="password_confirmation" pattern=".{6,}" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Vuelve a teclear la contraseña">
                                         </div>
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="col-md-4 control-label pull-left">Localización </label>
-                                        <div class="col-md-8">
-                                            <input type="text" class="form-control" name="localizacion" maxlength="60" value="@if(count($errors) > 0){{old('localizacion')}}@else{{$usuario->localizacion}}@endif" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Recuerda que esta localización es el sitio donde prefieres hacer las entregas/recogidas">
+                                        <label class="col-md-3 control-label pull-left">Localización </label>
+                                        <div class="col-md-9">
+                                            <input id="localizacion" type="text" class="form-control" name="localizacion" maxlength="60" value="@if(count($errors) > 0){{old('localizacion')}}@else{{$usuario->localizacion}}@endif" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Recuerda que esta localización es el sitio donde prefieres hacer las entregas/recogidas">
                                         </div>
                                     </div>
 
                                     <div class="row">
-                                        <!--TODO tanto latitud como longitud son obligatorios. Se pueden generar con gmaps a partir de la localización-->
-                                        <!--TODO generar latitud y longitud a partir de localización con gmaps https://developers.google.com/maps/documentation/javascript/geocoding?hl=es-->
-                                        <div class="col-md-7">
-                                            <div class="form-group">
-                                                <label class="col-md-offset-4 col-md-3 control-label">Latitud</label>
-                                                <div class="col-md-5">
-                                                    <input type="text" class="form-control" name="latitud" required value="@if(count($errors) > 0){{old('latitud')}}@else{{$usuario->latitud}}@endif">
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <div class="col-md-5">
-                                            <div class="form-group">
-                                                <label class="col-md-5 control-label">Longitud</label>
-                                                <div class="col-md-7">
-                                                    <input type="text" class="form-control" name="longitud" required value="@if(count($errors) > 0){{old('longitud')}}@else{{$usuario->longitud}}@endif">
-                                                </div>
+                                        <div class="form-group col-md-5">
+                                            <label class="col-md-6 control-label">Latitud</label>
+                                            <div class="col-md-6">
+                                                <input id="latitud" type="text" class="form-control" name="latitud" required value="@if(count($errors) > 0){{old('latitud')}}@else{{$usuario->latitud}}@endif" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="La latitud se generará automáticamente al poner la dirección">
                                             </div>
                                         </div>
-
+                                        <div class="form-group col-md-5">
+                                            <label class="col-md-6 control-label">Longitud</label>
+                                            <div class="col-md-6">
+                                                <input id="longitud" type="text" class="form-control" name="longitud" required value="@if(count($errors) > 0){{old('longitud')}}@else{{$usuario->longitud}}@endif" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="La longitud se generará automáticamente al poner la dirección">
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label class="col-md-8 control-label"><a id="mapa" class="btn btn-warning btn-sm" href="#" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Pulsa para comprobar la localización en el mapa"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span></a></label>
+                                            <div class="col-md-1">
+                                                <input id="checkMap" type="checkbox" class="form-control" name="mapa" checked   data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Marca esta casilla si la dirección está donde esperas en el mapa">
+                                            </div>
+                                        </div>
                                     </div>
 
                                 </div>
-                                <div class="col-md-7">
+                                <div class="col-md-5">
                                     <div class="panel panel-default">
                                         <div class="panel-heading">Contacto:</div>
                                         <div class="panel-body">
@@ -273,7 +271,15 @@
                                     </div>
                                 </div>
                             </div>
-                        </div><
+                        </div>
+                        <div id="confirmaPosicion" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="confirmarPosicion">
+                            <div class="modal-dialog modal-sm">
+                                <div class="modal-content">
+                                    <p>No has confirmado que la localización es correcta en el mapa.</p>
+                                    <p>Es importante que tu sitio para las entregas sea el correcto. Comprúebalo y marca la casilla junto a latitud/longitud</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

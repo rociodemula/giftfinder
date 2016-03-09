@@ -1,7 +1,8 @@
 /**
  * Created by rocio on 27/02/16.
  */
-var index = 0; //variable estática para controlar los indez de los productos añadidos dinámicamente
+var index = 0; //variable estática para controlar los index de los productos añadidos dinámicamente
+var apiKey = 'AIzaSyCAdE-mIj8O4nPF2RYcy2uEamgDHPmXHKM';
 $(function(){
     /*
     Por cada producto cargado creamos un evento asociado al botón de borrar producto, para eliminar la
@@ -71,7 +72,7 @@ $(function(){
     });
 
     /*
-    Gestión de evento clieck para visualización de caja modal para confirmación de borrado de perfil en el sitio
+    Gestión de evento click para visualización de caja modal para confirmación de borrado de perfil en el sitio
      */
     $('#enviar').on('click', function(e){
         if($('#eliminar').prop('checked')){
@@ -80,9 +81,23 @@ $(function(){
                 .one('click', '#borrar', function() {
                     $('#perfil').trigger('submit');
                 });
+        }else if(!$('#mapa').prop('checked')){
+            e.preventDefault();
+            $('#confirmacionPosicion').modal('show');
         }
     });
 
+    /*
+    Evento click que muestra en el mapa la posición guardada en latitud/longitud
+     */
+    $('#mapa').click(function(){
+        var latitud = $('#latitud').val();
+        var longitud = $('#longitud').val();
+        var url = 'https://www.google.es/maps/@' + latitud + ',' + longitud;
+        if (validar(latitud, longitud)){
+            window.open(url, '_blank');
+        }
+    });
     /*
     Inicializando las tooltips de bootstrap para indicaciones sobre algunos campos del formulario.
      */
@@ -91,4 +106,93 @@ $(function(){
     $('a[rel="txtTooltip"]').tooltip();
     $('button[rel="txtTooltip"]').tooltip();
     $('textarea[rel="txtTooltip"]').tooltip();
+
+    /*
+    Geolocalización con API geolocation
+     https://developers.google.com/maps/documentation/geocoding/intro?hl=es#StatusCodes
+     */
+    $('#localizacion').blur(function(){
+        var direccion = $(this).val();
+        var array = direccion.split(' ');
+        direccion = '';
+        for (var palabra in array) {
+            direccion = direccion + array[palabra];
+            if (palabra != array.length - 1){
+                direccion = direccion + '+';
+            }
+        }
+        var url='https://maps.googleapis.com/maps/api/geocode/json?address=' + direccion + '&key=' + apiKey;
+        $.ajax({
+            type: 'GET',
+            url: url,
+            dataType: 'text',
+            success: function (resultado) {
+                mostrar(eval('(' + resultado + ')'));
+            },
+            error: function (resultado) {
+                //En caso de error, derivamos la visualización del mensaje a
+                //la función asociada.
+                mostrarError(resultado);
+            }
+        });
+    })
+
+    function mostrar(coordenadas) {
+        limpiar(); //Lo primero limpiamos los contenedores para eliminar información antigua.
+        if (coordenadas.status == 'OK'){
+            $('#localizacion').val(coordenadas.results[0].formatted_address);
+            $('#latitud').val(coordenadas.results[0].geometry.location.lat);
+            $('#longitud').val(coordenadas.results[0].geometry.location.lng);
+            $('#checkMap').prop('checked', false);
+        }
+    }
+
+    /*
+    Validar latidud/longitud, según expresión regular
+     http://stackoverflow.com/questions/22903756/using-regular-expression-to-validate-latitude-and-longitude-coordinates-then-dis
+     */
+    function validar(latitud, longitud){
+
+        var valido = true;
+
+        if( typeof +latitud != 'number' || +latitud > 90 || +latitud < -90 ) {
+            valido = false;
+        }
+
+        if( typeof +longitud != 'number' || +longitud > 180 || +longitud < -180 ) {
+            valido = false;
+        }
+        return valido;
+
+    }
+    /**
+     * Función mostrarError(error) que coloca la cadena pasada por parámetro en el
+     * contenedor destinado a errores.
+     *
+     * @param {string} error
+     */
+    function mostrarError(error) {
+        limpiar(); //Limpiamos toda la información que pueda haber antigua.
+        var html = '<div id="contenedorErrores" class="alert alert-danger">' +
+            '<strong>¡Atención!</strong> Hay algún problema con tu entrada.<br><br>' +
+            '<ul>' +
+            '<li>' + error + '</li>' +
+            '</ul>' +
+            '</div>';
+        $('#errores').prepend(html);
+    }
+
+    /**
+     * Función limpiar() que vacía todos los contenedores de información en el
+     * fieldset de Predicción, gif de ajax, nombre de la ciudad, y lo deja limpio
+     * para volcar la información actualizada que proceda.
+     *
+     */
+    function limpiar() {
+        $('#latitud').html('');
+        $('#longitud').html('');
+        if ($('#contenedorErrores').length){
+            $(this).html('');
+        }
+    }
 });

@@ -7,7 +7,7 @@
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">Alta de Usuario</div>
-                    <div class="panel-body">
+                    <div class="panel-body" id="errores">
                     <!-- Bloque de volcado de errores-->
                         @if (count($errors) > 0)
                             <div class="alert alert-danger">
@@ -23,7 +23,7 @@
                         <form class="form-horizontal" role="form" method="POST" action="/auth/register">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <div class="row">
-                                <div class="col-md-5">
+                                <div class="col-md-7">
                                     <div class="form-group">
                                         <label class="col-md-4 control-label pull-left">Usuario</label>
                                         <div class="col-md-8">
@@ -48,33 +48,34 @@
                                     <div class="form-group">
                                         <label class="col-md-4 control-label pull-left">Localización </label>
                                         <div class="col-md-8">
-                                            <input type="text" class="form-control" name="localizacion" maxlength="60" value="{{ old('localizacion') }}" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Sitio que prefieres para las entregas/recogidas">
+                                            <input id="localizacion" type="text" class="form-control" name="localizacion" maxlength="60" value="{{ old('localizacion') }}" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Sitio que prefieres para las entregas/recogidas">
                                         </div>
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-md-7">
-                                            <div class="form-group">
-                                                <label class="col-md-offset-4 col-md-3 control-label">Latitud</label>
-                                                <div class="col-md-5">
-                                                    <input type="text" class="form-control" name="latitud" required value="{{ old('latitud') }}">
-                                                </div>
+                                        <div class="form-group col-md-5">
+                                            <label class="col-md-6 control-label">Latitud</label>
+                                            <div class="col-md-6">
+                                                <input id="latitud" type="text" class="form-control" name="latitud" required value="{{ old('latitud') }}" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="La latitud se generará automáticamente al poner la dirección">
                                             </div>
-
                                         </div>
                                         <div class="col-md-5">
-                                            <div class="form-group">
-                                                <label class="col-md-5 control-label">Longitud</label>
-                                                <div class="col-md-7">
-                                                    <input type="text" class="form-control" name="longitud" required value="{{ old('longitud') }}">
+                                            <div class="form-group col-md-5">
+                                                <label class="col-md-6 control-label">Longitud</label>
+                                                <div class="col-md-6">
+                                                    <input id="longitud" type="text" class="form-control" name="longitud" required value="{{ old('longitud') }}" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="La longitud se generará automáticamente al poner la dirección">
                                                 </div>
                                             </div>
                                         </div>
-
+                                        <div class="form-group col-md-3">
+                                            <label class="col-md-8 control-label"><a id="mapa" class="btn btn-warning btn-sm"  href="#" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Pulsa para comprobar la localización en el mapa"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span></a></label>
+                                            <div class="col-md-1">
+                                                <input id="checkMap" type="checkbox" class="form-control" name="mapa" required  data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Marca esta casilla si la dirección está donde esperas en el mapa">
+                                            </div>
+                                        </div>
                                     </div>
-
                                 </div>
-                                <div class="col-md-7">
+                                <div class="col-md-5">
                                     <div class="panel panel-default">
                                         <div class="panel-heading">Contacto:</div>
                                         <div class="panel-body">
@@ -215,6 +216,14 @@
                                 </div>
                             </div>
                         </form>
+                        <div id="confirmaPosicion" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="confirmarPosicion">
+                            <div class="modal-dialog modal-sm">
+                                <div class="modal-content">
+                                    <p>No has confirmado que la localización es correcta en el mapa.</p>
+                                    <p>Es importante que tu sitio para las entregas sea el correcto. Comprúebalo y marca la casilla junto a latitud/longitud</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
