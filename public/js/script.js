@@ -93,7 +93,9 @@ $(function(){
     $('#mapa').click(function(){
         var latitud = $('#latitud').val();
         var longitud = $('#longitud').val();
-        var url = 'https://www.google.es/maps/@' + latitud + ',' + longitud;
+        //Añadimos 17z, que es la proximidad para poder er nombres de calles circundantes,
+        //pero no demasiado cercana como para no distinguir la zona de la ciudad en la que estamos
+        var url = 'https://www.google.es/maps/@' + latitud + ',' + longitud + ',17z';
         if (validar(latitud, longitud)){
             window.open(url, '_blank');
         }

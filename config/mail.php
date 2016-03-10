@@ -55,7 +55,8 @@ return [
     */
 
     // 'from' => ['address' => null, 'name' => null],
-    'from' => ['address' => 'test@demosdata.com', 'name' => 'Homestead Laravel portatil-jc'],
+    //Para que en los correos de recuperación salga el remitente correcto (en vez de default 'Homestead Laravel'):
+    'from' => ['address' => 'recuperacion@giftfinder.demosdata.com', 'name' => 'Giftfinder'],
 
     /*
     |--------------------------------------------------------------------------

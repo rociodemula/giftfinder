@@ -22,6 +22,8 @@ class PasswordController extends Controller
 
     use ResetsPasswords;
 
+    //Para cambiar el texto del asunto del mensaje de recuperación de claves:
+    protected $subject = 'Link de recuperación de clave';
     /**
      * Create a new password controller instance.
      *
