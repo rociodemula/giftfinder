@@ -3,7 +3,12 @@
  */
 var index = 0; //variable estática para controlar los index de los productos añadidos dinámicamente
 var apiKey = 'AIzaSyCAdE-mIj8O4nPF2RYcy2uEamgDHPmXHKM';
+var map;
 $(function(){
+    /*************************************************************************/
+    /*                EVENTOS RELACIONADOS CON PERFIL DE USUARIO             */
+    /*************************************************************************/
+
     /*
     Por cada producto cargado creamos un evento asociado al botón de borrar producto, para eliminar la
     fila completa de combos asociados a ese producto en concreto
@@ -88,6 +93,22 @@ $(function(){
     });
 
     /*
+     Inicializando las tooltips de bootstrap para indicaciones sobre algunos campos del formulario.
+     */
+    $('input[rel="txtTooltip"]').tooltip();
+    $('select[rel="txtTooltip"]').tooltip();
+    $('a[rel="txtTooltip"]').tooltip();
+    $('button[rel="txtTooltip"]').tooltip();
+    $('textarea[rel="txtTooltip"]').tooltip();
+
+
+    /*************************************************************************/
+    /*                EVENTOS RELACIONADOS CON PERFIL DE USUARIO             */
+    /*                                                                       */
+    /*            ---------ESPECÍFICOS DE GEOLOCALIZACIÓN-------------       */
+    /*************************************************************************/
+
+    /*
     Evento click que muestra en el mapa la posición guardada en latitud/longitud
      */
     $('#mapa').click(function(){
@@ -102,15 +123,6 @@ $(function(){
             mostrarError('Las coordenadas no son válidas.');
         }
     });
-    /*
-    Inicializando las tooltips de bootstrap para indicaciones sobre algunos campos del formulario.
-     */
-    $('input[rel="txtTooltip"]').tooltip();
-    $('select[rel="txtTooltip"]').tooltip();
-    $('a[rel="txtTooltip"]').tooltip();
-    $('button[rel="txtTooltip"]').tooltip();
-    $('textarea[rel="txtTooltip"]').tooltip();
-
     /*
     Geolocalización con API geolocation
      https://developers.google.com/maps/documentation/geocoding/intro?hl=es#StatusCodes
@@ -128,8 +140,13 @@ $(function(){
         //Quitamos el check de geolocalización, ya que si estábamos geolocalizados, al meter una dirección
         //quedaría anulado
         $('#geolocalizacion').prop('checked', false);
-        llamarApi('https://maps.googleapis.com/maps/api/geocode/json?address=' + direccion + '&key=' + apiKey);
+        llamarApi('https://maps.googleapis.com/maps/api/geocode/json?address=' +
+            direccion + '&key=' + apiKey);
     });
+
+    /*
+    Geolocalización automática mediante dato procedente del navegador
+     */
 
     $('#geolocalizacion').click(function(){
         if ($(this).prop('checked')){
@@ -140,7 +157,67 @@ $(function(){
     });
 
 
+    /*************************************************************************/
+    /*             EVENTOS RELACIONADOS CON PANTALLA BÚSQUEDA                */
+    /*                                                                       */
+    /*         ---------ESPECÍFICOS DE GEOLOCALIZACIÓN-------------          */
+    /*************************************************************************/
+    initMap();
+
+    $('.distancia').each(function(){
+        var origen = $('#locate_user').val();
+        var usuarioDestino = $(this).attr('id');
+        var destino = $('.localizacion' + usuarioDestino).text();
+        var nombreUsuario = $('#usuario' + usuarioDestino).text();
+        //Forma 1 -> da error
+        //No 'Access-Control-Allow-Origin' header is present on the requested resource. Origin 'http://giftfinder.local' is therefore not allowed access.
+        //http://stackoverflow.com/questions/13807052/origin-url-is-not-allowed-by-access-control-allow-origin-with-google-direction-a
+        //var url = 'https://maps.googleapis.com/maps/api/directions/json?origin=' + origen + '&destination=' + destino + '&key=' + apiKey;
+        //Forma 2 -> Imposible hacerlo con ajax, da error:
+        //No 'Access-Control-Allow-Origin' header is present on the requested resource. Origin 'http://giftfinder.local' is therefore not allowed access.
+        //http://stackoverflow.com/questions/13807052/origin-url-is-not-allowed-by-access-control-allow-origin-with-google-direction-a
+        //Esta forma 2 da error, pero siguiendo la docu de Google, se consigue hacer con la
+        //Forma 3:
+        //https://developers.google.com/maps/documentation/javascript/directions#DisplayingResults
+        var distancia = new google.maps.DirectionsService();
+        var peticionDistancia = { origin: origen, destination: destino, travelMode: google.maps.TravelMode.WALKING};
+        distancia.route(peticionDistancia, function(results, status){
+            if (status == google.maps.DirectionsStatus.OK){
+                //Añadimos in marcador en el mapa para esta localización
+                var latitud = results.routes[0].legs[0].end_location.lat;
+                var longitud = results.routes[0].legs[0].end_location.lng;
+                var ubicacion = new google.maps.LatLng(latitud,longitud);
+
+                var marker = new google.maps.Marker({
+                    position: ubicacion,
+                    title: nombreUsuario
+                });
+                marker.setMap(map);
+                //Añadimos la distancia a la tabla
+                $('#' + usuarioDestino).text(results.routes[0].legs[0].distance.text);
+
+            }
+        });
+    });
+
+    $('#verMapa').click(function(){
+        $('#mapaBusquedas').removeClass('hidden');
+    })
+
 });
+
+/*************************************************************************/
+/*             FUNCIONES  RELACIONADAS CON PERFIL DE USUARIO             */
+/*                                                                       */
+/*         ---------ESPECÍFICOS DE GEOLOCALIZACIÓN-------------          */
+/*************************************************************************/
+/**
+ * Función geolocalizar() que obtiene y gestiona el posicionamiento disponible
+ * según el navegador cliente.
+ *
+ * Se realizará la llamada a la Api de Google y se volcará el resultado en los
+ * contenedores previstos en el formulario del usuario.
+ */
 function geolocalizar(){
     //http://stackoverflow.com/questions/3397585/navigator-geolocation-getcurrentposition-sometimes-works-sometimes-doesnt
     resultado = navigator.geolocation.getCurrentPosition(obtenerPosicion);
@@ -151,17 +228,24 @@ function obtenerPosicion(posicion){
     if (validar(latitud, longitud)){
         llamarApi('https://maps.googleapis.com/maps/api/geocode/json?latlng='
             + latitud + ','
-            + longitud + '&key=' + apiKey );
+            + longitud + '&key=' + apiKey);
     }
 }
 
+/**
+ * Función llamarApi(url) que gestiona la localización en la Api de Google correspondiente
+ * mediante la url para la obtener los datos relacionados con la posición deseada.
+ *
+ * @param url
+ * @param ruta boolean indica si la url corresponde a una ruta (2 localizaciones) o no.
+ */
 function llamarApi(url){
     $.ajax({
         type: 'GET',
         url: url,
         dataType: 'text',
         success: function (resultado) {
-            mostrar(eval('(' + resultado + ')'));
+                mostrar(eval('(' + resultado + ')'));
         },
         error: function (resultado) {
             //En caso de error, derivamos la visualización del mensaje a
@@ -171,6 +255,13 @@ function llamarApi(url){
     });
 }
 
+/**
+ * Función mostrar(coordenadas) que recibe el archivo json obtenido de la Api de
+ * geolocalización de Google, y muestra los resultados en los contenedores
+ * previstos para ello que son #localización, #latitud y #longitud
+ *
+ * @param coordenadas
+ */
 function mostrar(coordenadas) {
     limpiar(); //Lo primero limpiamos los contenedores para eliminar información antigua.
     limpiarErrores();
@@ -182,9 +273,10 @@ function mostrar(coordenadas) {
     }
 }
 
-/*
- Validar latidud/longitud, según expresión regular
- http://stackoverflow.com/questions/22903756/using-regular-expression-to-validate-latitude-and-longitude-coordinates-then-dis
+/**
+ * Función validar(latidud, longitud), según su valor numérico. Se cogen los datos de
+ * partida de último post del hilo (mirar answered Apr 7 '14 at 4:52 Mosho):
+ * http://stackoverflow.com/questions/22903756/using-regular-expression-to-validate-latitude-and-longitude-coordinates-then-dis
  */
 function validar(latitud, longitud){
 
@@ -228,8 +320,55 @@ function limpiar() {
     $('#longitud').val('');
     $('#localizacion').val('');
 }
+/**
+ * Función limpiarErrores() que vacía el contenedor añadido para los mensajes
+ * erróneod relacionados con eventos jquery.
+ */
 function limpiarErrores(){
     if ($('#contenedorErrores').length){
         $(this).html('');
     }
+}
+
+/*************************************************************************/
+/*           FUNCIONES  RELACIONADAS CON BUSQUEDA DE PRODUCTOS           */
+/*                                                                       */
+/*         ---------ESPECÍFICOS DE GEOLOCALIZACIÓN-------------          */
+/*************************************************************************/
+
+function initMap(){
+
+    var latitud = +$('#latitud').val();
+    var longitud = +$('#longitud').val();
+    map = new google.maps.Map(document.getElementById('mapaBusquedas'), {
+        zoom: 17,
+        center: {lat: latitud, lng: longitud}
+    });
+
+    var marker = new google.maps.Marker({
+        map: map,
+        // Define the place with a location, and a query string.
+        place: {
+            location: {lat: latitud, lng: longitud},
+            query: 'Aquí entregas/recoges tus productos'
+
+        },
+        // Attributions help users find your site again.
+        attribution: {
+            source: 'Google Maps JavaScript API',
+            webUrl: 'https://developers.google.com/maps/'
+        }
+    });
+    marker.setMap(map);
+/*
+    // Construct a new InfoWindow.
+    var infoWindow = new google.maps.InfoWindow({
+        content: 'Google Sydney'
+    });
+
+    // Opens the InfoWindow when marker is clicked.
+    marker.addListener('click', function() {
+        infoWindow.open(map, marker);
+    });*/
+
 }

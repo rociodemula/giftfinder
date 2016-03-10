@@ -67,7 +67,7 @@ class SearchController extends Controller
 
             $resultados = DB::table('usuarios_productos')
                 ->join('usuarios', 'usuarios.cod_usuario', '=', 'usuarios_productos.usuario')
-                ->select('usuarios.nombre_usuario', 'usuarios.email', 'usuarios.telefono', 'usuarios.movil', 'usuarios.whatsapp', 'usuarios.localizacion')
+                ->select('usuarios.cod_usuario', 'usuarios.nombre_usuario', 'usuarios.email', 'usuarios.telefono', 'usuarios.movil', 'usuarios.whatsapp', 'usuarios.localizacion', 'usuarios.longitud', 'usuarios.latitud')
                 ->where('usuarios_productos.producto', '=', $cod_producto)
                 ->get();
             //TODO ordenar por ubicación según posición del usuario logado

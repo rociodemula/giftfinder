@@ -1,5 +1,5 @@
+<?php header("access-control-allow-origin: *"); ?>
 @extends('app')
-
 @section('content')
 
     <div class="container-fluid">
@@ -21,6 +21,9 @@
                         @endif
                         <form class="form-horizontal" role="form" method="POST" action="/busqueda">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                            <input id="locate_user" type="hidden" name="locate_user" value="{{ auth()->user()->localizacion }}">
+                            <input id="latitud_user" type="hidden" name="latitud_user" value="{{ auth()->user()->latitud }}">
+                            <input id="longitud_user" type="hidden" name="longitud_user" value="{{ auth()->user()->longitud }}">
 
                             <div class="form-group">
                                 <div class="row">
@@ -65,13 +68,14 @@
                                 <div class="col-md-2">
                                     <div class="form-group">
                                         <!--TODO opción para ver localización en el mapa, ver https://styde.net/integrar-google-maps-en-laravel-5-con-phpgmaps/-->
-                                        <button type="button" id="mapa" class="btn btn-success">
+                                        <button type="button" id="verMapa" class="btn btn-success">
                                             Ver resultados en mapa
                                         </button>
                                     </div>
 
                                 </div>
                             </div>
+                            <div id="mapaBusquedas" class="hidden"></div>
                             <table class="table table-responsive table-striped">
                                 <thead>
                                 <td>Usuario</td>
@@ -80,22 +84,20 @@
                                 <td>Móvil</td>
                                 <td>Whatsapp</td>
                                 <td>Punto entrega</td>
+                                <td>Distancia</td>
                                 </thead>
                                 @foreach($resultado as $item)
                                     <tr>
-                                        <td>{{ $item->nombre_usuario }}</td>
+                                        <td id="usuario{{ $item->cod_usuario }}">{{ $item->nombre_usuario }}</td>
                                         <td>{{ $item->email }}</td>
                                         <td>{{ $item->telefono }} </td>
                                         <td>{{ $item->movil }}</td>
                                         <td>@if( $item->whatsapp ) Sí @else No @endif</td>
-                                        <td>{{ $item->localizacion}}</td>
+                                        <td class="localizacion{{ $item->cod_usuario }}">{{ $item->localizacion}}</td>
+                                        <td id="{{ $item->cod_usuario }}" class="distancia"></td>
                                     </tr>
                                 @endforeach
-
-
-
                             </table>
-
                         </form>
                     </div>
                 </div>

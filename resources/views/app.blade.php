@@ -15,6 +15,11 @@
 	<!-- Scripts -->
 	<script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
 	<script src="/js/script.js"></script>
+	<!-- Librería de Google Maps API, necesaria para Directions-->
+	<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+	<!--<script
+			src="https://maps.googleapis.com/maps/api/js?callback=initMap&signed_in=true&key=AIzaSyCAdE-mIj8O4nPF2RYcy2uEamgDHPmXHKM" async defer>
+	</script>-->
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 	<!--[if lt IE 9]>
