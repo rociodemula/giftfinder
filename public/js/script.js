@@ -81,9 +81,9 @@ $(function(){
                 .one('click', '#borrar', function() {
                     $('#perfil').trigger('submit');
                 });
-        }else if(!$('#mapa').prop('checked')){
+        }else if(!$('#checkMap').prop('checked')){
             e.preventDefault();
-            $('#confirmacionPosicion').modal('show');
+            $('#confirmaPosicion').modal('show');
         }
     });
 

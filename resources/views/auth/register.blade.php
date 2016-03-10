@@ -52,7 +52,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="row">
+                                    <div class="row recuadro-gris">
                                         <div class="form-group col-md-5">
                                             <label class="col-md-6 control-label">Latitud</label>
                                             <div class="col-md-6">
@@ -216,11 +216,21 @@
                                 </div>
                             </div>
                         </form>
-                        <div id="confirmaPosicion" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="confirmarPosicion">
+                        <div id="confirmaPosicion" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mensajeConfirmar">
                             <div class="modal-dialog modal-sm">
                                 <div class="modal-content">
-                                    <p>No has confirmado que la localización es correcta en el mapa.</p>
-                                    <p>Es importante que tu sitio para las entregas sea el correcto. Comprúebalo y marca la casilla junto a latitud/longitud</p>
+                                    <div class="modal-header">
+                                        <button class="close" aria-label="Close" data-dismiss="modal" type="button">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                        <h4 id="mensajeConfirmar" class="modal-title">¡Localización no confirmada!</h4>
+
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>No has confirmado que la localización es correcta en el mapa.</p>
+                                        <p>Es importante que tu sitio para las entregas sea el correcto. Comprúebalo y marca la casilla junto a latitud/longitud</p>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
