@@ -54,7 +54,7 @@
                                     <div class="form-group">
                                         <label class="col-md-3 control-label pull-left">Localización </label>
                                         <div class="col-md-9">
-                                            <input id="localizacion" type="text" class="form-control" name="localizacion" maxlength="60" value="@if(count($errors) > 0){{old('localizacion')}}@else{{$usuario->localizacion}}@endif" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Recuerda que esta localización es el sitio donde prefieres hacer las entregas/recogidas">
+                                            <input id="localizacion" type="text" class="form-control" name="localizacion" maxlength="60" required value="@if(count($errors) > 0){{old('localizacion')}}@else{{$usuario->localizacion}}@endif" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Recuerda que esta localización es el sitio donde prefieres hacer las entregas/recogidas">
                                         </div>
                                     </div>
 
@@ -62,13 +62,13 @@
                                         <div class="form-group col-md-5">
                                             <label class="col-md-6 control-label">Latitud</label>
                                             <div class="col-md-6">
-                                                <input id="latitud" type="text" class="form-control" name="latitud" required value="@if(count($errors) > 0){{old('latitud')}}@else{{$usuario->latitud}}@endif" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="La latitud se generará automáticamente al poner la dirección">
+                                                <input id="latitud" type="text" class="form-control" name="latitud" readonly required value="@if(count($errors) > 0){{old('latitud')}}@else{{$usuario->latitud}}@endif" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="La latitud se generará automáticamente al poner la localización">
                                             </div>
                                         </div>
                                         <div class="form-group col-md-5">
                                             <label class="col-md-6 control-label">Longitud</label>
                                             <div class="col-md-6">
-                                                <input id="longitud" type="text" class="form-control" name="longitud" required value="@if(count($errors) > 0){{old('longitud')}}@else{{$usuario->longitud}}@endif" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="La longitud se generará automáticamente al poner la dirección">
+                                                <input id="longitud" type="text" class="form-control" name="longitud" readonly required value="@if(count($errors) > 0){{old('longitud')}}@else{{$usuario->longitud}}@endif" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="La longitud se generará automáticamente al poner la localización">
                                             </div>
                                         </div>
                                         <div class="form-group col-md-3">

@@ -48,7 +48,7 @@
                                     <div class="form-group">
                                         <label class="col-md-4 control-label pull-left">Localización </label>
                                         <div class="col-md-8">
-                                            <input id="localizacion" type="text" class="form-control" name="localizacion" maxlength="60" value="{{ old('localizacion') }}" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Sitio que prefieres para las entregas/recogidas">
+                                            <input id="localizacion" type="text" class="form-control" name="localizacion" required maxlength="60" value="{{ old('localizacion') }}" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Sitio que prefieres para las entregas/recogidas">
                                         </div>
                                     </div>
 
@@ -56,13 +56,13 @@
                                         <div class="form-group col-md-5">
                                             <label class="col-md-6 control-label">Latitud</label>
                                             <div class="col-md-6">
-                                                <input id="latitud" type="text" class="form-control" name="latitud" required value="{{ old('latitud') }}" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="La latitud se generará automáticamente al poner la dirección">
+                                                <input id="latitud" type="text" class="form-control" name="latitud" readonly required value="{{ old('latitud') }}" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="La latitud se generará automáticamente al poner la localización">
                                             </div>
                                         </div>
                                         <div class="form-group col-md-5">
                                             <label class="col-md-6 control-label">Longitud</label>
                                             <div class="col-md-6">
-                                                <input id="longitud" type="text" class="form-control" name="longitud" required value="{{ old('longitud') }}" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="La longitud se generará automáticamente al poner la dirección">
+                                                <input id="longitud" type="text" class="form-control" name="longitud" readonly required value="{{ old('longitud') }}" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="La longitud se generará automáticamente al poner la localización">
                                             </div>
                                         </div>
                                         <div class="form-group col-md-3">
