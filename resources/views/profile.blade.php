@@ -232,7 +232,7 @@
                                 <div class="col-md-5">
                                     <div class="form-group">
                                         <div class="col-md-2">
-                                            <input type="checkbox" class="form-control" name="geolocalizacion" @if($usuario->geolocalizacion == 1)checked @endif data-toogle="tooltip" rel="txtTooltip" data-placement="right" title="Si quieres activar la geolocalización de tu dispositivo, marca esta opción">
+                                            <input id="geolocalizacion" type="checkbox" class="form-control" name="geolocalizacion" @if($usuario->geolocalizacion == 1)checked @endif data-toogle="tooltip" rel="txtTooltip" data-placement="right" title="Si quieres activar la geolocalización de tu dispositivo, marca esta opción">
                                         </div>
                                         <label class="col-md-10">Activar geolocalización</label>
                                     </div>

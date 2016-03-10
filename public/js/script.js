@@ -98,6 +98,8 @@ $(function(){
         var url = 'https://www.google.es/maps/@' + latitud + ',' + longitud + ',17z';
         if (validar(latitud, longitud)){
             window.open(url, '_blank');
+        }else{
+            mostrarError('Las coordenadas no son válidas.');
         }
     });
     /*
@@ -123,78 +125,111 @@ $(function(){
                 direccion = direccion + '+';
             }
         }
-        var url='https://maps.googleapis.com/maps/api/geocode/json?address=' + direccion + '&key=' + apiKey;
-        $.ajax({
-            type: 'GET',
-            url: url,
-            dataType: 'text',
-            success: function (resultado) {
-                mostrar(eval('(' + resultado + ')'));
-            },
-            error: function (resultado) {
-                //En caso de error, derivamos la visualización del mensaje a
-                //la función asociada.
-                mostrarError(resultado);
-            }
-        });
-    })
+        //Quitamos el check de geolocalización, ya que si estábamos geolocalizados, al meter una dirección
+        //quedaría anulado
+        $('#geolocalizacion').prop('checked', false);
+        llamarApi('https://maps.googleapis.com/maps/api/geocode/json?address=' + direccion + '&key=' + apiKey);
+    });
 
-    function mostrar(coordenadas) {
-        limpiar(); //Lo primero limpiamos los contenedores para eliminar información antigua.
-        if (coordenadas.status == 'OK'){
-            $('#localizacion').val(coordenadas.results[0].formatted_address);
-            $('#latitud').val(coordenadas.results[0].geometry.location.lat);
-            $('#longitud').val(coordenadas.results[0].geometry.location.lng);
-            $('#checkMap').prop('checked', false);
+    $('#geolocalizacion').click(function(){
+        if ($(this).prop('checked')){
+            geolocalizar();
+        }else{
+            limpiar();
         }
-    }
+    });
 
-    /*
-    Validar latidud/longitud, según expresión regular
-     http://stackoverflow.com/questions/22903756/using-regular-expression-to-validate-latitude-and-longitude-coordinates-then-dis
-     */
-    function validar(latitud, longitud){
 
-        var valido = true;
-
-        if( typeof +latitud != 'number' || +latitud > 90 || +latitud < -90 ) {
-            valido = false;
-        }
-
-        if( typeof +longitud != 'number' || +longitud > 180 || +longitud < -180 ) {
-            valido = false;
-        }
-        return valido;
-
-    }
-    /**
-     * Función mostrarError(error) que coloca la cadena pasada por parámetro en el
-     * contenedor destinado a errores.
-     *
-     * @param {string} error
-     */
-    function mostrarError(error) {
-        limpiar(); //Limpiamos toda la información que pueda haber antigua.
-        var html = '<div id="contenedorErrores" class="alert alert-danger">' +
-            '<strong>¡Atención!</strong> Hay algún problema con tu entrada.<br><br>' +
-            '<ul>' +
-            '<li>' + error + '</li>' +
-            '</ul>' +
-            '</div>';
-        $('#errores').prepend(html);
-    }
-
-    /**
-     * Función limpiar() que vacía todos los contenedores de información en el
-     * fieldset de Predicción, gif de ajax, nombre de la ciudad, y lo deja limpio
-     * para volcar la información actualizada que proceda.
-     *
-     */
-    function limpiar() {
-        $('#latitud').html('');
-        $('#longitud').html('');
-        if ($('#contenedorErrores').length){
-            $(this).html('');
-        }
-    }
 });
+function geolocalizar(){
+    //http://stackoverflow.com/questions/3397585/navigator-geolocation-getcurrentposition-sometimes-works-sometimes-doesnt
+    resultado = navigator.geolocation.getCurrentPosition(obtenerPosicion);
+}
+function obtenerPosicion(posicion){
+    var latitud = posicion.coords.latitude;
+    var longitud = posicion.coords.longitude;
+    if (validar(latitud, longitud)){
+        llamarApi('https://maps.googleapis.com/maps/api/geocode/json?latlng='
+            + latitud + ','
+            + longitud + '&key=' + apiKey );
+    }
+}
+
+function llamarApi(url){
+    $.ajax({
+        type: 'GET',
+        url: url,
+        dataType: 'text',
+        success: function (resultado) {
+            mostrar(eval('(' + resultado + ')'));
+        },
+        error: function (resultado) {
+            //En caso de error, derivamos la visualización del mensaje a
+            //la función asociada.
+            mostrarError(resultado);
+        }
+    });
+}
+
+function mostrar(coordenadas) {
+    limpiar(); //Lo primero limpiamos los contenedores para eliminar información antigua.
+    limpiarErrores();
+    if (coordenadas.status == 'OK'){
+        $('#localizacion').val(coordenadas.results[0].formatted_address);
+        $('#latitud').val(coordenadas.results[0].geometry.location.lat);
+        $('#longitud').val(coordenadas.results[0].geometry.location.lng);
+        $('#checkMap').prop('checked', false);
+    }
+}
+
+/*
+ Validar latidud/longitud, según expresión regular
+ http://stackoverflow.com/questions/22903756/using-regular-expression-to-validate-latitude-and-longitude-coordinates-then-dis
+ */
+function validar(latitud, longitud){
+
+    var valido = true;
+
+    if( typeof +latitud != 'number' || +latitud > 90 || +latitud < -90 ) {
+        valido = false;
+    }
+
+    if( typeof +longitud != 'number' || +longitud > 180 || +longitud < -180 ) {
+        valido = false;
+    }
+    return valido;
+
+}
+/**
+ * Función mostrarError(error) que coloca la cadena pasada por parámetro en el
+ * contenedor destinado a errores.
+ *
+ * @param {string} error
+ */
+function mostrarError(error) {
+    limpiarErrores(); //Limpiamos toda la información que pueda haber antigua.
+    var html = '<div id="contenedorErrores" class="alert alert-danger">' +
+        '<strong>¡Atención!</strong> Hay algún problema con tu entrada.<br><br>' +
+        '<ul>' +
+        '<li>' + error + '</li>' +
+        '</ul>' +
+        '</div>';
+    $('#errores').prepend(html);
+}
+
+/**
+ * Función limpiar() que vacía todos los contenedores de información en el
+ * fieldset de Predicción, gif de ajax, nombre de la ciudad, y lo deja limpio
+ * para volcar la información actualizada que proceda.
+ *
+ */
+function limpiar() {
+    $('#latitud').val('');
+    $('#longitud').val('');
+    $('#localizacion').val('');
+}
+function limpiarErrores(){
+    if ($('#contenedorErrores').length){
+        $(this).html('');
+    }
+}

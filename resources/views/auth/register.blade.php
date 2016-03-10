@@ -59,18 +59,16 @@
                                                 <input id="latitud" type="text" class="form-control" name="latitud" required value="{{ old('latitud') }}" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="La latitud se generará automáticamente al poner la dirección">
                                             </div>
                                         </div>
-                                        <div class="col-md-5">
-                                            <div class="form-group col-md-5">
-                                                <label class="col-md-6 control-label">Longitud</label>
-                                                <div class="col-md-6">
-                                                    <input id="longitud" type="text" class="form-control" name="longitud" required value="{{ old('longitud') }}" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="La longitud se generará automáticamente al poner la dirección">
-                                                </div>
+                                        <div class="form-group col-md-5">
+                                            <label class="col-md-6 control-label">Longitud</label>
+                                            <div class="col-md-6">
+                                                <input id="longitud" type="text" class="form-control" name="longitud" required value="{{ old('longitud') }}" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="La longitud se generará automáticamente al poner la dirección">
                                             </div>
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label class="col-md-8 control-label"><a id="mapa" class="btn btn-warning btn-sm"  href="#" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Pulsa para comprobar la localización en el mapa"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span></a></label>
                                             <div class="col-md-1">
-                                                <input id="checkMap" type="checkbox" class="form-control" name="mapa" required  data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Marca esta casilla si la dirección está donde esperas en el mapa">
+                                                <input id="checkMap" type="checkbox" class="form-control" name="mapa" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Marca esta casilla si la dirección está donde esperas en el mapa">
                                             </div>
                                         </div>
                                     </div>
@@ -193,7 +191,7 @@
                                 <div class="col-md-5">
                                     <div class="form-group">
                                         <div class="col-md-2">
-                                            <input type="checkbox" class="form-control" name="geolocalizacion" data-toogle="tooltip" rel="txtTooltip" data-placement="right" title="Si quieres activar la geolocalización de tu dispositivo, marca esta opción">
+                                            <input id="geolocalizacion" type="checkbox" class="form-control" name="geolocalizacion" data-toogle="tooltip" rel="txtTooltip" data-placement="right" title="Si quieres activar la geolocalización de tu dispositivo, marca esta opción">
                                         </div>
                                         <label class="col-md-10">Activar geolocalización</label>
                                     </div>
@@ -208,7 +206,7 @@
                                 </div>
                                 <div class="col-md-2">
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-success" data-toogle="tooltip" rel="txtTooltip" data-placement="right" title="Pulsa aquí para grabar tu perfil en Giftfinder">
+                                        <button id="enviar" type="submit" class="btn btn-success" data-toogle="tooltip" rel="txtTooltip" data-placement="right" title="Pulsa aquí para grabar tu perfil en Giftfinder">
                                             Enviar
                                         </button>
                                     </div>
