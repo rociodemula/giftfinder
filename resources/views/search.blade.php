@@ -1,5 +1,4 @@
-<?php header("access-control-allow-origin: *"); ?>
-@extends('app')
+@extends('maps') <!-- Para esta pantalla usamos otra cabecera, dado los problemas que conlleva usar el mismo script para maps y directions-->
 @section('content')
 
     <div class="container-fluid">
@@ -68,14 +67,13 @@
                                 <div class="col-md-2">
                                     <div class="form-group">
                                         <!--TODO opción para ver localización en el mapa, ver https://styde.net/integrar-google-maps-en-laravel-5-con-phpgmaps/-->
-                                        <button type="button" id="verMapa" class="btn btn-success">
+                                        <a href="#mapaBusquedas" type="button" id="verMapa" class="btn btn-success">
                                             Ver resultados en mapa
-                                        </button>
+                                        </a>
                                     </div>
 
                                 </div>
                             </div>
-                            <div id="mapaBusquedas" class="hidden"></div>
                             <table class="table table-responsive table-striped">
                                 <thead>
                                 <td>Usuario</td>
@@ -98,6 +96,7 @@
                                     </tr>
                                 @endforeach
                             </table>
+                            <div id="mapaBusquedas"></div>
                         </form>
                     </div>
                 </div>

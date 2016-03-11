@@ -14,15 +14,17 @@
 
 	<!-- Scripts -->
 	<script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
-	<script src="/js/script.js"></script>
-	<!-- Librería de Google Maps API, necesaria para Directions-->
-	<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+	<script src="/js/search.js"></script>
+	<!-- Librerías de Google Maps API, necesaria para Directions-->
+	<!--Script para página de perfil (usa solo Directions):
+	<script src="http://maps.google.com/maps/api/js?sensor=false"></script>-->
 
 	<!--Este script funciona bien para Directions, pero no para maps ni markers:
 	<script src="https://maps.google.com/maps/api/js?sensor=false&key=AIzaSyCAdE-mIj8O4nPF2RYcy2uEamgDHPmXHKM&signed_in=true&callback=initMap"></script>-->
 	<!--Este script no carga siempre, la geolocalización de perfil la hace bien, pero en búsquedas da error
-	ReferenceError: google is not defined (ver http://stackoverflow.com/questions/33495879/uncaught-referenceerror-google-is-not-defined-at-google-maps-marker)
-	<script async defer src="https://maps.google.com/maps/api/js?sensor=false&key=AIzaSyCAdE-mIj8O4nPF2RYcy2uEamgDHPmXHKM&signed_in=true&callback=initMap"></script>-->
+	ReferenceError: google is not defined  si le ponemos async defer (ver http://stackoverflow.com/questions/33495879/uncaught-referenceerror-google-is-not-defined-at-google-maps-marker)
+	y TypeError: a is null si se lo quitamos.
+	<script src="https://maps.google.com/maps/api/js?sensor=false&key=AIzaSyCAdE-mIj8O4nPF2RYcy2uEamgDHPmXHKM&signed_in=true&callback=initMap"></script>
 	<!--Este script da problemas, no carga las distancias <script
 			src="https://maps.googleapis.com/maps/api/js?callback=initMap&signed_in=true&key=AIzaSyCAdE-mIj8O4nPF2RYcy2uEamgDHPmXHKM" async defer>
 	</script>-->
@@ -118,6 +120,10 @@
 
 
 	<!-- Scripts -->
+	<!--Este script de google necesita estar al final del código, y sin los atributos async defer,  para que no de los
+	errores google is not defined, o TypeError: a is null (Para más datos ver:
+	http://stackoverflow.com/questions/33495879/uncaught-referenceerror-google-is-not-defined-at-google-maps-marker)-->
+	<script src="https://maps.google.com/maps/api/js?sensor=false&key=AIzaSyCAdE-mIj8O4nPF2RYcy2uEamgDHPmXHKM&signed_in=true&callback=initMap"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </body>

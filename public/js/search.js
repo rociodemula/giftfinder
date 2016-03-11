@@ -1,9 +1,13 @@
 /**
  * Created by rocio on 27/02/16.
  */
-var index = 0; //variable estática para controlar los index de los productos añadidos dinámicamente
-var apiKey = 'AIzaSyCAdE-mIj8O4nPF2RYcy2uEamgDHPmXHKM';
+//var index = 0; //variable estática para controlar los index de los productos añadidos dinámicamente
+//var apiKey = 'AIzaSyCAdE-mIj8O4nPF2RYcy2uEamgDHPmXHKM';
 var map;
+var punto;
+var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+var labelIndex = -1;
+
 $(function(){
     /*************************************************************************/
     /*                EVENTOS RELACIONADOS CON PERFIL DE USUARIO             */
@@ -13,7 +17,7 @@ $(function(){
     Por cada producto cargado creamos un evento asociado al botón de borrar producto, para eliminar la
     fila completa de combos asociados a ese producto en concreto
      */
-    $('a.borrarProducto').each(function(){
+    /*$('a.borrarProducto').each(function(){
         $(this).click(function(){
             var elem = '#productoCompartido' + $(this).attr('id') + ' option';
             $(elem).each(function(){
@@ -36,7 +40,7 @@ $(function(){
     el combo no tenga seleccionado ningún producto.
     TODO No funciona correctamente, solo asocia el evento al primer elemento, no a todos.
      */
-    $('.productoNuevo').each(function(){
+    /*$('.productoNuevo').each(function(){
         $(this).change(function(){
             if ($(this).val() != 'Producto'){
                 $('#mas').removeClass('hidden');
@@ -52,7 +56,7 @@ $(function(){
     /*
     Añade otra línea de artículos al pulsar +
      */
-    $('#mas').click(function(){
+    /*$('#mas').click(function(){
         var nuevaLinea = $('#nuevaLinea').html();
         //Recuperamos el código html correpondiente a una línea extra del propio documento
         $('#fin').before(nuevaLinea);
@@ -79,7 +83,7 @@ $(function(){
     /*
     Gestión de evento click para visualización de caja modal para confirmación de borrado de perfil en el sitio
      */
-    $('#enviar').on('click', function(e){
+    /*$('#enviar').on('click', function(e){
         if($('#eliminar').prop('checked')){
             e.preventDefault();
             $('#confirmacion').modal({ backdrop: 'static', keyboard: false })
@@ -111,7 +115,7 @@ $(function(){
     /*
     Evento click que muestra en el mapa la posición guardada en latitud/longitud
      */
-    $('#mapa').click(function(){
+    /*$('#mapa').click(function(){
         var latitud = $('#latitud').val();
         var longitud = $('#longitud').val();
         //Añadimos 17z, que es la proximidad para poder er nombres de calles circundantes,
@@ -127,7 +131,7 @@ $(function(){
     Geolocalización con API geolocation
      https://developers.google.com/maps/documentation/geocoding/intro?hl=es#StatusCodes
      */
-    $('#localizacion').blur(function(){
+    /*$('#localizacion').blur(function(){
         var direccion = $(this).val();
         var array = direccion.split(' ');
         direccion = '';
@@ -148,7 +152,7 @@ $(function(){
     Geolocalización automática mediante dato procedente del navegador
      */
 
-    $('#geolocalizacion').click(function(){
+    /*$('#geolocalizacion').click(function(){
         if ($(this).prop('checked')){
             geolocalizar();
         }else{
@@ -162,9 +166,7 @@ $(function(){
     /*                                                                       */
     /*         ---------ESPECÍFICOS DE GEOLOCALIZACIÓN-------------          */
     /*************************************************************************/
-    //initMap(); //Si dejamos esta línea activa, la geolocalización de Perfil da errores y no funciona
-    //Se decide separa este script del de la pantalla de búsquedas, ya que los scripts de las apis de Google
-    //son diferentes y en muchos casos, las declaraciones, incompatibles.
+    initMap();
 
     $('.distancia').each(function(){
         var origen = $('#locate_user').val();
@@ -182,29 +184,40 @@ $(function(){
         //Forma 3:
         //https://developers.google.com/maps/documentation/javascript/directions#DisplayingResults
         var distancia = new google.maps.DirectionsService();
+        punto = new google.maps.DirectionsRenderer();
         var peticionDistancia = { origin: origen, destination: destino, travelMode: google.maps.TravelMode.WALKING};
         distancia.route(peticionDistancia, function(results, status){
             if (status == google.maps.DirectionsStatus.OK){
+                /*punto.setDirections(results);*/
                 //Añadimos in marcador en el mapa para esta localización
-                var latitud = results.routes[0].legs[0].end_location.lat;
-                var longitud = results.routes[0].legs[0].end_location.lng;
-                var ubicacion = new google.maps.LatLng(latitud,longitud);
+
+                //var latitud = results.routes[0].legs[0].end_location.lat;
+                //var longitud = results.routes[0].legs[0].end_location.lng;
+                //Leer documentación acerca del objeto DirectionsRoute en https://developers.google.com/maps/documentation/javascript/directions#Routes
+                var ubicacion = results.routes[0].legs[0].end_location;
 
                 var marker = new google.maps.Marker({
                     position: ubicacion,
-                    title: nombreUsuario
-                });
-                marker.setMap(map);
+                    title: nombreUsuario,
+                    label: labels[labelIndex++ % labels.length],
+                    map: map
+                }); // NO funciona, no añade nada
+                //console.log('Añado a:' + nombreUsuario + 'en ' + +latitud + ' - ' + +longitud);
+                /*var marker = new google.maps.Marker({
+                    map: map,
+                    // Define the place with a location, and a query string.
+                    place: {
+                        location: {lat: +latitud, lng: +longitud},
+                        query: nombreUsuario
+
+                    },
+                });*/
                 //Añadimos la distancia a la tabla
                 $('#' + usuarioDestino).text(results.routes[0].legs[0].distance.text);
 
             }
         });
     });
-
-    $('#verMapa').click(function(){
-        $('#mapaBusquedas').removeClass('hidden');
-    })
 
 });
 
@@ -220,7 +233,7 @@ $(function(){
  * Se realizará la llamada a la Api de Google y se volcará el resultado en los
  * contenedores previstos en el formulario del usuario.
  */
-function geolocalizar(){
+/*function geolocalizar(){
     //http://stackoverflow.com/questions/3397585/navigator-geolocation-getcurrentposition-sometimes-works-sometimes-doesnt
     resultado = navigator.geolocation.getCurrentPosition(obtenerPosicion);
 }
@@ -241,7 +254,7 @@ function obtenerPosicion(posicion){
  * @param url
  * @param ruta boolean indica si la url corresponde a una ruta (2 localizaciones) o no.
  */
-function llamarApi(url){
+/*function llamarApi(url){
     $.ajax({
         type: 'GET',
         url: url,
@@ -264,7 +277,7 @@ function llamarApi(url){
  *
  * @param coordenadas
  */
-function mostrar(coordenadas) {
+/*function mostrar(coordenadas) {
     limpiar(); //Lo primero limpiamos los contenedores para eliminar información antigua.
     limpiarErrores();
     if (coordenadas.status == 'OK'){
@@ -317,7 +330,7 @@ function mostrarError(error) {
  * para volcar la información actualizada que proceda.
  *
  */
-function limpiar() {
+/*function limpiar() {
     $('#latitud').val('');
     $('#longitud').val('');
     $('#localizacion').val('');
@@ -339,29 +352,56 @@ function limpiarErrores(){
 /*************************************************************************/
 
 function initMap(){
+    /*var myLatLng = {lat: +$('#latitud_user').val(), lng: +$('#longitud_user').val()};
 
-    var latitud = +$('#latitud').val();
-    var longitud = +$('#longitud').val();
-    map = new google.maps.Map(document.getElementById('mapaBusquedas'), {
-        zoom: 17,
-        center: {lat: latitud, lng: longitud}
+    var map = new google.maps.Map(document.getElementById('mapaBusquedas'), {
+        zoom: 4,
+        center: myLatLng
     });
 
     var marker = new google.maps.Marker({
+        position: myLatLng,
         map: map,
-        // Define the place with a location, and a query string.
-        place: {
-            location: {lat: latitud, lng: longitud},
-            query: 'Aquí entregas/recoges tus productos'
-
-        },
-        // Attributions help users find your site again.
-        attribution: {
-            source: 'Google Maps JavaScript API',
-            webUrl: 'https://developers.google.com/maps/'
-        }
+        title: 'Hello World!'
     });
-    marker.setMap(map);
+    //Otra forma de marker:
+     var marker = new google.maps.Marker({
+         map: map,
+         // Define the place with a location, and a query string.
+         place: {
+         location: {lat: latitud, lng: longitud},
+         query: 'Aquí entregas/recoges tus productos'
+
+         },
+         // Attributions help users find your site again.
+         attribution: {
+         source: 'Google Maps JavaScript API',
+         webUrl: 'https://developers.google.com/maps/'
+     });
+     }*/
+
+    punto = new google.maps.DirectionsRenderer();
+    var latitud = $('#latitud_user').val();
+    var longitud = $('#longitud_user').val();
+    var ubicacion = new google.maps.LatLng(+latitud,+longitud);
+    /*var mapConfig = {
+        zoom: 10,
+        center: ubicacion
+    };
+    map = new google.maps.Map(document.getElementById('mapaBusquedas'), mapConfig);
+    punto.setMap(map);*/
+    map = new google.maps.Map(document.getElementById('mapaBusquedas'), {
+        zoom: 10,
+        center: ubicacion
+    });
+
+    var marker = new google.maps.Marker({
+        position: ubicacion,
+        title: 'Tú',
+        label: labels[labelIndex++ % labels.length],
+        map: map
+    }); //Esta forma funciona, pero solo pinta el primer punto con etiqueta B!!
+
 /*
     // Construct a new InfoWindow.
     var infoWindow = new google.maps.InfoWindow({
