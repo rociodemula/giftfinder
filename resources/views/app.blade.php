@@ -112,6 +112,7 @@
 						<a href="{{ url('/derechos') }}">Derechos de autor</a>
 					</li>
 				</ul>
+				<ul class="nav navbar-nav pull-right"><li><a href="mailto:rociodemula@demosdata.com">&copy; 2016 - Rocío de Mula</a></li></ul>
 			</div>
 	</div>
 </footer>

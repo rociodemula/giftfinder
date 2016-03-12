@@ -8,10 +8,10 @@ body {
     background-color: #f5f5f5;
     border-color: #ddd;
     border-radius: 4px;
-    height: 55px;
     line-height: 20px;
     margin-bottom: 10px;
     margin-left: 10px;
+    margin-right: 10px;
     padding-top: 10px;
 }
 #mapaBusquedas{

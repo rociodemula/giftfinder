@@ -3,7 +3,7 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">Búsqueda de Productos</div>
                     <div class="panel-body">
@@ -26,24 +26,24 @@
 
                             <div class="form-group">
                                 <div class="row">
-                                    <div class="col-md-offset-1 col-md-1">
+                                    <div class="col-md-offset-1 col-md-1 col-sm-offset-1 col-sm-1 col-xs-10 col-xs-offset-1">
                                         <label class="control-label">Elige</label>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-3 col-md-offset-0 col-sm-3 col-sm-offset-0 col-xs-7 col-xs-offset-1">
                                         <select class="form-control" name="categoria">
                                             @foreach ($categoria as $item)
                                                 <option @if($item->nombre_categoria == old('categoria'))selected @endif>{{ $item->nombre_categoria }}</option>
                                             @endforeach
                                         </select>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-3 col-md-offset-0 col-sm-3 col-sm-offset-0 col-xs-7 col-xs-offset-1">
                                         <select class="form-control" name="subcategoria">
                                             @foreach ($subcategoria as $item)
                                                 <option @if($item->nombre_subcategoria == old('subcategoria'))selected @endif>{{ $item->nombre_subcategoria }}</option>
                                             @endforeach
                                         </select>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-3 col-md-offset-0 col-sm-3 col-sm-offset-0 col-xs-7 col-xs-offset-1">
                                         <select class="form-control" name="producto" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Elige el producto que deseas buscar">
                                             <option>Producto</option>
                                             @foreach ($producto as $item)
@@ -51,7 +51,7 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                    <div class="col-md-1">
+                                    <div class="col-md-1 col-md-offset-0 col-sm-1 col-sm-offset-0 col-xs-3 col-xs-offset-9">
                                         <div class="form-group">
                                             <button type="submit" class="btn btn-success" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Pulsa aquí para ver el resultado de tu búsqueda">
                                                 Ver
@@ -61,14 +61,14 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-10">
+                                <div class="col-md-11 col-sm-11 col-xs-12">
                                     <h4>Resultados de búsqueda (ordenados por proximidad):</h4>
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-md-1 col-md-offset-0 col-sm-1 col-sm-offset-0 col-xs-3 col-xs-offset-9">
                                     <div class="form-group">
                                         <!--TODO opción para ver localización en el mapa, ver https://styde.net/integrar-google-maps-en-laravel-5-con-phpgmaps/-->
                                         <a href="#mapaBusquedas" type="button" id="verMapa" class="btn btn-success">
-                                            Ver resultados en mapa
+                                            Mapa
                                         </a>
                                     </div>
 

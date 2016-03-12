@@ -4,7 +4,7 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">Panel de Administración de la Base de datos</div>
                     <div class="panel-body">
@@ -32,10 +32,10 @@
 
                             <div class="form-group">
                                 <div class="row">
-                                    <div class="col-md-offset-1 col-md-3">
+                                    <div class="col-md-offset-1 col-md-3 col-sm-offset-1 col-sm-3 col-xs-offset-1 col-xs-10">
                                         <label class="control-label">Elige la tabla a modificar</label>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-4 col-md-offset-1 col-sm-4 col-sm-offset-1 col-xs-offset-1 col-xs-8">
                                         <select class="form-control" name="tabla">
                                             <option>Tabla</option>
                                             @foreach ($tablas as $item)
@@ -44,7 +44,7 @@
                                         </select>
                                     </div>
 
-                                    <div class="col-md-1">
+                                    <div class="col-md-1 col-md-offset-0 col-sm-1 col-sm-offset-0 col-xs-offset-9 col-xs-2">
                                         <div class="form-group">
                                             <button type="submit" class="btn btn-success">
                                                 Ver
@@ -55,7 +55,7 @@
                             </div>
                             </form>
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
                                     <h4>Contenido de la tabla: {{ $tabla }} @if ($tabla != '' && $tabla != 'migrations' && $tabla != 'password_resets') <a href="{{URL::to('/cpanel/nuevo/'.$tabla)}}" class="btn btn-success btn-xs" data-toogle="tooltip" rel="txtTooltip" data-placement="right" title="Añadir registro"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>@endif</h4>
                                 </div>
                             </div>

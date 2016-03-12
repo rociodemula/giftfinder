@@ -26,6 +26,14 @@
                             <!--TODO elaborar manual en pdf para el usuario. De momento este enlace apunta a la documentación del proyecto-->
                         </dl>
                         <dl>
+                            <dt>Uso del sitio:</dt>
+                            <dd>- Puedes acceder a las condiciones de uso del sitio <a href="{{ url('/condiciones') }}">aquí</a>.</dd>
+                        </dl>
+                        <dl>
+                            <dt>Autor:</dt>
+                            <dd>- Tienes más datos del copyright del sitio <a href="{{ url('/derechos') }}">aquí</a>.</dd>
+                        </dl>
+                        <dl>
                             <dt>Cookies:</dt>
                             <dd>- Las cookies son necesarias para la correcta gestión de login de los usuarios que acceden
                                 al sitio. Para más información, consulta este

@@ -4,7 +4,7 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">Formulario de Contacto</div>
                     <div class="panel-body">
@@ -22,29 +22,29 @@
                         <form class="form-horizontal" role="form" method="POST" action="/contacto">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <div class="row">
-                                <div class="col-md-5">
+                                <div class="col-md-5 col-sm-5 col-xs-12">
                                     <div class="form-group">
-                                        <label class="col-md-4 control-label pull-left">Usuario:</label>
-                                        <div class="col-md-8">
+                                        <label class="col-md-4 col-md-offset-0 col-sm-3 col-sm-offset-0 col-xs-10 col-xs-offset-1 control-label pull-left">Usuario:</label>
+                                        <div class="col-md-8 col-ms-offset-0 col-sm-9 col-sm-offset-0 col-xs-10 col-xs-offset-1">
                                             <input type="text" class="form-control" name="nombre_usuario" value="@if(count($errors) > 0){{old('nombre_usuario')}}@else{{auth()->user()->nombre_usuario}}@endif" disabled data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Este es el nombre de usuario que tienes en tu perfil del sitio">
                                         </div>
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="col-md-4 control-label pull-left">Email:</label>
-                                        <div class="col-md-8">
+                                        <label class="col-md-4 col-md-offset-0 col-sm-3 col-sm-offset-0 col-xs-10 col-xs-offset-1 control-label pull-left">Email:</label>
+                                        <div class="col-md-8 col-ms-offset-0 col-sm-9 col-sm-offset-0 col-xs-10 col-xs-offset-1">
                                             <input type="email" class="form-control" name="email_respuesta" required value="@if(count($errors) > 0){{old('email')}}@else{{auth()->user()->email}}@endif" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Este es el email que tienes en tu perfil del sitio. Puedes indicar otro para recibir respuesta a esta petición">
                                         </div>
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="col-md-4 control-label pull-left">Asunto:</label>
-                                        <div class="col-md-8">
+                                        <label class="col-md-4 col-md-offset-0 col-sm-3 col-sm-offset-0 col-xs-10 col-xs-offset-1 control-label pull-left">Asunto:</label>
+                                        <div class="col-md-8 col-ms-offset-0 col-sm-9 col-sm-offset-0 col-xs-10 col-xs-offset-1">
                                             <input type="text" class="form-control" name="asunto" maxlength="50" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Aquí puedes poner una frase corta con tu petición">
                                         </div>
                                     </div>
 
-                                    <div class="">
+                                    <div class="col-md-12 col-md-offset-0 col-sm-12 col-sm-offset-0 col-xs-10 col-xs-offset-1">
                                         <dl>
                                             <dt>Recuerda:</dt>
                                             <dd>- Este mensaje sólo lo verá el administrador del sitio.</dd>
@@ -52,7 +52,7 @@
                                         </dl>
                                     </div>
                                 </div>
-                                <div class="col-md-7">
+                                <div class="col-md-7 col-sm-7 col-xs-12">
                                     <div class="panel panel-default">
                                         <div class="panel-heading">Mensaje:</div>
                                         <div class="panel-body">
@@ -64,7 +64,7 @@
 
                             </div>
                             <div class="row">
-                                <div class="col-md-offset-10 col-md-2">
+                                <div class="col-md-offset-10 col-md-2 col-sm-offset-10 col-sm-2 col-xs-offset-8 col-xs-2">
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-success" data-toogle="tooltip" rel="txtTooltip" data-placement="right" title="Pulsa aquí para enviar tu petición a Giftfinder">
                                             Enviar
