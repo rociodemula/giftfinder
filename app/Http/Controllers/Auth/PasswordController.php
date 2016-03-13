@@ -24,17 +24,23 @@ class PasswordController extends Controller
 
     //Para cambiar el texto del asunto del mensaje de recuperación de claves:
     protected $subject = 'Link de recuperación de clave';
+
     /**
      * Create a new password controller instance.
      *
-     * @return void
+     *
      */
     public function __construct()
     {
         $this->middleware('guest');
     }
 
-/*
+/* Se comienza a trabajar en una línea en la que se cambie el nombre de campo password
+   por clave, pero genera conflictos con múltiples librerías.
+   Esta solución no resulta válida y se abandona por el momento.
+   Si no existe necesidad de renombrar el campo, la sobrescritura de este método
+   no es necesaria. Se conserva el código del intento por documentar una solución
+   no apta.
     public function postReset(Request $request)
     {
         $this->validate($request, [

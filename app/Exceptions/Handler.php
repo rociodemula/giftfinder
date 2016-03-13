@@ -35,6 +35,8 @@ class Handler extends ExceptionHandler
 
     /**
      * Render an exception into an HTTP response.
+     * (Modificada la original de Laravel para redirigir al usuario tras la
+     * pérdida de sesión (token) directamente a la página de login).
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Exception  $e
@@ -45,9 +47,13 @@ class Handler extends ExceptionHandler
         if ($e instanceof ModelNotFoundException) {
             $e = new NotFoundHttpException($e->getMessage(), $e);
         }
-
-        //TODO revisar si esta solución funciona. Procede de http://stackoverflow.com/questions/31449434/handling-expired-token-in-laravel
-        //Es posible que haya que cambiar a un return redirect()->guest('auth/login') o incluso a un simple redirect('/') si no queremos renovar el token
+        //Necesitamos redirigir al usuario a la página de login en caso de que
+        //su sesión haya caducado (el token se pierde)
+        //Esta solución procede del hilo:
+        //http://stackoverflow.com/questions/31449434/handling-expired-token-in-laravel
+        //Se podría hacer un redirect()->guest('auth/login') o incluso a redirect('/')
+        //pero en principio, se ve más oportuna esta solución, que no limita a si eres o no un guest
+        //y te invita directamente a que te logues para continuar estando en la misma página
         if ($e instanceof \Illuminate\Session\TokenMismatchException) {
             return redirect('auth/login');
         }

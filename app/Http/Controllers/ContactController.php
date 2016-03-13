@@ -10,41 +10,74 @@ use Giftfinder\Http\Controllers\Controller;
 
 class ContactController extends Controller
 {
+    /**
+     * Constructor de la clase
+     */
     public function __construct()
     {
         // Aplica un filtro a través de un middleware.
-        // No permite entrar en la página si no estamos logados.
+        // No permite entrar en la página Contactos si no estamos logados.
         $this->middleware('auth');
     }
     /**
-     * Display a listing of the resource.
+     * Visualiza la página tras la grabación de la petición y vuelca los
+     * mansajes de error en caso de que existan.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
+        //Variable para retornar los datos resultantes de la gestión del formulario
+        $resultado = null;
 
-        if ($this->store(\Request::instance(), auth()->user()->cod_usuario)){
-            return redirect('/contacto');
-            //TODO enviar mensaje de grabación correcta de petición
+        //Volcamos los datos del formulario en una variable y usamos el validador de la
+        //clase para validar los datos.
+        $request = \Request::instance();
+        $validacion = Peticion::validar($request);
+
+        if($validacion->fails()){
+
+            //Comunicación de errores en caso de que no esté correcto el formulario
+            $resultado = redirect()->back()->withInput()->withErrors($validacion->errors());
+
+        }elseif($this->store($request, auth()->user()->cod_usuario)){
+
+            //Si la validación es buena, y la grabación se realiza bien, enviamos un correo al
+            //administrador del sitio como aviso de que tiene unapetición nueva.
+            $asunto = 'Nuevo mensaje de usuario Giftfinder';
+            $mensaje = '<br/>Email usuario: '.$request->email_respuesta
+                .'<br/>Asunto: '.$request->asunto
+                .'<br/>Mensaje: '.$request->mensaje;
+
+            //Si no indicamos esta cabecera, no inerpretará el código html y no saldrán
+            //los acentos ni las ñ correctamente:
+            $cabecera= 'Content-type: text/html; charset=utf-8';
+
+            //En vez de rociodemula@demosdata.com, se podría enviar a un buzón especifico del
+            //sitio, o al correo de todos los administradores de la tabla Usuarios.
+            $correo = mail('rociodemula@demosdata.com', $asunto, $mensaje, $cabecera);
+
+            //Devolvemos el resultado de éxito y el resultado del envío de correo a la vista.
+            $resultado = view('contact', [
+                'exito' => true,
+                'correo' => $correo
+            ]);
+
+        }else{
+
+            //Si ha fallado la grabación en la tabla Peticiones, preparamos el resultado para
+            //que la vista lance el mensaje de error.
+            $resultado = view('contact', [
+                'exito' => false,
+                'correo' => false
+            ]);
         }
-        //TODO enviar mensaje automáticamente a email de administradores del sitio
-        //TODO gestión de errores y visualizacion
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return $resultado; //El resultado se devuelve de igual forma.
     }
 
 
     /**
-     * Store a newly created resource in storage.
+     * Almacena la petición en la tabla Peticiones usando el método del modelo Peticion.
      *
      * @param Request $request
      * @param $id
@@ -56,48 +89,18 @@ class ContactController extends Controller
         return Peticion::alta($request, $id);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
     /**
-     * Show the form for editing the specified resource.
+     * Función que nos edita elf formulario de contacto
+     * al entrar en la página por primera vez.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit()
     {
+        //No enviamos ningún dato adicional, para evitar mensajes de error en la vista.
+        //Con esta combinación, la vista no volcará nada en el contenedor de errores.
         return view('contact');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

@@ -18,6 +18,20 @@
                                     @endforeach
                                 </ul>
                             </div>
+                        @elseif(isset($exito) && $exito)
+                            <div class="alert alert-success">
+                                <strong>¡Hecho!</strong> La operación se ha realizado con éxito.<br>
+                                @if(isset($correo) && $correo)
+                                    Se ha enviado un mensaje automático para el administrador del sitio.<br>
+                                @else
+                                    Se ha generado la petición, pero no se ha podido enviar un aviso al
+                                    administrador del sitio.<br>
+                                @endif
+                            </div>
+                        @elseif(isset($exito) && !$exito))
+                            <div class="alert alert-danger">
+                                <strong>¡Atención!</strong> La operación no se ha podido completar.<br><br>
+                            </div>
                         @endif
                         <form class="form-horizontal" role="form" method="POST" action="/contacto">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -26,21 +40,21 @@
                                     <div class="form-group">
                                         <label class="col-md-4 col-md-offset-0 col-sm-3 col-sm-offset-0 col-xs-10 col-xs-offset-1 control-label pull-left">Usuario:</label>
                                         <div class="col-md-8 col-ms-offset-0 col-sm-9 col-sm-offset-0 col-xs-10 col-xs-offset-1">
-                                            <input type="text" class="form-control" name="nombre_usuario" value="@if(count($errors) > 0){{old('nombre_usuario')}}@else{{auth()->user()->nombre_usuario}}@endif" disabled data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Este es el nombre de usuario que tienes en tu perfil del sitio">
+                                            <input type="text" class="form-control" name="nombre_usuario" value="{{auth()->user()->nombre_usuario}}" disabled data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Este es el nombre de usuario que tienes en tu perfil del sitio">
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                         <label class="col-md-4 col-md-offset-0 col-sm-3 col-sm-offset-0 col-xs-10 col-xs-offset-1 control-label pull-left">Email:</label>
                                         <div class="col-md-8 col-ms-offset-0 col-sm-9 col-sm-offset-0 col-xs-10 col-xs-offset-1">
-                                            <input type="email" class="form-control" name="email_respuesta" required value="@if(count($errors) > 0){{old('email')}}@else{{auth()->user()->email}}@endif" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Este es el email que tienes en tu perfil del sitio. Puedes indicar otro para recibir respuesta a esta petición">
+                                            <input type="email" class="form-control" name="email_respuesta" required value="@if(count($errors) > 0){{old('email_respuesta')}}@else{{auth()->user()->email}}@endif" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Este es el email que tienes en tu perfil del sitio. Puedes indicar otro para recibir respuesta a esta petición">
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                         <label class="col-md-4 col-md-offset-0 col-sm-3 col-sm-offset-0 col-xs-10 col-xs-offset-1 control-label pull-left">Asunto:</label>
                                         <div class="col-md-8 col-ms-offset-0 col-sm-9 col-sm-offset-0 col-xs-10 col-xs-offset-1">
-                                            <input type="text" class="form-control" name="asunto" maxlength="50" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Aquí puedes poner una frase corta con tu petición">
+                                            <input type="text" class="form-control" name="asunto" value="@if(count($errors) > 0){{old('asunto')}}@endif" maxlength="50" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Aquí puedes poner una frase corta con tu petición">
                                         </div>
                                     </div>
 
@@ -56,7 +70,7 @@
                                     <div class="panel panel-default">
                                         <div class="panel-heading">Mensaje:</div>
                                         <div class="panel-body">
-                                            <textarea class="form-control" name="mensaje" required maxlength="255" placeholder="Describe tu petición" rows="7" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Háblanos de tu petición en un máximo de 255 caracteres"></textarea>
+                                            <textarea class="form-control" name="mensaje" required maxlength="255" placeholder="Describe tu petición" rows="7" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Háblanos de tu petición en un máximo de 255 caracteres">@if(count($errors) > 0){{old('mensaje')}}@endif</textarea>
                                         </div>
                                     </div>
                                 </div>

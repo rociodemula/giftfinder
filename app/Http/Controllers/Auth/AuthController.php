@@ -45,7 +45,6 @@ class AuthController extends Controller
     /**
      * Create a new authentication controller instance.
      *
-     * @return void
      */
     public function __construct()
     {
@@ -62,6 +61,8 @@ class AuthController extends Controller
      */
     protected function validator(array $data)
     {
+        //Retornamos la validación personalizada en la función declarada
+        //en el modelo Usuario
         return Usuario::validarAlta($data);
     }
 
@@ -73,17 +74,28 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
+        //Se sobreescribe la creación del registro nuevo con la función
+        //existente en el modelo.
         return Usuario::crear($data);
     }
 
+    /**
+     * Función que atiende la petición post generada por el formulario
+     * de login de usuario.
+     *
+     * @param Request $request
+     * @return $this|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
+     */
     public function postLogin(Request $request)
     {
-        //Anterior:
+        //Código original:
         /*$this->validate($request, [
         $this->loginUsername() => 'required', 'clave' => 'required',
         ]);*/
-        //Se modifica segun:
+        //Se modifica según:
         //http://stackoverflow.com/questions/28584531/laravel-5-modify-existing-auth-module-email-to-username
+        //Se sobreescriben los nombres de campos por los que queremos usar para el login (en el caso de password, no,
+        //ya que dará problemas con el sistema de recuperación de contraseñas de Laravel).
 
         $this->validate($request, [
             'nombre_usuario' => 'required', 'password' => 'required',
@@ -98,10 +110,13 @@ class AuthController extends Controller
             return $this->sendLockoutResponse($request);
         }
 
-        //Anterior:
+        //Código original:
         //$credentials = $this->getCredentials($request);
-        //se sustituye por consejo en:
+
+        //Se sustituye por consejo en:
         //http://stackoverflow.com/questions/28584531/laravel-5-modify-existing-auth-module-email-to-username
+        //Con esto adaptamos el sistema de login propio de Laravel para entrar con usuario y contraseña
+        //en vez de con email y contraseña.
 
         $credentials = $request->only('nombre_usuario', 'password');
 
@@ -111,8 +126,12 @@ class AuthController extends Controller
         //de clave 'clave' en lugar de 'password', que es lo que espera el sistema
         //Se siguen los consejos del siguiente enlace
         // http://stackoverflow.com/questions/26073309/how-to-change-custom-password-field-name-for-laravel-4-and-laravel-5-user-auth
-        $my_credentials = ['nombre_usuario' => $credentials['nombre_usuario'], 'password' => $credentials['password']];
-        if (Auth::attempt($my_credentials, $request->has('remember'))) {
+        //$my_credentials = ['nombre_usuario' => $credentials['nombre_usuario'], 'password' => $credentials['password']];
+
+        //Se abandona esta línea de trabajo, altamente conflictiva para integrarla con el sistema de recuperación
+        //de passwords propio de Laravel y se deja como password el nombre del campo para la clave en la BBDD.
+
+        if (Auth::attempt($credentials, $request->has('remember'))) {
             return $this->handleUserWasAuthenticated($request, $throttles);
         }
 
@@ -128,6 +147,14 @@ class AuthController extends Controller
                 $this->loginUsername() => $this->getFailedLoginMessage(),
             ]);
     }
+
+    /**
+     * Función que atiende la petición get de registro de usuario.
+     * Devuelve la vista correspondiente, con la totalidad de productos, categorías y subcategoprías existentes en
+     * la base de datos, que forman parte del formulario de registro.
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function getRegister(){
         return view('auth.register', [
             'categoria' => Categoria::all(),

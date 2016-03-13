@@ -136,6 +136,8 @@ trait AuthenticatesUsers
      */
     public function loginUsername()
     {
+        //Se sobrestribe el nombre del campo de nombre de usuario, a pesar de
+        //definirse en AuthController, es necesario cambiar también aquí.
         return property_exists($this, 'nombre_usuario') ? $this->username : 'email';
     }
 
