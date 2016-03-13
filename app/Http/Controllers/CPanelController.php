@@ -51,6 +51,7 @@ class CPanelController extends Controller
             'campos' => $campos,
             'resultados' => $resultados,
             'tablas' => DB::select('SHOW TABLES'),
+            'ddbb' => 'Tables_in_'.env('DB_DATABASE'),
         ]);
     }
 
@@ -76,20 +77,19 @@ class CPanelController extends Controller
             'resultados' => $resultados,
             'campos' => $campos,
             'tablas' => DB::select('SHOW TABLES'),
+            'ddbb' => 'Tables_in_'.env('DB_DATABASE'),
         ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request  $tabla
      * @return \Illuminate\Http\Response
      */
     public function store($tabla)
     {
         $request = \Request::instance();
-        //$id = $request->get('id');
-        $tabla = $request->get('tabla');
         $grabado = null;
         $validacion = null;
         $exito = false;
@@ -176,6 +176,7 @@ class CPanelController extends Controller
             'campos' => $campos,
             'resultados' => $resultados,
             'tablas' => DB::select('SHOW TABLES'),
+            'ddbb' => 'Tables_in_'.env('DB_DATABASE'),
         ]);
     }
 
@@ -195,6 +196,7 @@ class CPanelController extends Controller
             'resultados' => [],
             'campos' => [],
             'tablas' => DB::select('SHOW TABLES'),
+            'ddbb' => 'Tables_in_'.env('DB_DATABASE'),
         ]);
     }
 
@@ -217,6 +219,7 @@ class CPanelController extends Controller
             'campos' => $campos,
             'resultados' => $resultados,
             'tablas' => DB::select('SHOW TABLES'),
+            'ddbb' => 'Tables_in_'.env('DB_DATABASE'),
         ]);
     }
 
@@ -293,6 +296,7 @@ class CPanelController extends Controller
             'campos' => $campos,
             'resultados' => $resultados,
             'tablas' => DB::select('SHOW TABLES'),
+            'ddbb' => 'Tables_in_'.env('DB_DATABASE'),
         ]);
     }
 
@@ -337,6 +341,7 @@ class CPanelController extends Controller
             'campos' => $campos,
             'resultados' => $resultados,
             'tablas' => DB::select('SHOW TABLES'),
+            'ddbb' => 'Tables_in_'.env('DB_DATABASE'),
         ]);
     }
 }

@@ -39,7 +39,7 @@
                                         <select class="form-control" name="tabla">
                                             <option>Tabla</option>
                                             @foreach ($tablas as $item)
-                                                <option>@if($item->Tables_in_giftfinder == old('tabla'))selected @endif{{$item->Tables_in_giftfinder}}</option>
+                                                <option>@if($item->$ddbb == old('tabla'))selected @endif{{$item->$ddbb}}</option>
                                             @endforeach
                                         </select>
                                     </div>
