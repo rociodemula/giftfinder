@@ -24,7 +24,7 @@
                             </div>
                         @elseif(isset($exito) && !$exito)
                         <div class="alert alert-danger">
-                            <strong>¡Atención!</strong> No se ha realizado ningún cambio.<br><br>
+                            <strong>¡Atención!</strong> La operación no se ha completado correctamente.<br><br>
                         </div>
                         @endif
                         <form class="form-horizontal" role="form" method="POST" action="/cpanel">
@@ -77,7 +77,7 @@
                                                     <button type="submit" class="btn btn-warning btn-xs" data-toogle="tooltip" rel="txtTooltip" data-placement="right" title="Grabar"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button>
                                                 </td>
                                                 @foreach($campos as $index => $campo)
-                                                    <td><input name="{{$campo}}" value="{{ old($campo) }}"@if ($index == 0) readonly @endif/></td>
+                                                    <td><input name="{{$campo}}" value="@if(count($errors) > 0){{ old($campo) }}@endif"@if ($index == 0) readonly @endif/></td>
                                                 @endforeach
                                             </form>
                                         </tr>
@@ -105,7 +105,7 @@
                                                         @endif
                                                     </td>
                                                     @foreach($campos as $index => $campo)
-                                                        <td><input name="{{$campo}}" value="{{ $registro->$campo }}" @if ($index == 0) readonly @endif/>@if ($campo == 'nombre_usuario' || $campo == 'password')<input name="{{$campo}}_old" value="{{ $registro->$campo }}" type="hidden"/>@endif</td>
+                                                        <td><input name="{{$campo}}" value="@if(count($errors) > 0){{ old($campo) }}@else{{ $registro->$campo }}@endif" @if ($index == 0) readonly @endif/>@if ($campo == 'nombre_usuario' || $campo == 'password')<input name="{{$campo}}_old" value="{{ $registro->$campo }}" type="hidden"/>@endif</td>
                                                     @endforeach
                                                 </form>
                                             </tr>

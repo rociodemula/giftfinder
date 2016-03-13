@@ -18,7 +18,7 @@ class Subcategoria extends Model
 
     protected $primaryKey = 'cod_subcategoria';
 
-    protected $fillable = ['nombre_categoria', 'categoria'];
+    protected $fillable = ['nombre_subcategoria', 'categoria'];
 
     public function productos()
 

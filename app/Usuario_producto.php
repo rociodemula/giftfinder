@@ -11,6 +11,8 @@ class Usuario_producto extends Model
 
     protected $fillable = ['usuario', 'producto'];
 
+    protected $primaryKey = 'codigo';
+
     public static function crear($cod_usuario, $nombre_producto){
         $codProducto = Usuario_producto::getCodProducto($nombre_producto);
 
@@ -49,7 +51,7 @@ class Usuario_producto extends Model
         return DB::table('usuarios_productos')
             ->where('usuario', '=', $cod_usuario)
             ->where('producto', '=', $codProducto)
-            ->delete();;
+            ->delete();
     }
 
     public static function borrarPorId($id){
