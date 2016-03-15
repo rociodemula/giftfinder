@@ -20,11 +20,11 @@
                             </div>
                         @elseif(isset($exito) && $exito)
                             <div class="alert alert-success">
-                                <strong>¡Hecho!</strong> La operación se ha realizado con éxito.<br>
+                                <strong>¡Hecho!</strong> La operación se ha realizado con éxito .<br>
                             </div>
                         @elseif(isset($exito) && !$exito)
                         <div class="alert alert-danger">
-                            <strong>¡Atención!</strong> La operación no se ha completado correctamente.<br><br>
+                            <strong>¡Atención!</strong> La operación no se ha completado correctamente.<br>
                         </div>
                         @endif
                         <form class="form-horizontal" role="form" method="POST" action="/cpanel">
@@ -86,7 +86,7 @@
                                                 <td>
                                                     @if ($tabla != 'migrations' && $tabla != 'password_resets')
                                                         <a href="{{URL::to('/cpanel/editar/'.$tabla.'/'.$registro->$campos[0])}}" class="btn btn-success btn-xs" data-toogle="tooltip" rel="txtTooltip" data-placement="right" title="Editar"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
-                                                        <a href="{{URL::to('/cpanel/borrar/'.$tabla.'/'.$registro->$campos[0])}}" class="btn btn-danger btn-xs" data-toogle="tooltip" rel="txtTooltip" data-placement="right" title="Borrar"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+                                                        <a href="{{URL::to('/cpanel/borrar/'.$tabla.'/'.$registro->$campos[0])}}" class="eliminar btn btn-danger btn-xs" data-toogle="tooltip" rel="txtTooltip" data-placement="right" title="Borrar"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
                                                     @endif
                                                 </td>
                                                 @foreach($campos as $campo)
@@ -112,7 +112,33 @@
                                         @endforeach
                                     @endif
                             </table>
-
+                            <div id="confirmacion" class="modal fade" tabindex="-1" role="dialog">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Volver"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title">¡Atención!</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Estás a punto de eliminar el registro:</p>
+                                            <div class="row">
+                                                <label class="control-label col-md-5 col-md-offset-1 col-sm-5 col-sm-offset-1 col-xs-11 col-xs-offset-1" for="borraRegistro">Código del registro a borrar: </label><input class="col-md-3 col-md-offset-0 col-sm-3 col-sm-offset-0 col-xs-8 col-xs-offset-2" type="text" id="borraRegistro" name="borraRegistro" value=""readonly />
+                                            </div>
+                                            <div class="row">
+                                                <label class="control-label col-md-5 col-md-offset-1 col-sm-5 col-sm-offset-1 col-xs-11 col-xs-offset-1" for="tabla">Tabla en la que se encuentra: </label><input class="col-md-3 col-md-offset-0 col-sm-3 col-sm-offset-0 col-xs-8 col-xs-offset-2"  id="tabla" type="text" name="tabla" value="" readonly/>
+                                            </div><br/>
+                                            <p>En caso de se trate de un dato del que dependan otros, se producirá un borrado en cascada.</p>
+                                            <p>Por ejemplo, si borras una categoría, estarás borrando las subcategorías y productos que comprende,
+                                            si borras un usuario, estarás borrando las peticiones que ese usuario ha realizado.</p>
+                                            <p>¿Estás completamente seguro de querer completar el borrado?</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Volver</button>
+                                            <button id="borrar" type="button" class="btn btn-danger">Si, eliminar este registro</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                     </div>
                 </div>
             </div>

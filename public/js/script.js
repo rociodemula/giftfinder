@@ -101,6 +101,24 @@ $(function(){
     $('button[rel="txtTooltip"]').tooltip();
     $('textarea[rel="txtTooltip"]').tooltip();
 
+    /*************************************************************************/
+    /*                EVENTOS RELACIONADOS CON PANEL DE CONTROL              */
+    /*************************************************************************/
+
+    $('.eliminar').click(function(e) {
+        e.preventDefault();
+        //Guardamos la url a la que tenemos que redirigir la página en caso de confirmación:
+        var url = $(this).attr('href');
+        var desgloseUrl = url.split('/');
+        //Con estos datos inyectamos valores al cuadro modal:
+        $('#borraRegistro').val(desgloseUrl[6]);
+        $('#tabla').val(desgloseUrl[5]);
+        $('#confirmacion').modal({backdrop: 'static', keyboard: false})
+            .one('click', '#borrar', function () {
+                location.href = url;
+            });
+    });
+
 
     /*************************************************************************/
     /*                EVENTOS RELACIONADOS CON PERFIL DE USUARIO             */
