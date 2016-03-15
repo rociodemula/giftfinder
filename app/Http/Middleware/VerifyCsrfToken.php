@@ -11,6 +11,10 @@ class VerifyCsrfToken extends BaseVerifier
      *
      * @var array
      */
+
+    /*
+     * No se modifica la gestión de tokens de Laravel.
+     */
     protected $except = [
         //
     ];

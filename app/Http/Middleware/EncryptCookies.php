@@ -11,6 +11,10 @@ class EncryptCookies extends BaseEncrypter
      *
      * @var array
      */
+    /*
+     * No se modifica la gestión de cookies de Laravel
+     * TODO revisar política de cookies.
+     */
     protected $except = [
         //
     ];

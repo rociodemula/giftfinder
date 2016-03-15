@@ -8,7 +8,7 @@ use Illuminate\Contracts\Auth\Guard;
 class RedirectIfAuthenticated
 {
     /**
-     * The Guard implementation.
+     * Variable de clase del middleware.
      *
      * @var Guard
      */
@@ -20,13 +20,21 @@ class RedirectIfAuthenticated
      * @param  Guard  $auth
      * @return void
      */
+    /**
+     * Constructor de la clase. Gestiona la redirección de usuarios ya autenticados
+     * durante la recuperación de contraseñas.
+     *
+     * @param Guard $auth
+     */
     public function __construct(Guard $auth)
     {
         $this->auth = $auth;
     }
 
     /**
-     * Handle an incoming request.
+     * Manejador del middleware. Redirige a un usuario a su gestion de perfil
+     * en caso de estar autenticado.
+     * Forma parte de la gestión de recuperación de contraseñas de Laravel.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next
@@ -34,10 +42,13 @@ class RedirectIfAuthenticated
      */
     public function handle($request, Closure $next)
     {
+        $ok = null;
         if ($this->auth->check()) {
-            return redirect('/perfil');
+            $ok = redirect('/perfil');
+        }else{
+            $ok = $next($request);
         }
 
-        return $next($request);
+        return $ok;
     }
 }

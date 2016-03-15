@@ -8,40 +8,49 @@ use Illuminate\Contracts\Auth\Guard;
 class Authenticate
 {
     /**
-     * The Guard implementation.
+     * Variable de clase del middleware.
      *
      * @var Guard
      */
+
     protected $auth;
 
     /**
-     * Create a new filter instance.
-     *
-     * @param  Guard  $auth
-     * @return void
+     * Contructor de la clase. Crea un filtro de forma que ningún usuario no logado
+     * pueda accedera las páginas con este middleware.
+     * @param Guard $auth
      */
     public function __construct(Guard $auth)
     {
         $this->auth = $auth;
     }
 
+
     /**
-     * Handle an incoming request.
+     * Manejador del middleware. Redirige los usuarios no logados a la página de login
+     * o a la 401 en caso de peticiones ajax.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @return mixed
+     * @param $request
+     * @param Closure $next
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function handle($request, Closure $next)
     {
+        $ok = null;
         if ($this->auth->guest()) {
             if ($request->ajax()) {
-                return response('Unauthorized.', 401);
+                //Se prevee que la petición pueda ser ajax.
+                $ok = response('Unauthorized.', 401);
             } else {
-                return redirect()->guest('auth/login');
+                $ok = redirect()->guest('auth/login');
+                //En principio no se ve oportuno lanzar un mensaje de falta de permisos.
+                //Simplemente se redirige al usuario a la página de login.
             }
+        }else{
+            //En caso de estar logado, se usa la clousure para mostrar el resultado.
+            $ok = $next($request);
         }
 
-        return $next($request);
+        return $ok;
     }
 }
