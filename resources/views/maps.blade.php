@@ -8,12 +8,18 @@
 	<link rel="shortcut icon" href="/img/logo.jpg">
 
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<link rel="stylesheet"
+		  href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css">
 	<link href="/css/app.css" rel="stylesheet">
 	<!-- Fonts -->
 	<link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
 
 	<!-- Scripts -->
 	<script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+	<script type="text/javascript"
+			src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
 	<script src="/js/search.js"></script>
 	<!-- Librerías de Google Maps API, necesaria para Directions-->
 	<!--Script para página de perfil (usa solo Directions):
@@ -124,7 +130,5 @@
 	errores google is not defined, o TypeError: a is null (Para más datos ver:
 	http://stackoverflow.com/questions/33495879/uncaught-referenceerror-google-is-not-defined-at-google-maps-marker)-->
 	<script src="https://maps.google.com/maps/api/js?sensor=false&key=AIzaSyCAdE-mIj8O4nPF2RYcy2uEamgDHPmXHKM&signed_in=true&callback=initMap"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </body>
 </html>

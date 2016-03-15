@@ -62,11 +62,10 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-11 col-sm-11 col-xs-12">
-                                    <h4>Resultados de búsqueda (ordenados por proximidad):</h4>
+                                    <h4>Resultados de búsqueda para (ordenados por proximidad): {{$nombreProducto}}</h4>
                                 </div>
                                 <div class="col-md-1 col-md-offset-0 col-sm-1 col-sm-offset-0 col-xs-3 col-xs-offset-9">
                                     <div class="form-group">
-                                        <!--TODO opción para ver localización en el mapa, ver https://styde.net/integrar-google-maps-en-laravel-5-con-phpgmaps/-->
                                         <a href="#mapaBusquedas" type="button" id="verMapa" class="btn btn-success">
                                             Mapa
                                         </a>
@@ -74,7 +73,7 @@
 
                                 </div>
                             </div>
-                            <table class="table table-responsive table-striped">
+                            <table id="resultados" class="table table-responsive table-striped">
                                 <thead>
                                 <td>Usuario</td>
                                 <td>Email</td>
