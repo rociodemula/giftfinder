@@ -3,10 +3,14 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
+/**
+ * Class CreateSubcategoriasTable, encargada de la migración de la tabla Subcategorías.
+ */
 class CreateSubcategoriasTable extends Migration
 {
     /**
-     * Run the migrations.
+     * Migra la base de datos.
+     * Crea la tabla Subcategorías para la bbdd giftfinder
      *
      * @return void
      */
@@ -16,7 +20,8 @@ class CreateSubcategoriasTable extends Migration
             $table->increments('cod_subcategoria');
             $table->string('nombre_subcategoria',30);
             $table->integer('categoria')->unsigned();
-            $table->timestamps();
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at');
             $table->foreign('categoria')
                 ->references('cod_categoria')
                 ->on('categorias')
@@ -26,7 +31,7 @@ class CreateSubcategoriasTable extends Migration
     }
 
     /**
-     * Reverse the migrations.
+     * Deshace la migración realizada con up().
      *
      * @return void
      */

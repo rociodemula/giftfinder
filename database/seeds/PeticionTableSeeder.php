@@ -2,10 +2,13 @@
 
 use Illuminate\Database\Seeder;
 
+/**
+ * Class PeticionTableSeeder
+ */
 class PeticionTableSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * Incorpora los inserts a la tabla.
      *
      * @return void
      */

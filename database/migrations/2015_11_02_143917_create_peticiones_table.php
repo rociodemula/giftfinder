@@ -3,10 +3,15 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
+
+/**
+ * Class CreatePeticionesTable, encargada de migrar la tabla Peticiones.
+ */
 class CreatePeticionesTable extends Migration
 {
     /**
-     * Run the migrations.
+     * Migra la base de datos.
+     * Crea la tabla peticiones para la bbdd giftfinder
      *
      * @return void
      */
@@ -17,7 +22,8 @@ class CreatePeticionesTable extends Migration
             $table->string('email_respuesta', 80);
             $table->string('asunto', 50)->nullable();
             $table->string('mensaje');
-            $table->timestamps();
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at');
             //
             $table->integer('usuario')->unsigned();
             $table->foreign('usuario')
@@ -28,7 +34,7 @@ class CreatePeticionesTable extends Migration
     }
 
     /**
-     * Reverse the migrations.
+     * Deshace la migración realizada con up().
      *
      * @return void
      */

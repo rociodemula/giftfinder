@@ -3,10 +3,14 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
+/**
+ * Class CreateCategoriasTable, encargada de migrar la tabla Categorías
+ */
 class CreateCategoriasTable extends Migration
 {
     /**
-     * Run the migrations.
+     * Migra la base de datos.
+     * Crea la tabla Categorías para la bbdd giftfinder
      *
      * @return void
      */
@@ -15,12 +19,13 @@ class CreateCategoriasTable extends Migration
         Schema::create('categorias', function (Blueprint $table) {
             $table->increments('cod_categoria');
             $table->string('nombre_categoria', 30);
-            $table->timestamps();
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at');
         });
     }
 
     /**
-     * Reverse the migrations.
+     * Deshace la migración realizada con up().
      *
      * @return void
      */

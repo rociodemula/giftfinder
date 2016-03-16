@@ -2,15 +2,21 @@
 
 use Illuminate\Database\Seeder;
 
+/**
+ * Class ProductoTableSeeder
+ */
 class ProductoTableSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * Incorpora los inserts a la tabla.
      *
      * @return void
      */
     public function run()
     {
+        //Necesitamos alimentar previamente Categoría y Subcategoría, en el mismo
+        //archivo seeder, para así poder disponer de los id para insertarlos en la
+        //tabla Productos.
         $categoria = \DB::table('categorias')->insertGetId(array(
             'nombre_categoria'  =>  'Alimentación',
         ));

@@ -3,21 +3,25 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
+/**
+ * Class CreateUsuariosTable, encargada de migrar la tabla Usuarios.
+ */
 class CreateUsuariosTable extends Migration
 {
     /**
      * Migra la base de datos.
-     * Crea las tablas para la bbdd giftfinder
+     * Crea la tabla Usuarion para la bbdd giftfinder
      *
      * @return void
      */
     public function up()
     {
+        //Definimos la tabla Usuarios, según las especificaciones:
         Schema::create('usuarios', function (Blueprint $table) {
             $table->increments('cod_usuario');
             $table->string('nombre_usuario', 30);
             $table->string('password', 60);
-            $table->string('localizacion', 60)->nullable();
+            $table->string('localizacion', 100)->nullable();
             $table->decimal('latitud', 9, 6);
             $table->decimal('longitud', 9, 6);
             $table->string('email', 80)->unique();
@@ -30,12 +34,13 @@ class CreateUsuariosTable extends Migration
                                   'admin'])
                 ->default('user');
             $table->rememberToken();
-            $table->timestamps();
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at');
         });
     }
 
     /**
-     * Reverse the migrations.
+     * Deshace la migración realizada con up().
      *
      * @return void
      */

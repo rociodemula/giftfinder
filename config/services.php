@@ -30,7 +30,7 @@ return [
     ],
 
     'stripe' => [
-        'model'  => Giftfinder\User::class,
+        'model'  => Giftfinder\Usuario::class,
         'key'    => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],

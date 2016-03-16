@@ -3,10 +3,14 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class DatabaseSeeder
+ */
 class DatabaseSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * Indica el orden en que se deben ejecutar los seeders que alimentan
+     * la base de datos.
      *
      * @return void
      */
@@ -14,8 +18,6 @@ class DatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        //$this->call(CategoriaTableSeeder::class);
-        //$this->call(SubcategoriaTableSeeder::class);
         $this->call(ProductoTableSeeder::class);
         $this->call(UsuarioTableSeeder::class);
         $this->call(UsuarioProductoTableSeeder::class);

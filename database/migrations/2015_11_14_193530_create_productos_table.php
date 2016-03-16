@@ -3,10 +3,14 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
+/**
+ * Class CreateProductosTable, encargada de la migración de la tabla Productos.
+ */
 class CreateProductosTable extends Migration
 {
     /**
-     * Run the migrations.
+     * Migra la base de datos.
+     * Crea la tabla Productos para la bbdd giftfinder
      *
      * @return void
      */
@@ -19,7 +23,8 @@ class CreateProductosTable extends Migration
             $table->string('descripcion')->nullable();
             $table->string('foto_producto')->nullable();
             $table->string('link_articulo')->nullable();
-            $table->timestamps();
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at');
             $table->foreign('subcategoria')
                 ->references('cod_subcategoria')
                 ->on('subcategorias')
@@ -28,7 +33,7 @@ class CreateProductosTable extends Migration
     }
 
     /**
-     * Reverse the migrations.
+     * Deshace la migración realizada con up().
      *
      * @return void
      */

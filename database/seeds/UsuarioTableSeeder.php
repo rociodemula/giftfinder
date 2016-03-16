@@ -2,15 +2,21 @@
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
 
+
 /**
- * Created by PhpStorm.
- * User: rociodemula
- * Date: 2/11/15
- * Time: 10:55
+ * Class UsuarioTableSeeder
  */
 class UsuarioTableSeeder extends Seeder {
+
+    /**
+     * Incorpora los inserts a la tabla.
+     *
+     * @return void
+     */
     public function run() {
 
+        //Con el método create de Faker podemos alimentar la tabla usuarios con
+        //los reigstros que queramos.
         $faker = Faker::create();
 
         \DB::table('usuarios')->insert(array(

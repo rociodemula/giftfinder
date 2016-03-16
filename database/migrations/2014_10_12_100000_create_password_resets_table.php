@@ -3,10 +3,15 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
+/**
+ * Class CreatePasswordResetsTable encargada de migrar la tabla Password_resets
+ */
 class CreatePasswordResetsTable extends Migration
 {
+
     /**
-     * Run the migrations.
+     * Migra la base de datos.
+     * Crea la tabla password-resets para la bbdd giftfinder
      *
      * @return void
      */
@@ -15,12 +20,13 @@ class CreatePasswordResetsTable extends Migration
         Schema::create('password_resets', function (Blueprint $table) {
             $table->string('email')->index();
             $table->string('token')->index();
-            $table->timestamp('created_at');
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
         });
     }
 
+
     /**
-     * Reverse the migrations.
+     * Deshace la migración realizada con up().
      *
      * @return void
      */
