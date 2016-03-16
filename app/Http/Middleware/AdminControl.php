@@ -30,11 +30,15 @@ class AdminControl
         $ok = null;
         if ($this->auth->user()->tipo != 'admin'){
             if ($request->ajax()) {
-                $ok = response('Unauthorized.', 401);
+                $ok = view('errors/401');
+                //Original:
+                //$ok = response('Unauthorized.', 401);
             } else {
                 //En principio no se ve oportuno lanzar un mensaje de falta de permisos, debido a la
                 //seguridad. Simplemente se redirige al usuario a la página de bienvenida.
-                $ok =  redirect('/');
+                $ok = view('errors/401');
+                //Original
+                //$ok =  redirect('/');
             }
         }else{
             //En caso de estar autorizado, se usa la clousure para mostrar el resultado.

@@ -40,7 +40,9 @@ class Authenticate
         if ($this->auth->guest()) {
             if ($request->ajax()) {
                 //Se prevee que la petición pueda ser ajax.
-                $ok = response('Unauthorized.', 401);
+                $ok = view('errors/401');
+                //Original:
+                //$ok = response('Unauthorized.', 401);
             } else {
                 $ok = redirect()->guest('auth/login');
                 //En principio no se ve oportuno lanzar un mensaje de falta de permisos.

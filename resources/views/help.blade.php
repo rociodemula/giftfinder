@@ -14,16 +14,16 @@
                                 usuarios registrados.</dd>
                             <dd>- En el menú inferior, a pie de página, tienes algunas opciones referentes a la legalidad
                                 del sitio, derechos de autor y esta ayuda.</dd>
-                            <dd>- Una vez registrado, cualqueir usuario puede darse de baja en el sistema marcando la
+                            <dd>- Una vez registrado, cualquier usuario puede darse de baja en el sistema marcando la
                                 opción de 'Eliminar perfil del sistema' existente en el formulario de gestión de Perfil.</dd>
-                            <dd>- Para cualquier duda adicional, siempre puedes consultar el manual de uso del sitio, o
-                                descargar la documentación.</dd>
+                            <dd>- En todas las pantallas de la aplicación existe ayuda para cada cada dato a rellenar. Dejando el
+                                ratón sobre un elemento de la pantalla puedes ver ayuda adicional de cómo rellenar el dato y qué
+                                debe contener.</dd>
                         </dl>
                         <dl>
-                            <dt>Manuales:</dt>
-                            <dd>- Puedes visualizar los manuales en pdf de la aplicación, o bien descargarlos para
+                            <dt>Manuales técnicos:</dt>
+                            <dd>- Puedes visualizar los manuales técnicos de la aplicación, o bien descargarlos para
                                 consultarlos más tarde pulsando <a href="http://giftfinder.demosdata.com/doc/">aquí</a>.</dd>
-                            <!--TODO elaborar manual en pdf para el usuario. De momento este enlace apunta a la documentación del proyecto-->
                         </dl>
                         <dl>
                             <dt>Uso del sitio:</dt>
