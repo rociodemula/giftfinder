@@ -1,9 +1,15 @@
+/* Hoja de estilos para Giftfinder*/
+
 body {
-    padding-top: 130px;
+    padding-top: 130px; /* Necesario para que el fixed-menu  de la cabecera no tape el contenido,*/
+    padding-bottom: 40px; /* Necesario para que el fixed-menu del pie no tape el contenido,*/
 }
+
 .banner {
-    max-height: 70px;
+    max-height: 70px; /* Definir una altura mínima para el banner publicitario.*/
 }
+
+/* Recuadro gris para destacar la geolocalización.*/
 .recuadro-gris{
     background-color: #f5f5f5;
     border-color: #ddd;
@@ -14,6 +20,7 @@ body {
     margin-right: 10px;
     padding-top: 10px;
 }
+/* Si no definimos una altura para el mapa, no se cargará.*/
 #mapaBusquedas{
     height: 300px;
 }

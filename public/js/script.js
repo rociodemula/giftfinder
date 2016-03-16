@@ -1,10 +1,13 @@
 /**
+ * Script jQuery para gestionar eventos y demás contenido dinámico de la aplicación en general.
+ * Casi toda la funcionalidad es específica de la página de alta/perfil de usuario.
+ *
  * Created by rocio on 27/02/16.
  */
 var index = 0; //variable estática para controlar los index de los productos añadidos dinámicamente
-var apiKey = 'AIzaSyCAdE-mIj8O4nPF2RYcy2uEamgDHPmXHKM';
-var map;
-$(function(){
+var apiKey = 'AIzaSyCAdE-mIj8O4nPF2RYcy2uEamgDHPmXHKM'; //La clave api obtenida de nuestra cuenta de google es necesaria.
+
+$(function(){ //Una vez cargada la página declaramos los eventos.
     /*************************************************************************/
     /*                EVENTOS RELACIONADOS CON PERFIL DE USUARIO             */
     /*************************************************************************/
@@ -105,14 +108,21 @@ $(function(){
     /*                EVENTOS RELACIONADOS CON PANEL DE CONTROL              */
     /*************************************************************************/
 
+    /*
+    Visualiza el cuadro modal pidiendo cnfirmación en caso de que pulsemos el botón
+    para borrar un registro.
+    Alimentamos un formulario interno en el modal, que nos vale para mostrar los datos
+    del registro que se quiere borrar.
+     */
     $('.eliminar').click(function(e) {
         e.preventDefault();
-        //Guardamos la url a la que tenemos que redirigir la página en caso de confirmación:
+        //Guardamos la url a la que tenemos que redirigir la página en caso de confirmación positiva:
         var url = $(this).attr('href');
         var desgloseUrl = url.split('/');
         //Con estos datos inyectamos valores al cuadro modal:
         $('#borraRegistro').val(desgloseUrl[6]);
         $('#tabla').val(desgloseUrl[5]);
+        //Mostramos el modal, y en caso de confirmación, redirigimos el flujo a la url de borrado.
         $('#confirmacion').modal({backdrop: 'static', keyboard: false})
             .one('click', '#borrar', function () {
                 location.href = url;
@@ -175,55 +185,6 @@ $(function(){
     });
 
 
-    /*************************************************************************/
-    /*             EVENTOS RELACIONADOS CON PANTALLA BÚSQUEDA                */
-    /*                                                                       */
-    /*         ---------ESPECÍFICOS DE GEOLOCALIZACIÓN-------------          */
-    /*************************************************************************/
-    //initMap(); //Si dejamos esta línea activa, la geolocalización de Perfil da errores y no funciona
-    //Se decide separa este script del de la pantalla de búsquedas, ya que los scripts de las apis de Google
-    //son diferentes y en muchos casos, las declaraciones, incompatibles.
-
-    $('.distancia').each(function(){
-        var origen = $('#locate_user').val();
-        var usuarioDestino = $(this).attr('id');
-        var destino = $('.localizacion' + usuarioDestino).text();
-        var nombreUsuario = $('#usuario' + usuarioDestino).text();
-        //Forma 1 -> da error
-        //No 'Access-Control-Allow-Origin' header is present on the requested resource. Origin 'http://giftfinder.local' is therefore not allowed access.
-        //http://stackoverflow.com/questions/13807052/origin-url-is-not-allowed-by-access-control-allow-origin-with-google-direction-a
-        //var url = 'https://maps.googleapis.com/maps/api/directions/json?origin=' + origen + '&destination=' + destino + '&key=' + apiKey;
-        //Forma 2 -> Imposible hacerlo con ajax, da error:
-        //No 'Access-Control-Allow-Origin' header is present on the requested resource. Origin 'http://giftfinder.local' is therefore not allowed access.
-        //http://stackoverflow.com/questions/13807052/origin-url-is-not-allowed-by-access-control-allow-origin-with-google-direction-a
-        //Esta forma 2 da error, pero siguiendo la docu de Google, se consigue hacer con la
-        //Forma 3:
-        //https://developers.google.com/maps/documentation/javascript/directions#DisplayingResults
-        var distancia = new google.maps.DirectionsService();
-        var peticionDistancia = { origin: origen, destination: destino, travelMode: google.maps.TravelMode.WALKING};
-        distancia.route(peticionDistancia, function(results, status){
-            if (status == google.maps.DirectionsStatus.OK){
-                //Añadimos in marcador en el mapa para esta localización
-                var latitud = results.routes[0].legs[0].end_location.lat;
-                var longitud = results.routes[0].legs[0].end_location.lng;
-                var ubicacion = new google.maps.LatLng(latitud,longitud);
-
-                var marker = new google.maps.Marker({
-                    position: ubicacion,
-                    title: nombreUsuario
-                });
-                marker.setMap(map);
-                //Añadimos la distancia a la tabla
-                $('#' + usuarioDestino).text(results.routes[0].legs[0].distance.text);
-
-            }
-        });
-    });
-
-    $('#verMapa').click(function(){
-        $('#mapaBusquedas').removeClass('hidden');
-    })
-
 });
 
 /*************************************************************************/
@@ -239,13 +200,23 @@ $(function(){
  * contenedores previstos en el formulario del usuario.
  */
 function geolocalizar(){
+    //Usamos idea procedente de:
     //http://stackoverflow.com/questions/3397585/navigator-geolocation-getcurrentposition-sometimes-works-sometimes-doesnt
     resultado = navigator.geolocation.getCurrentPosition(obtenerPosicion);
 }
+/**
+ * Función obtenerPosicion() que obtiene la latitud y longitud del navegador, en combinación
+ * con la función geolocalizar()
+ *
+ * @param posicion
+ */
 function obtenerPosicion(posicion){
     var latitud = posicion.coords.latitude;
     var longitud = posicion.coords.longitude;
     if (validar(latitud, longitud)){
+        //Una vez que tenemos la latitud/longitud provenientes del navegador,
+        //usamos la función llamarApi para obtener la dirección formateada y
+        //mostrarla en el campo localización.
         llamarApi('https://maps.googleapis.com/maps/api/geocode/json?latlng='
             + latitud + ','
             + longitud + '&key=' + apiKey);
@@ -255,6 +226,7 @@ function obtenerPosicion(posicion){
 /**
  * Función llamarApi(url) que gestiona la localización en la Api de Google correspondiente
  * mediante la url para la obtener los datos relacionados con la posición deseada.
+ * Los vuelca en el campo localización medainte la función mostrar().
  *
  * @param url
  * @param ruta boolean indica si la url corresponde a una ruta (2 localizaciones) o no.
@@ -265,6 +237,8 @@ function llamarApi(url){
         url: url,
         dataType: 'text',
         success: function (resultado) {
+            //Si es exitosa la petición ajax, volcamos el resultado en los
+            //diferentes campos del formulario relacionados:
                 mostrar(eval('(' + resultado + ')'));
         },
         error: function (resultado) {
@@ -350,45 +324,3 @@ function limpiarErrores(){
     }
 }
 
-/*************************************************************************/
-/*           FUNCIONES  RELACIONADAS CON BUSQUEDA DE PRODUCTOS           */
-/*                                                                       */
-/*         ---------ESPECÍFICOS DE GEOLOCALIZACIÓN-------------          */
-/*************************************************************************/
-
-function initMap(){
-
-    var latitud = +$('#latitud').val();
-    var longitud = +$('#longitud').val();
-    map = new google.maps.Map(document.getElementById('mapaBusquedas'), {
-        zoom: 17,
-        center: {lat: latitud, lng: longitud}
-    });
-
-    var marker = new google.maps.Marker({
-        map: map,
-        // Define the place with a location, and a query string.
-        place: {
-            location: {lat: latitud, lng: longitud},
-            query: 'Aquí entregas/recoges tus productos'
-
-        },
-        // Attributions help users find your site again.
-        attribution: {
-            source: 'Google Maps JavaScript API',
-            webUrl: 'https://developers.google.com/maps/'
-        }
-    });
-    marker.setMap(map);
-/*
-    // Construct a new InfoWindow.
-    var infoWindow = new google.maps.InfoWindow({
-        content: 'Google Sydney'
-    });
-
-    // Opens the InfoWindow when marker is clicked.
-    marker.addListener('click', function() {
-        infoWindow.open(map, marker);
-    });*/
-
-}
