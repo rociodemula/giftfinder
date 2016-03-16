@@ -208,7 +208,7 @@
                                     </div>
                                     <div class="modal-body">
                                         <p>No has confirmado que la localización es correcta en el mapa.</p>
-                                        <p>Es importante que tu sitio para las entregas sea el correcto. Comprúebalo y marca la casilla junto a latitud/longitud</p>
+                                        <p>Es importante que tu sitio para las entregas sea el correcto. Comprúebalo y marca la casilla junto a latitud/longitud.</p>
                                     </div>
                                 </div>
                             </div>

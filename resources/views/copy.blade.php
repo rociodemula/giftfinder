@@ -15,7 +15,7 @@
                                 con permiso de su propietario y dentro del marco de la legalidad.</dd>
                             <dd>- El funcionamiento del banner publicitario es proporcionado por el sponsor y su
                                 funcionalidad puede variar dependiendo del navegador utilizado por el usuario</dd>
-                            <dd>- Tanto la aplicación como su diseño se han realizado en 2015-2016 por <a href="mailto:rociodemula@demosdata.com">Rocío de Mula</a></dd>
+                            <dd>- Tanto la aplicación como su diseño se han realizado en 2015-2016 por <a href="mailto:rociodemula@demosdata.com">Rocío de Mula</a>.</dd>
                         </dl>
                     </div>
                 </div>

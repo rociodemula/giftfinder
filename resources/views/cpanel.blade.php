@@ -20,7 +20,7 @@
                             </div>
                         @elseif(isset($exito) && $exito)
                             <div class="alert alert-success">
-                                <strong>¡Hecho!</strong> La operación se ha realizado con éxito .<br>
+                                <strong>¡Hecho!</strong> La operación se ha realizado con éxito.<br>
                             </div>
                         @elseif(isset($exito) && !$exito)
                         <div class="alert alert-danger">
