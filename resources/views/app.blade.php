@@ -17,6 +17,8 @@
 	<script src="/js/script.js"></script>
 	<!-- Librería de Google Maps API, necesaria para Directions-->
 	<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+	<!-- Librería de geolocalización en javascript-->
+	<script language="JavaScript" src="http://www.geoplugin.net/javascript.gp" type="text/javascript"></script>
 
 	<!--Este script funciona bien para Directions, pero no para maps ni markers:
 	<script src="https://maps.google.com/maps/api/js?sensor=false&key=AIzaSyCAdE-mIj8O4nPF2RYcy2uEamgDHPmXHKM&signed_in=true&callback=initMap"></script>-->

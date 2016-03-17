@@ -7,6 +7,24 @@
 var index = 0; //variable estática para controlar los index de los productos añadidos dinámicamente
 var apiKey = 'AIzaSyCAdE-mIj8O4nPF2RYcy2uEamgDHPmXHKM'; //La clave api obtenida de nuestra cuenta de google es necesaria.
 
+//Utilidad duck-typing para localizar el navegador usado por el usuario, obtenida de:
+//http://stackoverflow.com/questions/9847580/how-to-detect-safari-chrome-ie-firefox-and-opera-browser
+
+// Opera 8.0+
+var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
+// Firefox 1.0+
+var isFirefox = typeof InstallTrigger !== 'undefined';
+// At least Safari 3+: "[object HTMLElementConstructor]"
+var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
+// Internet Explorer 6-11
+var isIE = /*@cc_on!@*/false || !!document.documentMode;
+// Edge 20+
+var isEdge = !isIE && !!window.StyleMedia;
+// Chrome 1+
+var isChrome = !!window.chrome && !!window.chrome.webstore;
+// Blink engine detection
+var isBlink = (isChrome || isOpera) && !!window.CSS;
+
 $(function(){ //Una vez cargada la página declaramos los eventos.
     /*************************************************************************/
     /*                EVENTOS RELACIONADOS CON PERFIL DE USUARIO             */
@@ -202,7 +220,20 @@ $(function(){ //Una vez cargada la página declaramos los eventos.
 function geolocalizar(){
     //Usamos idea procedente de:
     //http://stackoverflow.com/questions/3397585/navigator-geolocation-getcurrentposition-sometimes-works-sometimes-doesnt
-    resultado = navigator.geolocation.getCurrentPosition(obtenerPosicion);
+    resultado = navigator.geolocation.getCurrentPosition(obtenerPosicion, errorGeolocalizar, {timeout:10000});
+
+}
+/**
+ * Función que geolocaliza una posición basandose en los datos diferentes a los facilitados por el navegador (p.e., IP)
+ * Es posible utilizarla en navegadores que no dispongan de otra alternativa, pero es un sistema altamente inexacto.
+ */
+function geolocalizarIP(){
+    llamarApi('https://maps.googleapis.com/maps/api/geocode/json?latlng='
+        + geoplugin_latitude() + ','
+        + geoplugin_longitude() + '&key=' + apiKey);
+}
+function errorGeolocalizar(){
+    $('#errorGeolocalizacion').modal('show');
 }
 /**
  * Función obtenerPosicion() que obtiene la latitud y longitud del navegador, en combinación

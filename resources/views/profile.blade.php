@@ -256,24 +256,46 @@
                                 </div>
                             </div>
                         </div>
-                            <div id="confirmaPosicion" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mensajeConfirmar">
-                                <div class="modal-dialog modal-sm">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button class="close" aria-label="Close" data-dismiss="modal" type="button">
-                                                <span aria-hidden="true">×</span>
-                                            </button>
-                                            <h4 id="mensajeConfirmar" class="modal-title">¡Localización no confirmada!</h4>
-
-                                        </div>
-                                        <div class="modal-body">
-                                            <p>No has confirmado que la localización es correcta en el mapa.</p>
-                                            <p>Es importante que tu sitio para las entregas sea el correcto. Comprúebalo y marca la casilla junto a latitud/longitud.</p>
-                                        </div>
+                        <div id="confirmaPosicion" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mensajeConfirmar">
+                            <div class="modal-dialog modal-sm">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button class="close" aria-label="Close" data-dismiss="modal" type="button">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                        <h4 id="mensajeConfirmar" class="modal-title">¡Localización no confirmada!</h4>
 
                                     </div>
+                                    <div class="modal-body">
+                                        <p>No has confirmado que la localización es correcta en el mapa.</p>
+                                        <p>Es importante que tu sitio para las entregas sea el correcto. Comprúebalo y marca la casilla junto a latitud/longitud.</p>
+                                    </div>
+
                                 </div>
                             </div>
+                        </div>
+                        <div id="errorGeolocalizacion" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mensajeConfirmar">
+                            <div class="modal-dialog modal-sm">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button class="close" aria-label="Close" data-dismiss="modal" type="button">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                        <h4 id="mensajeInformar" class="modal-title">¡Geolocalización no detectada!</h4>
+
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Necesitamos que des permiso para detectar tu posición.</p>
+                                        <p>Este proceso varía según el navegador que uses, y es posible que no hayas
+                                            realizado la autorización de forma correcta, o que tu navegador no disponga
+                                            de esta opción.</p>
+                                        <p>Recuerda que puedes indicar la dirección que te interese manualmente en 'Localización'
+                                           y se detectará la latitud y longitud automáticamente.</p>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
