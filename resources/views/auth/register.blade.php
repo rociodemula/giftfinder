@@ -65,9 +65,11 @@
                                             </div>
                                         </div>
                                         <div class="form-group col-md-3 col-sm-3 col-xs-12">
-                                            <label class="col-md-8 col-md-offset-0 col-sm-7 col-sm-offset-0 col-xs-2 col-xs-offset-5 control-label"><a id="mapa" class="btn btn-warning btn-sm"  href="#" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Pulsa para comprobar la localización en el mapa"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span></a></label>
+                                            <label class="col-md-8 col-md-offset-0 col-sm-7 col-sm-offset-0 col-xs-2 col-xs-offset-5">
+                                                <a id="mapa" class="btn btn-warning btn-sm pull-right"  href="#" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Pulsa para comprobar la localización en el mapa"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span></a>
+                                            </label>
                                             <div class="col-md-1 col-ms-offset-0 col-sm-offset-0 col-sm-1 col-xs-offset-1 col-xs-2">
-                                                <input id="checkMap" type="checkbox" class="form-control" name="mapa" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Marca esta casilla si la dirección está donde esperas en el mapa">
+                                                <input id="checkMap" type="checkbox" class="pull-right" name="mapa" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Marca esta casilla si la dirección está donde esperas en el mapa">
                                             </div>
                                         </div>
                                     </div>
@@ -95,7 +97,7 @@
                                                 </div>
                                                 <!--TODO este campo solo se podra marcar si se ha rellenado el campo móvil con un tlf movil-->
                                                 <div class="col-md-1 col-sm-1 col-xs-1">
-                                                    <input type="checkbox" class="form-control" name="whatsapp" data-toogle="tooltip" rel="txtTooltip" data-placement="right" title="Si quieres que te contacten por whatsapp marca esta opción">
+                                                    <input type="checkbox" name="whatsapp" class="pull-right" data-toogle="tooltip" rel="txtTooltip" data-placement="right" title="Si quieres que te contacten por whatsapp marca esta opción">
                                                 </div>
                                                 <label class="col-md-2 col-sm-2 col-xs-1"><img src="/img/whatsapp.png"></label>
                                             </div>
@@ -173,7 +175,7 @@
                                 <div class="col-md-5 col-sm-5 col-xs-12">
                                     <div class="form-group">
                                         <div class="col-md-2 col-sm-2 col-xs-2">
-                                            <input id="geolocalizacion" type="checkbox" class="form-control" name="geolocalizacion" data-toogle="tooltip" rel="txtTooltip" data-placement="right" title="Si quieres activar la geolocalización de tu dispositivo, marca esta opción">
+                                            <input id="geolocalizacion" type="checkbox" class="pull-right" name="geolocalizacion" data-toogle="tooltip" rel="txtTooltip" data-placement="right" title="Si quieres activar la geolocalización de tu dispositivo, marca esta opción">
                                         </div>
                                         <label class="col-md-10 col-sm-10 col-xs-10">Activar geolocalización</label>
                                     </div>
@@ -181,7 +183,7 @@
                                 <div class="col-md-5 col-sm-5 col-xs-12">
                                     <div class="form-group">
                                         <div class="col-md-2 col-sm-2 col-xs-2">
-                                            <input type="checkbox" class="form-control" name="acepto" required data-toogle="tooltip" rel="txtTooltip" data-placement="right" title="Es necesario aceptar las condiciones del sitio para continuar">
+                                            <input type="checkbox" class="pull-right" name="acepto" required data-toogle="tooltip" rel="txtTooltip" data-placement="right" title="Es necesario aceptar las condiciones del sitio para continuar">
                                         </div>
                                         <label class="col-md-10 col-sm-10 col-xs-10">He leído y acepto las condiciones de uso</label>
                                     </div>
