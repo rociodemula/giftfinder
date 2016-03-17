@@ -47,7 +47,7 @@
                                     <div class="form-group">
                                         <label class="col-md-4 col-md-offset-0 col-sm-3 col-sm-offset-0 col-xs-10 col-xs-offset-1 control-label">Localización </label>
                                         <div class="col-md-7 col-md-offset-0 col-sm-7 col-sm-offset-0 col-xs-10 col-xs-offset-1">
-                                            <input id="localizacion" type="text" class="form-control" name="localizacion" required maxlength="60" value="{{ old('localizacion') }}" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Sitio que prefieres para las entregas/recogidas">
+                                            <input id="localizacion" type="text" class="form-control" name="localizacion" required maxlength="100" value="{{ old('localizacion') }}" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Sitio que prefieres para las entregas/recogidas">
                                         </div>
                                     </div>
 
