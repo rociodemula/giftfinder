@@ -26,7 +26,7 @@
                             <div class="form-group">
                                 <label class="col-md-4 col-md-offset-0 col-sm-4 col-sm-offset-0 col-xs-3 col-xs-offset-1 control-label">Usuario</label>
                                 <div class="col-md-6 col-sm-6 col-xs-7">
-                                    <input type="text" class="form-control" name="nombre_usuario" value="{{ old('nombre_usuario') }}">
+                                    <input type="text" class="form-control" name="nombre_usuario" value="{{ old('nombre_usuario') }}" autofocus>
                                 </div>
                             </div>
 

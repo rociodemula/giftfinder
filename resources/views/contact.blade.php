@@ -70,7 +70,7 @@
                                     <div class="panel panel-default">
                                         <div class="panel-heading">Mensaje:</div>
                                         <div class="panel-body">
-                                            <textarea class="form-control" name="mensaje" required maxlength="255" placeholder="Describe tu petición" rows="7" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Háblanos de tu petición en un máximo de 255 caracteres">@if(count($errors) > 0){{old('mensaje')}}@endif</textarea>
+                                            <textarea class="form-control" name="mensaje" required maxlength="255" placeholder="Describe tu petición" rows="7" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Háblanos de tu petición en un máximo de 255 caracteres" autofocus>@if(count($errors) > 0){{old('mensaje')}}@endif</textarea>
                                         </div>
                                     </div>
                                 </div>

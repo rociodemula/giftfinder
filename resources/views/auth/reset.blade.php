@@ -32,7 +32,7 @@
 						<div class="form-group">
 							<label class="col-md-4 col-md-offset-0 col-sm-4 col-sm-offset-0 col-xs-offset-1 col-xs-10 control-label">Clave</label>
 							<div class="col-md-6 col-md-offset-0 col-sm-6 col-sm-offset-0 col-xs-offset-1 col-xs-10 ">
-								<input type="password" class="form-control" name="password">
+								<input type="password" class="form-control" name="password" autofocus>
 							</div>
 						</div>
 

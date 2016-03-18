@@ -36,7 +36,7 @@
                                         <label class="control-label">Elige la tabla a modificar</label>
                                     </div>
                                     <div class="col-md-4 col-md-offset-1 col-sm-4 col-sm-offset-1 col-xs-offset-1 col-xs-8">
-                                        <select class="form-control" name="tabla">
+                                        <select class="form-control" name="tabla" @if ($tabla == '') autofocus @endif>
                                             <option>Tabla</option>
                                             @foreach ($tablas as $item)
                                                 <option>@if($item->$ddbb == old('tabla'))selected @endif{{$item->$ddbb}}</option>
@@ -77,7 +77,7 @@
                                                     <button type="submit" class="btn btn-warning btn-xs" data-toogle="tooltip" rel="txtTooltip" data-placement="right" title="Grabar"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button>
                                                 </td>
                                                 @foreach($campos as $index => $campo)
-                                                    <td><input name="{{$campo}}" value="@if(count($errors) > 0){{ old($campo) }}@endif"@if ($index == 0) readonly @endif/></td>
+                                                    <td><input name="{{$campo}}" class="form-control" value="@if(count($errors) > 0){{ old($campo) }}@endif"@if ($index == 0) readonly @elseif($index == 1) autofocus @endif/></td>
                                                 @endforeach
                                             </form>
                                         </tr>
@@ -105,7 +105,7 @@
                                                         @endif
                                                     </td>
                                                     @foreach($campos as $index => $campo)
-                                                        <td><input name="{{$campo}}" value="@if(count($errors) > 0){{ old($campo) }}@else{{ $registro->$campo }}@endif" @if ($index == 0) readonly @endif/>@if ($campo == 'nombre_usuario' || $campo == 'password')<input name="{{$campo}}_old" value="{{ $registro->$campo }}" type="hidden"/>@endif</td>
+                                                        <td><input name="{{$campo}}" class="form-control" value="@if(count($errors) > 0){{ old($campo) }}@else{{ $registro->$campo }}@endif" @if ($index == 0) readonly @elseif($index == 1) autofocus @endif/>@if ($campo == 'nombre_usuario' || $campo == 'password')<input name="{{$campo}}_old" value="{{ $registro->$campo }}" type="hidden"/>@endif</td>
                                                     @endforeach
                                                 </form>
                                             </tr>

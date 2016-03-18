@@ -33,7 +33,7 @@
                                     <div class="form-group">
                                         <label class="col-md-4 col-md-offset-0 col-sm-3 col-sm-offset-0 col-xs-10 col-xs-offset-1 control-label">Usuario</label>
                                         <div class="col-md-7 col-md-offset-0 col-sm-7 col-sm-offset-0 col-xs-10 col-xs-offset-1">
-                                            <input type="text" class="form-control" name="nombre_usuario" maxlength="30" required value="@if(count($errors) > 0){{old('nombre_usuario')}}@else{{$usuario->nombre_usuario}}@endif" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Puedes cambiar el nombre de usuario con el que accedes al sitio">
+                                            <input type="text" class="form-control" name="nombre_usuario" maxlength="30" required value="@if(count($errors) > 0){{old('nombre_usuario')}}@else{{$usuario->nombre_usuario}}@endif" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Puedes cambiar el nombre de usuario con el que accedes al sitio" autofocus>
                                         </div>
                                     </div>
 

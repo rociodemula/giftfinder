@@ -44,7 +44,7 @@
                                         </select>
                                     </div>
                                     <div class="col-md-3 col-md-offset-0 col-sm-3 col-sm-offset-0 col-xs-7 col-xs-offset-1">
-                                        <select class="form-control" name="producto" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Elige el producto que deseas buscar">
+                                        <select class="form-control" name="producto" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Elige el producto que deseas buscar" autofocus>
                                             <option>Producto</option>
                                             @foreach ($producto as $item)
                                                 <option @if($item->nombre_producto == old('producto'))selected @endif>{{ $item->nombre_producto }}</option>
