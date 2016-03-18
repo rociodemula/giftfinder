@@ -66,7 +66,7 @@
                                 </div>
                                 <div class="col-md-1 col-md-offset-0 col-sm-1 col-sm-offset-0 col-xs-3 col-xs-offset-9">
                                     <div class="form-group">
-                                        <a href="#mapaBusquedas" type="button" id="verMapa" class="btn btn-success">
+                                        <a href="#mapaBusquedas" type="button" id="verMapa" class="btn btn-success" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Ir a mapa al final de la lista" >
                                             Mapa
                                         </a>
                                     </div>
