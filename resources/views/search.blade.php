@@ -81,7 +81,7 @@
                                 <td>Móvil</td>
                                 <td>Whatsapp</td>
                                 <td>Punto entrega</td>
-                                <td>Distancia</td>
+                                <td>Distancia (kms)</td>
                                 </thead>
                                 @foreach($resultado as $item)
                                     <tr>

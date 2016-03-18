@@ -1,5 +1,6 @@
 <?php
 use Illuminate\Database\Seeder;
+use Faker\Provider\es_ES\Address;
 use Faker\Factory as Faker;
 
 
@@ -18,12 +19,12 @@ class UsuarioTableSeeder extends Seeder {
         //Con el método create de Faker podemos alimentar la tabla usuarios con
         //los reigstros que queramos.
         $faker = Faker::create();
-
         \DB::table('usuarios')->insert(array(
             'nombre_usuario' => 'adminproy',
             'password' => \Hash::make('secure'),
-            'latitud' => 57.4879289,
-            'longitud' => -4.1406816,
+            'localizacion' => 'Dos Hermanas, Sevilla, Spain',
+            'latitud' => 37.2865803,
+            'longitud' => -5.924239099999999,
             'email' => 'pruebas@example.com',
             'tipo' => 'admin',
         ));
@@ -31,8 +32,9 @@ class UsuarioTableSeeder extends Seeder {
         \DB::table('usuarios')->insert(array(
             'nombre_usuario' => 'tutorproy',
             'password' => \Hash::make('secure'),
-            'latitud' => 57.4879289,
-            'longitud' => -4.1406816,
+            'localizacion' => 'Aguadulce, Almería, Spain',
+            'latitud' => 36.816162,
+            'longitud' => -2.5718122,
             'email' => 'pruebas1@example.com',
             'tipo' => 'admin',
         ));
@@ -40,6 +42,7 @@ class UsuarioTableSeeder extends Seeder {
             \DB::table('usuarios')->insert(array(
                 'nombre_usuario' => $faker->unique()->word,
                 'password' => \Hash::make('123456'),
+                'localizacion' => Address::state().',Spain',
                 'latitud' => $faker->latitude,
                 'longitud' => $faker->longitude,
                 'email' => $faker->unique()->email,
