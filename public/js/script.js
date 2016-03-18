@@ -55,7 +55,7 @@ $(function(){ //Una vez cargada la página declaramos los eventos.
     /*
     Asociamos un evento change a cada linea productoNuevo, para que oculte el botón + en caso de que
     el combo no tenga seleccionado ningún producto.
-    TODO No funciona correctamente, solo asocia el evento al primer elemento, no a todos.
+    TODO ampliar funcionalidad en fase II para poder añadir más productos de una vez.
      */
     $('.productoNuevo').each(function(){
         $(this).change(function(){
@@ -113,6 +113,16 @@ $(function(){ //Una vez cargada la página declaramos los eventos.
         }
     });
 
+    //Solo se debe permitir marcar el icono de whatsapp si contiene un nº móvil
+    //Lo revisaremos tanto cuando se carga, como cuando cambia el valor del campo
+    var movil = $('#movil');
+
+    revisarMovil(movil.val());
+
+    movil.change(function(){
+        revisarMovil($(this).val());
+    });
+
     /*
      Inicializando las tooltips de bootstrap para indicaciones sobre algunos campos del formulario.
      */
@@ -121,6 +131,7 @@ $(function(){ //Una vez cargada la página declaramos los eventos.
     $('a[rel="txtTooltip"]').tooltip();
     $('button[rel="txtTooltip"]').tooltip();
     $('textarea[rel="txtTooltip"]').tooltip();
+
 
     /*************************************************************************/
     /*                EVENTOS RELACIONADOS CON PANEL DE CONTROL              */
@@ -204,6 +215,35 @@ $(function(){ //Una vez cargada la página declaramos los eventos.
 
 
 });
+
+
+/*************************************************************************/
+/*             FUNCIONES  RELACIONADAS CON PERFIL DE USUARIO             */
+/*************************************************************************/
+
+/**
+ * Función que comprueba si el número contenido en el campo pasado como
+ * parámetro es un móvil. Si no lo es, oculta tanto el check de
+ * whatsapp como su label asociado, si lo es, las muestra.
+ *
+ * PREMISA: Se asume que los móviles son nacionales, por lo que la
+ * validación se considera positiva si el número está comprendido
+ * entre 500000000 y 799999999.
+ * Una importante mejora para la fase II de desarrollo es la de ampliar
+ * el rango de forma que se admitan teléfonos móviles de otras
+ * nacionalidades con sus prefijos.
+ *
+ * @param movil
+ */
+function revisarMovil(movil){
+    if(movil > 500000000 && movil < 799999999){
+        $('#whatsapp').show();
+        $('#labelWhatsapp').show();
+    }else{
+        $('#whatsapp').hide();
+        $('#labelWhatsapp').hide();
+    }
+}
 
 /*************************************************************************/
 /*             FUNCIONES  RELACIONADAS CON PERFIL DE USUARIO             */

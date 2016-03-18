@@ -38,7 +38,7 @@
                             <dd>- Las cookies son necesarias para la correcta gestión de login de los usuarios que acceden
                                 al sitio. Para más información, consulta este
                                 <a href="http://politicadecookies.com/index.php">enlace</a>.</dd>
-                            <!--TODO revisar politica de cookies. Es necesario un popup nada más entrar en el sitio donde se acepte la política por parte del usuario-->
+                            <!--TODO revisar politica de cookies para la fase II de desarrollo. Es necesario un popup nada más entrar en el sitio donde se acepte la política por parte del usuario-->
                         </dl>
                     </div>
                 </div>

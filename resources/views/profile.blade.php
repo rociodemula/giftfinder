@@ -95,19 +95,18 @@
                                             <div class="form-group">
                                                 <label class="col-md-3 col-sm-3 col-xs-10 control-label">Teléfono</label>
                                                 <div class="col-md-6 col-sm-6 col-xs-9">
-                                                    <input type="number" class="form-control" name="telefono" value="@if(count($errors) > 0){{old('telefono')}}@else{{$usuario->telefono}}@endif" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Puedes compartir tu teléfono si quieres">
+                                                    <input type="number" class="form-control" name="telefono" min="800000000" max="999999999" value="@if(count($errors) > 0){{old('telefono')}}@else{{$usuario->telefono}}@endif" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Puedes compartir tu teléfono si quieres">
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-md-3 col-sm-3 col-xs-10 control-label">Móvil</label>
                                                 <div class="col-md-6 col-md-offset-0 col-sm-6 col-sm-offset-0 col-xs-8">
-                                                    <input type="number" class="form-control" name="movil" value="@if(count($errors) > 0){{old('movil')}}@else{{$usuario->movil}}@endif" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Puedes compartir tu móvil si quieres">
+                                                    <input id="movil" type="number" class="form-control" name="movil" min="500000000" max="799999999" value="@if(count($errors) > 0){{old('movil')}}@else{{$usuario->movil}}@endif" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Puedes compartir tu móvil si quieres">
                                                 </div>
                                                 <div class="col-md-1 col-sm-1 col-xs-1">
-                                                <!--TODO este campo solo se podra marcar si se ha rellenado el campo móvil con un tlf movil-->
-                                                            <input type="checkbox" class="pull-right" name="whatsapp" @if($usuario->whatsapp == 1)checked @endif data-toogle="tooltip" rel="txtTooltip" data-placement="right" title="Si quieres que te contacten por whatsapp marca esta opción">
+                                                    <input id="whatsapp" type="checkbox" class="pull-right" name="whatsapp" @if($usuario->whatsapp == 1)checked @endif data-toogle="tooltip" rel="txtTooltip" data-placement="right" title="Si quieres que te contacten por whatsapp marca esta opción">
                                                 </div>
-                                                <label class="col-md-2 col-sm-2 col-xs-1"><img src="/img/whatsapp.png"></label>
+                                                <label id="labelWhatsapp" class="col-md-2 col-sm-2 col-xs-1"><img src="/img/whatsapp.png"></label>
                                             </div>
                                         </div>
                                     </div>
