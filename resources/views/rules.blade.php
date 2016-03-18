@@ -27,7 +27,7 @@
                             <dt>Cookies:</dt>
                             <dd>- Las cookies son necesarias para la correcta gestión de login de los usuarios que acceden
                                 al sitio. Para más información, consulta este
-                                <a href="http://politicadecookies.com/index.php">enlace</a>.</dd>
+                                <a href="http://politicadecookies.com/index.php" target="_blank" data-toogle="tooltip" rel="txtTooltip" data-placement="right" title="Ir a página Política de Cookies (se abrirá en otra pestaña)">enlace</a>.</dd>
                         </dl>
                     </div>
                 </div>

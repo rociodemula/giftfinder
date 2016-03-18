@@ -40,10 +40,6 @@ class UsuarioProductoTableSeeder extends Seeder
             'producto'  =>  1,
         ));
         \DB::table('usuarios_productos')->insert(array(
-            'usuario'   =>  3,
-            'producto'  =>  1,
-        ));
-        \DB::table('usuarios_productos')->insert(array(
             'usuario'   =>  5,
             'producto'  =>  2,
         ));

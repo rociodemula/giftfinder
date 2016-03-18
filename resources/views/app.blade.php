@@ -40,7 +40,7 @@
 
 	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container-fluid">
-			<a href="http://demosdata.com/"><img class="banner img-responsive center-block" height="70" src="/img/banner.jpg" height="35"></img></a>
+			<a href="{{ url('/') }}"><img class="banner img-responsive center-block" title="Giftfinder" alt="Imagen con logotipo Giftfinder y productos ofrecidos" height="70" src="/img/banner.jpg" height="35"></img></a>
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
 					<span class="sr-only">Toggle Navigation</span>
@@ -48,7 +48,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="{{ url('/') }}"><img src="/img/logo.jpg" height="35" width="35""></img>
+				<a class="navbar-brand" href="{{ url('/') }}"><img src="/img/logo.jpg" title="Giftfinder" alt="logotipo Giftfinder" height="35" width="35""></img>
 					</a>
 			</div>
 
