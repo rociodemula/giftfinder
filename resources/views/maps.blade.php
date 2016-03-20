@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Giftfinder</title>
+	<title>Giftfinder - Encuentra gratis tu regalo</title>
 	<link rel="shortcut icon" href="/img/logo.jpg">
 	<!--El orden de los links relacionados con dataTables de jquery es importante. De otra forma, puede no funcionar.-->
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
@@ -40,6 +40,16 @@
 		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->
+	<meta content="kefir" name="keywords">
+	<!--<meta content="index,follow" name="robots">-->
+	<meta content="Giftfinder - Comparte y regala lo que te sobra." name="description">
+	<link href="http://giftfinder.demosdata.com/" rel="canonical">
+	<meta content="es_ES" property="og:locale">
+	<meta content="website" property="og:type">
+	<meta content="Giftfinder - Encuentra gratis tu regalo." property="og:title">
+	<meta content="Giftfinder - Encuentra gratis tu regalo mientras compartes lo que sobra." property="og:description">
+	<meta content="http://giftfinder.demosdata.com" property="og:url">
+	<meta content="Giftfinder" property="og:site_name">
 </head>
 <body>
 

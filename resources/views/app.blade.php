@@ -34,6 +34,16 @@
 		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->
+	<meta content="kefir" name="keywords">
+	<!--<meta content="index,follow" name="robots">-->
+	<meta content="Giftfinder - Comparte y regala lo que te sobra." name="description">
+	<link href="http://giftfinder.demosdata.com/" rel="canonical">
+	<meta content="es_ES" property="og:locale">
+	<meta content="website" property="og:type">
+	<meta content="Giftfinder - Encuentra gratis tu regalo." property="og:title">
+	<meta content="Giftfinder - Encuentra gratis tu regalo mientras compartes lo que sobra." property="og:description">
+	<meta content="http://giftfinder.demosdata.com" property="og:url">
+	<meta content="Giftfinder" property="og:site_name">
 </head>
 <body>
 
