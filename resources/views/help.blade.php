@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="container-fluid">
+    <div id="contenido" class="container-fluid">
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
@@ -23,21 +23,21 @@
                         <dl>
                             <dt>Manuales técnicos:</dt>
                             <dd>- Puedes visualizar los manuales técnicos de la aplicación, o bien descargarlos para
-                                consultarlos más tarde pulsando <a href="http://giftfinder.demosdata.com/doc/" target="_blank" data-toogle="tooltip" rel="txtTooltip" data-placement="right" title="Ir a documentación (se abrirá en otra pestaña)">aquí</a>.</dd>
+                                consultarlos más tarde pulsando <a href="http://giftfinder.demosdata.com/doc/" target="_blank" data-toogle="tooltip" rel="jslicense" data-placement="right" title="Ir a documentación (se abrirá en otra pestaña)">aquí</a>.</dd>
                         </dl>
                         <dl>
                             <dt>Uso del sitio:</dt>
-                            <dd>- Puedes acceder a las condiciones de uso del sitio <a href="{{ url('/condiciones') }}" data-toogle="tooltip" rel="txtTooltip" data-placement="right" title="Ir a Condiciones de uso">aquí</a>.</dd>
+                            <dd>- Puedes acceder a las condiciones de uso del sitio <a href="{{ url('/condiciones') }}" data-toogle="tooltip" rel="jslicense" data-placement="right" title="Ir a Condiciones de uso">aquí</a>.</dd>
                         </dl>
                         <dl>
                             <dt>Autor:</dt>
-                            <dd>- Tienes más datos del copyright del sitio <a href="{{ url('/derechos') }}" data-toogle="tooltip" rel="txtTooltip" data-placement="right" title="Ir a Derechos de autor">aquí</a>.</dd>
+                            <dd>- Tienes más datos del copyright del sitio <a href="{{ url('/derechos') }}" data-toogle="tooltip" rel="jslicense" data-placement="right" title="Ir a Derechos de autor">aquí</a>.</dd>
                         </dl>
                         <dl>
                             <dt>Cookies:</dt>
                             <dd>- Las cookies son necesarias para la correcta gestión de login de los usuarios que acceden
                                 al sitio. Para más información, consulta este
-                                <a href="http://politicadecookies.com/index.php" target="_blank" data-toogle="tooltip" rel="txtTooltip" data-placement="right" title="Ir a página Política de Cookies (se abrirá en otra pestaña)">enlace</a>.</dd>
+                                <a href="http://politicadecookies.com/index.php" target="_blank" data-toogle="tooltip" rel="jslicense" data-placement="right" title="Ir a página Política de Cookies (se abrirá en otra pestaña)">enlace</a>.</dd>
                             <!--TODO revisar politica de cookies para la fase II de desarrollo. Es necesario un popup nada más entrar en el sitio donde se acepte la política por parte del usuario-->
                         </dl>
                     </div>

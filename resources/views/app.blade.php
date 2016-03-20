@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,7 +18,7 @@
 	<!-- Librería de Google Maps API, necesaria para Directions-->
 	<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
 	<!-- Librería de geolocalización en javascript-->
-	<script language="JavaScript" src="http://www.geoplugin.net/javascript.gp" type="text/javascript"></script>
+	<script src="http://www.geoplugin.net/javascript.gp" type="text/javascript"></script>
 
 	<!--Este script funciona bien para Directions, pero no para maps ni markers:
 	<script src="https://maps.google.com/maps/api/js?sensor=false&key=AIzaSyCAdE-mIj8O4nPF2RYcy2uEamgDHPmXHKM&signed_in=true&callback=initMap"></script>-->
@@ -40,7 +40,8 @@
 
 	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container-fluid">
-			<a href="{{ url('/') }}"><img class="banner img-responsive center-block" title="Giftfinder" alt="Imagen con logotipo Giftfinder y productos ofrecidos" height="70" src="/img/banner.jpg" height="35"></img></a>
+			<a class="hidden" href="#contenido">Saltar a contenido principal</a>
+			<a href="{{ url('/') }}"><img class="banner img-responsive center-block" title="Giftfinder" alt="Imagen con logotipo y productos de Giftfinder" height="70" src="/img/banner.jpg"></a>
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
 					<span class="sr-only">Toggle Navigation</span>
@@ -48,7 +49,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="{{ url('/') }}"><img src="/img/logo.jpg" title="Giftfinder" alt="logotipo Giftfinder" height="35" width="35""></img>
+				<a class="navbar-brand" href="{{ url('/') }}"><img src="/img/logo.jpg" title="Giftfinder" alt="logotipo Giftfinder" height="35" width="35">
 					</a>
 			</div>
 

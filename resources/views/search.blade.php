@@ -1,11 +1,11 @@
 @extends('maps') <!-- Para esta pantalla usamos otra cabecera, dado los problemas que conlleva usar el mismo script para maps y directions-->
 @section('content')
 
-    <div class="container-fluid">
+    <div id="contenido" class="container-fluid">
         <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Búsqueda de Productos</div>
+                    <div class="panel-heading"><h1 class="panel-title">Búsqueda de Productos</h1></div>
                     <div class="panel-body">
 
                         @if (count($errors) > 0)
@@ -18,7 +18,7 @@
                                 </ul>
                             </div>
                         @endif
-                        <form class="form-horizontal" role="form" method="POST" action="/busqueda">
+                        <form class="form-horizontal" method="POST" action="/busqueda">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <input id="locate_user" type="hidden" name="locate_user" value="{{ auth()->user()->localizacion }}">
                             <input id="latitud_user" type="hidden" name="latitud_user" value="{{ auth()->user()->latitud }}">
@@ -27,10 +27,10 @@
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-md-offset-1 col-md-1 col-sm-offset-1 col-sm-1 col-xs-10 col-xs-offset-1">
-                                        <label class="control-label">Elige</label>
+                                        <label for="categoria" class="control-label">Elige</label>
                                     </div>
                                     <div class="col-md-3 col-md-offset-0 col-sm-3 col-sm-offset-0 col-xs-7 col-xs-offset-1">
-                                        <select class="form-control" name="categoria">
+                                        <select id="categoria" class="form-control" name="categoria">
                                             @foreach ($categoria as $item)
                                                 <option @if($item->nombre_categoria == old('categoria'))selected @endif>{{ $item->nombre_categoria }}</option>
                                             @endforeach
@@ -44,7 +44,7 @@
                                         </select>
                                     </div>
                                     <div class="col-md-3 col-md-offset-0 col-sm-3 col-sm-offset-0 col-xs-7 col-xs-offset-1">
-                                        <select class="form-control" name="producto" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Elige el producto que deseas buscar" autofocus>
+                                        <select class="form-control" name="producto" data-toogle="tooltip" rel="jslicense" data-placement="bottom" title="Elige el producto que deseas buscar" autofocus>
                                             <option>Producto</option>
                                             @foreach ($producto as $item)
                                                 <option @if($item->nombre_producto == old('producto'))selected @endif>{{ $item->nombre_producto }}</option>
@@ -53,7 +53,7 @@
                                     </div>
                                     <div class="col-md-1 col-md-offset-0 col-sm-1 col-sm-offset-0 col-xs-3 col-xs-offset-9">
                                         <div class="form-group">
-                                            <button type="submit" class="btn btn-success" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Pulsa aquí para ver el resultado de tu búsqueda">
+                                            <button type="submit" class="btn btn-success" data-toogle="tooltip" rel="jslicense" data-placement="bottom" title="Pulsa aquí para ver el resultado de tu búsqueda">
                                                 Ver
                                             </button>
                                         </div>
@@ -66,7 +66,7 @@
                                 </div>
                                 <div class="col-md-1 col-md-offset-0 col-sm-1 col-sm-offset-0 col-xs-3 col-xs-offset-9">
                                     <div class="form-group">
-                                        <a href="#mapaBusquedas" type="button" id="verMapa" class="btn btn-success" data-toogle="tooltip" rel="txtTooltip" data-placement="bottom" title="Ir a mapa al final de la lista" >
+                                        <a href="#mapaBusquedas" type="button" id="verMapa" class="btn btn-success" data-toogle="tooltip" rel="jslicense" data-placement="bottom" title="Ir a mapa al final de la lista" >
                                             Mapa
                                         </a>
                                     </div>

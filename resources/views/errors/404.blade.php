@@ -2,12 +2,12 @@
 
 @section('content')
 
-    <div class="container-fluid">
+    <div id="contenido" class="container-fluid">
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title"><strong>¡Lo sentimos!</strong> La página que buscas no existe.</h3>
+                        <h1 class="panel-title"><strong>¡Lo sentimos!</strong> La página que buscas no existe.</h1>
                     </div>
                     <div class="panel-body">
                         <dl>

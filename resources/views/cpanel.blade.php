@@ -2,11 +2,11 @@
 
 @section('content')
 
-    <div class="container-fluid">
+    <div id="contenido" class="container-fluid">
         <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Panel de Administración de la Base de datos</div>
+                    <div class="panel-heading"><h1 class="panel-title">Panel de Administración de la Base de datos</h1></div>
                     <div class="panel-body">
 
                         @if (count($errors) > 0)
@@ -27,16 +27,16 @@
                             <strong>¡Atención!</strong> La operación no se ha completado correctamente.<br>
                         </div>
                         @endif
-                        <form class="form-horizontal" role="form" method="POST" action="/cpanel">
+                        <form class="form-horizontal" method="POST" action="/cpanel">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-md-offset-1 col-md-3 col-sm-offset-1 col-sm-3 col-xs-offset-1 col-xs-10">
-                                        <label class="control-label">Elige la tabla a modificar</label>
+                                        <label class="control-label" for="tablaM">Elige la tabla a modificar</label>
                                     </div>
                                     <div class="col-md-4 col-md-offset-1 col-sm-4 col-sm-offset-1 col-xs-offset-1 col-xs-8">
-                                        <select class="form-control" name="tabla" @if ($tabla == '') autofocus @endif>
+                                        <select id="tablaM" class="form-control" name="tabla" @if ($tabla == '') autofocus @endif data-toogle="tooltip" rel="jslicense" data-placement="bottom" title="Elige la tabla a modificar.">
                                             <option>Tabla</option>
                                             @foreach ($tablas as $item)
                                                 <option>@if($item->$ddbb == old('tabla'))selected @endif{{$item->$ddbb}}</option>
@@ -56,7 +56,7 @@
                             </form>
                             <div class="row">
                                 <div class="col-md-12 col-sm-12 col-xs-12">
-                                    <h4>Contenido de la tabla: {{ $tabla }} @if ($tabla != '' && $tabla != 'migrations' && $tabla != 'password_resets') <a href="{{URL::to('/cpanel/nuevo/'.$tabla)}}" class="btn btn-success btn-xs" data-toogle="tooltip" rel="txtTooltip" data-placement="right" title="Añadir registro"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>@endif</h4>
+                                    <h4>Contenido de la tabla: {{ $tabla }} @if ($tabla != '' && $tabla != 'migrations' && $tabla != 'password_resets') <a href="{{URL::to('/cpanel/nuevo/'.$tabla)}}" class="btn btn-success btn-xs" data-toogle="tooltip" rel="jslicense" data-placement="right" title="Añadir registro"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>@endif</h4>
                                 </div>
                             </div>
                             <table class="table table-responsive table-striped">
@@ -74,7 +74,7 @@
                                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                 <input type="hidden" name="tabla" value="{{$tabla}}"/>
                                                 <td>
-                                                    <button type="submit" class="btn btn-warning btn-xs" data-toogle="tooltip" rel="txtTooltip" data-placement="right" title="Grabar"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button>
+                                                    <button type="submit" class="btn btn-warning btn-xs" data-toogle="tooltip" rel="jslicense" data-placement="right" title="Grabar"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button>
                                                 </td>
                                                 @foreach($campos as $index => $campo)
                                                     <td><input name="{{$campo}}" class="form-control" value="@if(count($errors) > 0){{ old($campo) }}@endif"@if ($index == 0) readonly @elseif($index == 1) autofocus @endif/></td>
@@ -85,8 +85,8 @@
                                             <tr @if ($editar && ($registro->$campos[0] == $id)) class="hidden" @endif>
                                                 <td>
                                                     @if ($tabla != 'migrations' && $tabla != 'password_resets')
-                                                        <a href="{{URL::to('/cpanel/editar/'.$tabla.'/'.$registro->$campos[0])}}" class="btn btn-success btn-xs" data-toogle="tooltip" rel="txtTooltip" data-placement="right" title="Editar"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
-                                                        <a href="{{URL::to('/cpanel/borrar/'.$tabla.'/'.$registro->$campos[0])}}" class="eliminar btn btn-danger btn-xs" data-toogle="tooltip" rel="txtTooltip" data-placement="right" title="Borrar"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+                                                        <a href="{{URL::to('/cpanel/editar/'.$tabla.'/'.$registro->$campos[0])}}" class="btn btn-success btn-xs" data-toogle="tooltip" rel="jslicense" data-placement="right" title="Editar"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
+                                                        <a href="{{URL::to('/cpanel/borrar/'.$tabla.'/'.$registro->$campos[0])}}" class="eliminar btn btn-danger btn-xs" data-toogle="tooltip" rel="jslicense" data-placement="right" title="Borrar"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
                                                     @endif
                                                 </td>
                                                 @foreach($campos as $campo)
@@ -101,7 +101,7 @@
                                                     <input type="hidden" name="id" value="{{$registro->$campos[0]}}"/>
                                                     <td>
                                                         @if ($tabla != 'migrations' && $tabla != 'password_resets')
-                                                            <button type="submit" class="btn btn-warning btn-xs" data-toogle="tooltip" rel="txtTooltip" data-placement="right" title="Grabar"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button>
+                                                            <button type="submit" class="btn btn-warning btn-xs" data-toogle="tooltip" rel="jslicense" data-placement="right" title="Grabar"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button>
                                                         @endif
                                                     </td>
                                                     @foreach($campos as $index => $campo)

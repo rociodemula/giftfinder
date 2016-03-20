@@ -14,11 +14,11 @@ $(function(){
     /*
      Inicializando las tooltips de bootstrap para indicaciones sobre algunos campos del formulario.
      */
-    $('input[rel="txtTooltip"]').tooltip();
-    $('select[rel="txtTooltip"]').tooltip();
-    $('a[rel="txtTooltip"]').tooltip();
-    $('button[rel="txtTooltip"]').tooltip();
-    $('textarea[rel="txtTooltip"]').tooltip();
+    $('input[rel="jslicense"]').tooltip();
+    $('select[rel="jslicense"]').tooltip();
+    $('a[rel="jslicense"]').tooltip();
+    $('button[rel="jslicense"]').tooltip();
+    $('textarea[rel="jslicense"]').tooltip();
 
 
 
