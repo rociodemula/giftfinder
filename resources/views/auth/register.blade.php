@@ -66,7 +66,7 @@
                                         </div>
                                         <div class="form-group col-md-3 col-sm-3 col-xs-12">
                                             <label for="checkMap" class="col-md-8 col-md-offset-0 col-sm-7 col-sm-offset-0 col-xs-2 col-xs-offset-5">
-                                                <a class="btn btn-warning btn-sm pull-right"  href="#" data-toogle="tooltip" rel="jslicense" data-placement="bottom" title="Pulsa para comprobar la localización en el mapa"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span></a>
+                                                <a id="mapa" class="btn btn-warning btn-sm pull-right"  href="#" data-toogle="tooltip" rel="jslicense" data-placement="bottom" title="Pulsa para comprobar la localización en el mapa"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span></a>
                                             </label>
                                             <div class="col-md-1 col-ms-offset-0 col-sm-offset-0 col-sm-1 col-xs-offset-1 col-xs-2">
                                                 <input id="checkMap" type="checkbox" class="pull-right" name="mapa" data-toogle="tooltip" rel="jslicense" data-placement="bottom" title="Marca esta casilla si la dirección está donde esperas en el mapa">
