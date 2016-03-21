@@ -173,7 +173,11 @@ $(function(){ //Una vez cargada la página declaramos los eventos.
         var longitud = $('#longitud').val();
         //Añadimos 17z, que es la proximidad para poder er nombres de calles circundantes,
         //pero no demasiado cercana como para no distinguir la zona de la ciudad en la que estamos
-        var url = 'https://www.google.es/maps/@' + latitud + ',' + longitud + ',17z';
+        //Esta primera forma la indican en la doc de google, pero no muestra el marker
+        //var url = 'https://www.google.es/maps/@' + latitud + ',' + longitud + ',17z';
+        //Esta otra forma, no es oficial, pero funciona, y es más sencilla y rapida.
+        //Procede de http://stackoverflow.com/questions/6582834/use-a-url-to-link-to-a-google-map-with-a-marker-on-it
+        var url = 'http://maps.google.com/maps?q=loc:' + latitud + ',' + longitud;
         if (validar(latitud, longitud)){
             window.open(url, '_blank');
         }else{

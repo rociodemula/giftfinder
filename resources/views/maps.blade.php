@@ -57,8 +57,8 @@
 	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container-fluid">
 			<a class="hidden" href="#contenido">Saltar a contenido principal</a>
+			<a href="{{ url('/') }}"><img class="banner img-responsive center-block" title="Giftfinder" alt="Imagen con logotipo y productos de Giftfinder"  height="70" src="/img/banner.jpg"></a>
 			<div class="navbar-header">
-				<a href="{{ url('/') }}"><img class="banner img-responsive center-block" title="Giftfinder" alt="Imagen con logotipo y productos de Giftfinder"  height="70" src="/img/banner.jpg"></a>
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
 					<span class="sr-only">Toggle Navigation</span>
 					<span class="icon-bar"></span>

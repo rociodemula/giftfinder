@@ -255,7 +255,7 @@ class Usuario extends Model implements AuthenticatableContract,
             'localizacion' => 'max:100',
             'latitud' => 'required|numeric',
             'longitud' => 'required|numeric',
-            'email' => 'required|email|max:80',
+            'email' => 'required|email|max:80|unique:usuarios',
             'telefono' => 'numeric|digits:9',
             'movil' => 'numeric|digits:9'
         ]);
@@ -274,11 +274,17 @@ class Usuario extends Model implements AuthenticatableContract,
         $data = array();
         $rules = array();
 
-        //Si se ha cambiado el nombre de usuario, debemos añadir la regla para que
-        //verifique que el nombre nuevo no existe ya en la tabla.
+        //Tenemos que considerar aparte los campos con la constraint unique de la base
+        //de datos, porque al validar la modificación, darán problamas, al existir ya.
+        //Si se ha cambiado el nombre de usuario/email, debemos añadir la regla para que
+        //verifique que el nombre/emailnuevo no existe ya en la tabla.
         if(auth()->user()->nombre_usuario != $request->nombre_usuario){
             $data = ['nombre_usuario' => $request->nombre_usuario];
             $rules = ['nombre_usuario' => 'required|max:30|unique:usuarios'];
+        }
+        if(auth()->user()->email != $request->email){
+            $data = array_merge($data, ['email' => $request->email]);
+            $rules = array_merge($rules, ['email' => 'required|max:80|unique:usuarios']);
         }
         //Volvamos el resto de datos en su array:
         $rest = array(
@@ -287,7 +293,6 @@ class Usuario extends Model implements AuthenticatableContract,
             'localizacion' => $request->localizacion,
             'latitud' => $request->latitud,
             'longitud' => $request->longitud,
-            'email' => $request->email,
             'telefono' => $request->telefono,
             'movil' => $request->movil,
             'whatsapp' => $request->whatsapp,
@@ -301,7 +306,6 @@ class Usuario extends Model implements AuthenticatableContract,
             'localizacion' => 'max:100',
             'latitud' => 'required|numeric',
             'longitud' => 'required|numeric',
-            'email' => 'required|email|max:80',
             'telefono' => 'numeric|digits:9',
             'movil' => 'numeric|digits:9'
         );
