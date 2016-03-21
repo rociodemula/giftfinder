@@ -335,12 +335,15 @@ class Usuario extends Model implements AuthenticatableContract,
             $data = ['nombre_usuario' => $request->nombre_usuario];
             $rules = ['nombre_usuario' => 'required|max:30|unique:usuarios'];
         }
+        if($request->email != $request->email_old){
+            $data = array_merge($data, ['email' => $request->email]);
+            $rules = array_merge($rules, ['email' => 'required|max:80|unique:usuarios']);
+        }
         $rest = array(
             'password' => $request->password,
             'localizacion' => $request->localizacion,
             'latitud' => $request->latitud,
             'longitud' => $request->longitud,
-            'email' => $request->email,
             'telefono' => $request->telefono,
             'movil' => $request->movil,
             'whatsapp' => $request->whatsapp,
@@ -352,7 +355,6 @@ class Usuario extends Model implements AuthenticatableContract,
             'localizacion' => 'max:100',
             'latitud' => 'required|numeric',
             'longitud' => 'required|numeric',
-            'email' => 'required|email|max:80',
             'telefono' => 'numeric|digits:9',
             'movil' => 'numeric|digits:9',
             'acepto' => 'required|boolean:true',

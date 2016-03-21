@@ -105,7 +105,7 @@
                                                         @endif
                                                     </td>
                                                     @foreach($campos as $index => $campo)
-                                                        <td><input name="{{$campo}}" class="form-control" value="@if(count($errors) > 0){{ old($campo) }}@else{{ $registro->$campo }}@endif" @if ($index == 0) readonly @elseif($index == 1) autofocus @endif/>@if ($campo == 'nombre_usuario' || $campo == 'password')<input name="{{$campo}}_old" value="{{ $registro->$campo }}" type="hidden"/>@endif</td>
+                                                        <td><input name="{{$campo}}" class="form-control" value="@if(count($errors) > 0){{ old($campo) }}@else{{ $registro->$campo }}@endif" @if ($index == 0) readonly @elseif($index == 1) autofocus @endif/>@if ($campo == 'nombre_usuario' || $campo == 'password' || $campo == 'email')<input name="{{$campo}}_old" value="{{ $registro->$campo }}" type="hidden"/>@endif</td>
                                                     @endforeach
                                                 </form>
                                             </tr>
